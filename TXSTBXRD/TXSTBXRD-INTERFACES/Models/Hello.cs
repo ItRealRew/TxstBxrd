@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace TXSTBXRD_INTERFACES.Models
 {
-    public class Simple
+    public class Hello
     {
-        public string Hello { get; set; }
+        public string HelloString { get; set; }
     }
 }

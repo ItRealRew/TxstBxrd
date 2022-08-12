@@ -3,5 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Shed.CoreKit.WebApi" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TXSTBXRD-INTERFACES\TXSTBXRD-INTERFACES.csproj" />
+    <ProjectReference Include="..\..\TXTBXRD-MIDDLEWARE\TXTBXRD-MIDDLEWARE.csproj" />
+  </ItemGroup>
 </Project>
