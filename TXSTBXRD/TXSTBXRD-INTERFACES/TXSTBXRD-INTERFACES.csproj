@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Shed.CoreKit.WebApi.Abstractions" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
