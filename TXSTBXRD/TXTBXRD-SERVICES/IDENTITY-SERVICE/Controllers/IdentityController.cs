@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using IDENTITY_SERVICE.Services;
@@ -13,22 +8,17 @@ namespace IDENTITY_SERVICE.Controllers
     [Route("[controller]")]
     public class IdentityController : Controller
     {
-        private readonly ILogger<IdentityController> _logger;
+        private readonly ILogger<IdentityController> logger;
+        private readonly IdentityService service;
 
-        public IdentityController(ILogger<IdentityController> logger)
+        public IdentityController(ILogger<IdentityController> logger, IdentityService service)
         {
-            _logger = logger;
-        }
-        
-        [HttpGet]
-        public Personal Get()
-        {
-            return  IdentityService.AuthenticationResult();
+            this.logger = logger;
+            this.service = service;
         }
 
         [HttpPost]
-        public Personal IdentificationUser(Personal unknownUser){
-            return unknownUser;
-        }
+        public string IdentificationUser(Personal unknownUser) => service.Identification(unknownUser);
+
     }
 }

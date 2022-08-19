@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using IDENTITY_SERVICE.Services;
 
 namespace IDENTITY_SERVICE
 {
@@ -25,6 +26,8 @@ namespace IDENTITY_SERVICE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IdentityService>();
+            services.AddMemoryCache();
             services.AddControllers();
         }
 

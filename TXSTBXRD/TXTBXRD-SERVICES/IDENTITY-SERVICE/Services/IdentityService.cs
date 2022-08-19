@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using IDENTITY_SERVICE.Models;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace IDENTITY_SERVICE.Services
 {
     public class IdentityService
-    {    
-        internal static Personal AuthenticationResult() {
-            var d = new Personal();
-            d.Login = "first login";
-            d.Password = "asdasd";
-            return d;
+    {
+        private IMemoryCache cache;
+        public IdentityService(IMemoryCache cache) => this.cache = cache;
+        internal string Identification(Personal unknownUser)
+        {
+            cache.Set<string>("userId", "WAZAP!");
+            return cache.Get<string>("userId");
         }
     }
 }
