@@ -6,11 +6,16 @@ namespace IDENTITY_SERVICE.Services
     public class IdentityService
     {
         private IMemoryCache cache;
-        public IdentityService(IMemoryCache cache) => this.cache = cache;
+
+        private readonly UsersDAO dao;
+        public IdentityService(IMemoryCache cache, UsersDAO dao){
+           this.cache = cache;
+           this.dao = dao; 
+        }
         internal string Identification(Personal unknownUser)
         {
             cache.Set<string>("userId", "WAZAP!");
-            return cache.Get<string>("userId");
+            return dao.authentication(unknownUser) ? "WAZAP" : "Account is Null!";
         }
     }
 }

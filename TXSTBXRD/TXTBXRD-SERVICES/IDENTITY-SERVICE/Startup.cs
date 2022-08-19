@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using IDENTITY_SERVICE.Services;
 
+
 namespace IDENTITY_SERVICE
 {
     public class Startup
@@ -26,9 +27,11 @@ namespace IDENTITY_SERVICE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IdentityService>();
             services.AddMemoryCache();
             services.AddControllers();
+            services.AddSingleton<IdentityService>();
+            services.AddSingleton<UsersDAO>();
+            services.AddTransient<UsersDbContext>(_ => new UsersDbContext(Configuration["ConnectionStrings:Default"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
