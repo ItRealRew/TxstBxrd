@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using IDENTITY_SERVICE.Services;
 using IDENTITY_SERVICE.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace IDENTITY_SERVICE.Controllers
 {
@@ -18,7 +20,7 @@ namespace IDENTITY_SERVICE.Controllers
         }
 
         [HttpPost]
-        public string IdentificationUser(Personal unknownUser) => service.Identification(unknownUser);
+        public async Task<Guid> IdentificationUser(LogIn unknownUser) => await service.Identification(unknownUser);
 
     }
 }

@@ -1,6 +1,9 @@
 using MySqlConnector;
 using System.Data;
 using IDENTITY_SERVICE.Models;
+using System;
+using System.Threading.Tasks;
+
 
 namespace IDENTITY_SERVICE.Services
 {
@@ -12,43 +15,83 @@ namespace IDENTITY_SERVICE.Services
             this.datebase = datebase;
         }
 
-        public bool authentication(Personal unknownUser)
+        public async Task<string> authentication(LogIn unknownUser)
         {
-            datebase.Connection.Open();
-
-            using var cmd = datebase.Connection.CreateCommand();
-            cmd.CommandText = @"CALL `userstxstbxrd`.`authentication`(@login, @password);";
-
-            cmd.Parameters.Add(new MySqlParameter
+            var result = "N";
+            try
             {
-                ParameterName = "@login",
-                DbType = DbType.String,
-                Value = unknownUser.Login,
-            });
+                datebase.Connection.Open();
 
-            cmd.Parameters.Add(new MySqlParameter
-            {
-                ParameterName = "@password",
-                DbType = DbType.String,
-                Value = unknownUser.Password,
-            });
+                using var cmd = datebase.Connection.CreateCommand();
+                cmd.CommandText = @"CALL `userstxstbxrd`.`authentication`(@login, @password);";
 
-            string result = "";
-
-            using (var reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
+                cmd.Parameters.Add(new MySqlParameter
                 {
-                    result = reader.GetString(0);
+                    ParameterName = "@login",
+                    DbType = DbType.String,
+                    Value = unknownUser.Login,
+                });
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@password",
+                    DbType = DbType.String,
+                    Value = unknownUser.Password,
+                });
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        result = reader.GetValue(0).ToString();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                await datebase.Connection.CloseAsync();
+            }
+            return result;
+        }
 
-            datebase.Connection.Close();
-            
-            if (result == "Y")
-                return true;
-            else
-                return false;
+        public async Task<string> getUserPermissions(int userId)
+        {
+            var result = "N";
+            try
+            {
+                datebase.Connection.Open();
+
+                using var cmd = datebase.Connection.CreateCommand();
+                cmd.CommandText = @"CALL `userstxstbxrd`.`getPermissions`(@userId);";
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@userId",
+                    DbType = DbType.Int16,
+                    Value = userId,
+                });
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        result = reader.GetString(0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                await datebase.Connection.CloseAsync();
+            }
+            return result;
         }
     }
 }
