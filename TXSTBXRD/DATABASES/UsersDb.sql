@@ -18,13 +18,13 @@ USE `userstxstbxrd`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `roles`
+-- Table structure for table `permissions`
 --
 
-DROP TABLE IF EXISTS `roles`;
+DROP TABLE IF EXISTS `permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `roles` (
+CREATE TABLE `permissions` (
   `Id` int NOT NULL,
   `Name` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`)
@@ -32,13 +32,13 @@ CREATE TABLE `roles` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roles`
+-- Dumping data for table `permissions`
 --
 
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'root'),(2,'Users'),(3,'Admins');
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+LOCK TABLES `permissions` WRITE;
+/*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
+INSERT INTO `permissions` VALUES (1,'root'),(2,'Users'),(3,'Admins');
+/*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -67,30 +67,30 @@ INSERT INTO `users` VALUES (1,'root','root');
 UNLOCK TABLES;
 
 --
--- Table structure for table `users_roles`
+-- Table structure for table `users_permissions`
 --
 
-DROP TABLE IF EXISTS `users_roles`;
+DROP TABLE IF EXISTS `users_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users_roles` (
+CREATE TABLE `users_permissions` (
   `user` int NOT NULL,
-  `role` int NOT NULL,
-  PRIMARY KEY (`user`,`role`),
-  KEY `role` (`role`),
-  CONSTRAINT `users_roles_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`Id`),
-  CONSTRAINT `users_roles_ibfk_2` FOREIGN KEY (`role`) REFERENCES `roles` (`Id`)
+  `permission` int NOT NULL,
+  PRIMARY KEY (`user`,`permission`),
+  KEY `permission` (`permission`),
+  CONSTRAINT `users_permissions_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`Id`),
+  CONSTRAINT `users_permissions_ibfk_2` FOREIGN KEY (`permission`) REFERENCES `permissions` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users_roles`
+-- Dumping data for table `users_permissions`
 --
 
-LOCK TABLES `users_roles` WRITE;
-/*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (1,1);
-/*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
+LOCK TABLES `users_permissions` WRITE;
+/*!40000 ALTER TABLE `users_permissions` DISABLE KEYS */;
+INSERT INTO `users_permissions` VALUES (1,1);
+/*!40000 ALTER TABLE `users_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -135,8 +135,8 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getPermissions`(IN userId int)
 BEGIN
-	IF exists (SELECT * FROM userstxstbxrd.users_roles WHERE `user` = userId) THEN
-    Select Name from userstxstbxrd.users_roles INNER JOIN  userstxstbxrd.roles ON Id = role  WHERE `user` = userId;
+	IF exists (SELECT * FROM userstxstbxrd.users_permissions WHERE `user` = userId) THEN
+    Select Name from userstxstbxrd.users_permissions INNER JOIN  userstxstbxrd.permissions ON Id = permission  WHERE `user` = userId;
     else
     SELECT 'N';
     END IF;
@@ -156,4 +156,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-22 15:47:53
+-- Dump completed on 2022-08-24  9:35:17
