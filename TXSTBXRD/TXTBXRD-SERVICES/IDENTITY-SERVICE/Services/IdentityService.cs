@@ -24,10 +24,20 @@ namespace IDENTITY_SERVICE.Services
                     return Guid.Empty;
                 default:
                     Guid authorizationToken = Guid.NewGuid();
-                    await dao.getUserPermissions(Convert.ToInt16(userId));
-                    cache.Set<string>(authorizationToken, userId);
+
+                    var result = new Personally();
+                    result.Permissions = await dao.getUserPermissions(Convert.ToInt16(userId));
+                    result.UserName = unknownUser.Login;
+
+                    cache.Set<Personally>(authorizationToken, result);
+
                     return authorizationToken;
             }
+        }
+
+        internal string Registration(Registration newUser)
+        {
+            return "it Work!";
         }
     }
 }

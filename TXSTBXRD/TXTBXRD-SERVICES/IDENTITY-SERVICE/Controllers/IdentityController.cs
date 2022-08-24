@@ -19,8 +19,10 @@ namespace IDENTITY_SERVICE.Controllers
             this.service = service;
         }
 
-        [HttpPost]
+        [HttpPost("identification")]
         public async Task<Guid> IdentificationUser(LogIn unknownUser) => await service.Identification(unknownUser);
 
+        [HttpPost("registration")]
+        public string RegistrationUser(Registration newUser) => service.Registration(newUser);
     }
 }

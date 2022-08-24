@@ -3,6 +3,7 @@ using System.Data;
 using IDENTITY_SERVICE.Models;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 
 namespace IDENTITY_SERVICE.Services
@@ -58,9 +59,9 @@ namespace IDENTITY_SERVICE.Services
             return result;
         }
 
-        public async Task<string> getUserPermissions(int userId)
+        public async Task<Dictionary<string, bool>> getUserPermissions(int userId)
         {
-            var result = "N";
+            var result = new Dictionary<string, bool>();
             try
             {
                 datebase.Connection.Open();
@@ -79,7 +80,8 @@ namespace IDENTITY_SERVICE.Services
                 {
                     while (await reader.ReadAsync())
                     {
-                        result = reader.GetString(0);
+                        result.Add(reader.GetString(0),true);
+                        Console.WriteLine(reader.GetString(0));
                     }
                 }
             }

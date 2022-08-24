@@ -18,6 +18,24 @@ USE `userstxstbxrd`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `details`
+--
+
+DROP TABLE IF EXISTS `details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `details` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int NOT NULL,
+  `userName` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  CONSTRAINT `details_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `permissions`
 --
 
@@ -25,10 +43,10 @@ DROP TABLE IF EXISTS `permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permissions` (
-  `Id` int NOT NULL,
+  `Id` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,11 +67,11 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `Id` int NOT NULL,
+  `Id` int NOT NULL AUTO_INCREMENT,
   `Login` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +107,7 @@ CREATE TABLE `users_permissions` (
 
 LOCK TABLES `users_permissions` WRITE;
 /*!40000 ALTER TABLE `users_permissions` DISABLE KEYS */;
-INSERT INTO `users_permissions` VALUES (1,1);
+INSERT INTO `users_permissions` VALUES (1,1),(1,2);
 /*!40000 ALTER TABLE `users_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,6 +118,28 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'userstxstbxrd'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `addUser` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addUser`(IN login VARCHAR(255), IN pasword VARCHAR(255), IN name VARCHAR(255), IN email VARCHAR(255))
+BEGIN
+INSERT INTO `userstxstbxrd`.`users` (`Login`, `Password`) VALUES (login, pasword);
+SET @actual = LAST_INSERT_ID();
+INSERT INTO `userstxstbxrd`.`details` (`userId`, `userName`, `email`) VALUES (@actual, name, email);
+INSERT INTO `userstxstbxrd`.`users_permissions` (`user`, `permission`) VALUES (@actual, '2');
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `authentication` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -156,4 +196,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-24  9:35:17
+-- Dump completed on 2022-08-24 15:05:31
