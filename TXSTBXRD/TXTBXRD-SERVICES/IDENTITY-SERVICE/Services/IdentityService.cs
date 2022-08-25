@@ -29,12 +29,25 @@ namespace IDENTITY_SERVICE.Services
                     result.Permissions = await dao.getUserPermissions(Convert.ToInt16(userId));
                     result.UserName = unknownUser.Login;
 
-                    cache.Set<Personally>(authorizationToken, result);
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                                 .SetSize(1)
+                                    .SetPriority(CacheItemPriority.High)
+                                    .SetSlidingExpiration(TimeSpan.FromHours(2))
+                                    .SetAbsoluteExpiration(TimeSpan.FromDays(1));
+
+                    cache.Set<Personally>(authorizationToken, result, cacheEntryOptions);
 
                     return authorizationToken;
             }
         }
 
         internal async Task<bool> Registration(Registration newUser) => await dao.addUser(newUser);
+
+        internal bool Verification(VerificationPermission userPermission)
+        {
+            if (cache.TryGetValue(userPermission.authorizationToken, out var received))
+                return cache.Get<Personally>(userPermission.authorizationToken).Permissions.ContainsKey(userPermission.Permission);
+            return false;
+        }
     }
 }

@@ -24,5 +24,8 @@ namespace IDENTITY_SERVICE.Controllers
 
         [HttpPost("registration")]
         public async Task<bool> RegistrationUser(Registration newUser) => await service.Registration(newUser);
+
+        [HttpPost("verification")] 
+        public bool VerificationUserPermission(VerificationPermission userPermission) => service.Verification(userPermission);
     }
 }
