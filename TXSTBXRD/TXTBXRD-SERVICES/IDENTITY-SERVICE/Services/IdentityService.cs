@@ -35,9 +35,6 @@ namespace IDENTITY_SERVICE.Services
             }
         }
 
-        internal string Registration(Registration newUser)
-        {
-            return "it Work!";
-        }
+        internal async Task<bool> Registration(Registration newUser) => await dao.addUser(newUser);
     }
 }

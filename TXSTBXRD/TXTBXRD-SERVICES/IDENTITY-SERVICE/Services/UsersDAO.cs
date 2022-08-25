@@ -96,8 +96,9 @@ namespace IDENTITY_SERVICE.Services
             return result;
         }
 
-        public async void addUser(Registration newUser)
+        public async Task<bool> addUser(Registration newUser)
         {
+            var result = false;
             try
             {
                 datebase.Connection.Open();
@@ -133,7 +134,14 @@ namespace IDENTITY_SERVICE.Services
                     Value = newUser.Email,
                 });
 
-                await cmd.ExecuteNonQueryAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        if (reader.GetValue(0).ToString() == "Y")
+                            result = true;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -143,6 +151,7 @@ namespace IDENTITY_SERVICE.Services
             {
                 await datebase.Connection.CloseAsync();
             }
+            return result;
         }
     }
 }

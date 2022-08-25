@@ -23,6 +23,6 @@ namespace IDENTITY_SERVICE.Controllers
         public async Task<Guid> IdentificationUser(LogIn unknownUser) => await service.Identification(unknownUser);
 
         [HttpPost("registration")]
-        public string RegistrationUser(Registration newUser) => service.Registration(newUser);
+        public async Task<bool> RegistrationUser(Registration newUser) => await service.Registration(newUser);
     }
 }
