@@ -32,8 +32,17 @@ CREATE TABLE `details` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `details_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `details`
+--
+
+LOCK TABLES `details` WRITE;
+/*!40000 ALTER TABLE `details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `details` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `permissions`
@@ -71,7 +80,7 @@ CREATE TABLE `users` (
   `Login` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,16 +133,21 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addUser`(IN login VARCHAR(255), IN pasword VARCHAR(255), IN name VARCHAR(255), IN email VARCHAR(255))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addUser`(IN logword VARCHAR(255), IN pasword VARCHAR(255), IN name VARCHAR(255), IN mail VARCHAR(255))
 BEGIN
-INSERT INTO `userstxstbxrd`.`users` (`Login`, `Password`) VALUES (login, pasword);
-SET @actual = LAST_INSERT_ID();
-INSERT INTO `userstxstbxrd`.`details` (`userId`, `userName`, `email`) VALUES (@actual, name, email);
-INSERT INTO `userstxstbxrd`.`users_permissions` (`user`, `permission`) VALUES (@actual, '2');
+IF exists (SELECT * FROM userstxstbxrd.users WHERE `Login` = logword) THEN
+	SELECT 'N';
+    else
+    INSERT INTO `userstxstbxrd`.`users` (`Login`, `Password`) VALUES (logword, pasword);
+	SET @actual = LAST_INSERT_ID();
+	INSERT INTO `userstxstbxrd`.`details` (`userId`, `userName`, `email`) VALUES (@actual, name, mail);
+	INSERT INTO `userstxstbxrd`.`users_permissions` (`user`, `permission`) VALUES (@actual, '2');
+    SELECT 'Y';
+    END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -150,10 +164,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `authentication`(IN login VARCHAR(255), IN pasword VARCHAR(255))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `authentication`(IN logword VARCHAR(255), IN pasword VARCHAR(255))
 BEGIN
-	IF exists (SELECT * FROM userstxstbxrd.users WHERE `Login` = login AND `Password` = pasword) THEN
-	SELECT `Id` FROM userstxstbxrd.users WHERE `Login` = login AND `Password` = pasword;
+	IF exists (SELECT * FROM userstxstbxrd.users WHERE `Login` = logword AND `Password` = pasword) THEN
+	SELECT `Id` FROM userstxstbxrd.users WHERE `Login` = logword AND `Password` = pasword;
     else
     SELECT 'N';
     END IF;
@@ -196,4 +210,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-24 15:05:31
+-- Dump completed on 2022-08-25 14:31:09

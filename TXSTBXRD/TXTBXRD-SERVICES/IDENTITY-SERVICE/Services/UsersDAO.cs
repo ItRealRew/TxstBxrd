@@ -80,7 +80,7 @@ namespace IDENTITY_SERVICE.Services
                 {
                     while (await reader.ReadAsync())
                     {
-                        result.Add(reader.GetString(0),true);
+                        result.Add(reader.GetString(0), true);
                         Console.WriteLine(reader.GetString(0));
                     }
                 }
@@ -94,6 +94,55 @@ namespace IDENTITY_SERVICE.Services
                 await datebase.Connection.CloseAsync();
             }
             return result;
+        }
+
+        public async void addUser(Registration newUser)
+        {
+            try
+            {
+                datebase.Connection.Open();
+
+                using var cmd = datebase.Connection.CreateCommand();
+                cmd.CommandText = @"CALL `userstxstbxrd`.`addUser`(@Login, @pasword, @name, @email);";
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@Login",
+                    DbType = DbType.String,
+                    Value = newUser.Login,
+                });
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@pasword",
+                    DbType = DbType.String,
+                    Value = newUser.Password,
+                });
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@name",
+                    DbType = DbType.String,
+                    Value = newUser.UserName,
+                });
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@email",
+                    DbType = DbType.String,
+                    Value = newUser.Email,
+                });
+
+                await cmd.ExecuteNonQueryAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                await datebase.Connection.CloseAsync();
+            }
         }
     }
 }
