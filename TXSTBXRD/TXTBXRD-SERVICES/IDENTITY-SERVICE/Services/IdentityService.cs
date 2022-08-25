@@ -43,11 +43,8 @@ namespace IDENTITY_SERVICE.Services
 
         internal async Task<bool> Registration(Registration newUser) => await dao.addUser(newUser);
 
-        internal bool Verification(VerificationPermission userPermission)
-        {
-            if (cache.TryGetValue(userPermission.authorizationToken, out var received))
-                return cache.Get<Personally>(userPermission.authorizationToken).Permissions.ContainsKey(userPermission.Permission);
-            return false;
-        }
+        internal bool Verification(VerificationPermission userPermission) =>
+                                cache.TryGetValue(userPermission.authorizationToken, out Personally received) == true ?
+                                    received.Permissions.ContainsKey(userPermission.Permission) : false;
     }
 }
