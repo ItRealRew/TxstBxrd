@@ -40,9 +40,9 @@ namespace IDENTITY_SERVICE.Services
 
                     cache.Set<Personally>(authorizationToken, result, cacheEntryOptions);
 
-                    security.GetWithSalt("Писька","Бля буду надежный пароль");
+                    security.GetWithSalt("hfpDB20,","fc5347ab-5877-4c08-b55c-85f207616b74");
 
-                    security.GetWithSalt("45","777778888");
+                    security.GetWithSalt("ghjK115!","fc5347ab-5877-4c08-b55c-85f207616b74");
 
                     return authorizationToken;
             }

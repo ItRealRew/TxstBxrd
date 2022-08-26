@@ -8,11 +8,11 @@ namespace IDENTITY_SERVICE.Services
 {
     public class SecurityService
     {
-        internal void GenerateFirst()
+        internal void GenerateFirst(string wordHashing)
         {
             using (SHA512Managed sha1 = new SHA512Managed())
             {
-                var hashSh1 = sha1.ComputeHash(Encoding.UTF8.GetBytes("root"));
+                var hashSh1 = sha1.ComputeHash(Encoding.UTF8.GetBytes(wordHashing));
 
                 var sb = new StringBuilder(hashSh1.Length * 2);
 
@@ -25,24 +25,24 @@ namespace IDENTITY_SERVICE.Services
             }
         }
 
-        internal void GetWithSalt(string original, string salt)
+        internal string GetWithSalt(string original, string salt)
         {
-            if (original.Length > salt.Length)
-                salt = salt + new string('*', original.Length - salt.Length);
-            else
-                original = original + new string('*', salt.Length - original.Length);
+            StringBuilder result = new StringBuilder((original.Length + salt.Length) * 2);
 
-            var result = original.ToCharArray();
+            for (int i = 3; i < original.Length; i++)
+                if (i % 2 != 0)
+                    result.Append(salt[i]);
+                else
+                    result.Append(original[i]);
 
-            for (int i = 0; i < result.Length; i++)
-            {
-                if (i % 2 == 0)
-                    result[i] = salt[i];
-            }
+            if (salt.Length > original.Length)
+                result.Append(salt.Substring(original.Length, salt.Length - original.Length));
 
-            Console.WriteLine("ORIGA" + original);
-            Console.WriteLine("SALT" + salt);
-            Console.WriteLine(new string(result));
+            Console.WriteLine("ORIGA " + original);
+            Console.WriteLine("SALT  " + salt);
+            Console.WriteLine("      " + result.ToString());
+
+            return result.ToString();
         }
     }
 }
