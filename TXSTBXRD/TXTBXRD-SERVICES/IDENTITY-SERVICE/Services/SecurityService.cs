@@ -8,20 +8,20 @@ namespace IDENTITY_SERVICE.Services
 {
     public class SecurityService
     {
-        internal void GenerateFirst(string wordHashing)
+        internal string GenerateFirst(string wordHashing)
         {
-            using (SHA512Managed sha1 = new SHA512Managed())
+            using (SHA512Managed security = new SHA512Managed())
             {
-                var hashSh1 = sha1.ComputeHash(Encoding.UTF8.GetBytes(wordHashing));
+                byte[] hashed = security.ComputeHash(Encoding.UTF8.GetBytes(wordHashing));
 
-                var sb = new StringBuilder(hashSh1.Length * 2);
+                StringBuilder result = new StringBuilder(hashed.Length * 2);
 
-                foreach (byte b in hashSh1)
-                {
-                    sb.Append(b.ToString("X2").ToLower());
-                }
+                foreach (byte b in hashed)
+                    result.Append(b.ToString("X2").ToLower());
 
-                Console.WriteLine(sb.ToString());
+                Console.WriteLine(result.ToString());
+
+                return result.ToString();
             }
         }
 
