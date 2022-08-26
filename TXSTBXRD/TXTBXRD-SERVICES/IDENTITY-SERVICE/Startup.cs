@@ -30,6 +30,7 @@ namespace IDENTITY_SERVICE
             services.AddMemoryCache();
             services.AddControllers();
             services.AddSingleton<IdentityService>();
+            services.AddSingleton<SecurityService>();
             services.AddSingleton<UsersDAO>();
             services.AddTransient<UsersDbContext>(_ => new UsersDbContext(Configuration["ConnectionStrings:Default"]));
         }

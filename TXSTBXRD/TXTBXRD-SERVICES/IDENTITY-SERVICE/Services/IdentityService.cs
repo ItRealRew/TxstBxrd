@@ -10,10 +10,13 @@ namespace IDENTITY_SERVICE.Services
         private IMemoryCache cache;
 
         private readonly UsersDAO dao;
-        public IdentityService(IMemoryCache cache, UsersDAO dao)
+
+        private readonly SecurityService security;
+        public IdentityService(IMemoryCache cache, UsersDAO dao, SecurityService security)
         {
             this.cache = cache;
             this.dao = dao;
+            this.security = security;
         }
         internal async Task<Guid> Identification(LogIn unknownUser)
         {
@@ -36,6 +39,10 @@ namespace IDENTITY_SERVICE.Services
                                     .SetAbsoluteExpiration(TimeSpan.FromDays(1));
 
                     cache.Set<Personally>(authorizationToken, result, cacheEntryOptions);
+
+                    security.GetWithSalt("Писька","Бля буду надежный пароль");
+
+                    security.GetWithSalt("45","777778888");
 
                     return authorizationToken;
             }
