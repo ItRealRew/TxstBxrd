@@ -32,7 +32,7 @@ CREATE TABLE `details` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `details_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +69,32 @@ INSERT INTO `permissions` VALUES (1,'root'),(2,'Users'),(3,'Admins');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `salt`
+--
+
+DROP TABLE IF EXISTS `salt`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `salt` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  CONSTRAINT `salt_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `salt`
+--
+
+LOCK TABLES `salt` WRITE;
+/*!40000 ALTER TABLE `salt` DISABLE KEYS */;
+/*!40000 ALTER TABLE `salt` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -80,7 +106,7 @@ CREATE TABLE `users` (
   `Login` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,4 +236,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-25 14:31:09
+-- Dump completed on 2022-08-26 17:34:28
