@@ -40,9 +40,7 @@ namespace IDENTITY_SERVICE.Services
 
                     cache.Set<Personally>(authorizationToken, result, cacheEntryOptions);
 
-                    security.GetWithSalt("hfpDB20,","fc5347ab-5877-4c08-b55c-85f207616b74");
-
-                    security.GetWithSalt("ghjK115!","fc5347ab-5877-4c08-b55c-85f207616b74");
+                    security.GetSecurePassword("hfpDB20,", security.GetUniqueKey(13), 5);
 
                     return authorizationToken;
             }

@@ -1,6 +1,5 @@
 using System.Security.Cryptography;
 using System.Text;
-
 using System;
 
 
@@ -8,41 +7,60 @@ namespace IDENTITY_SERVICE.Services
 {
     public class SecurityService
     {
-        internal string GenerateFirst(string wordHashing)
+        internal string GetSecurePassword(string original, string salt, int repeatSalt)
+        {
+            StringBuilder result = new StringBuilder(128 + (salt.Length));
+            result.Append(original);
+            result.Append(salt);
+
+            result = Hash(result);
+
+            while (repeatSalt != 0)
+            {
+                repeatSalt--;
+                result.Append(salt);
+                result = Hash(result);
+            }
+
+
+            Console.WriteLine("ORIGA " + original);
+            Console.WriteLine("SALT  " + salt);
+            Console.WriteLine("      " + result.ToString());
+            return "Ок";
+        }
+
+        internal string GetUniqueKey(int maxSize)
+        {
+            char[] chars = new char[80];
+            chars =
+            "abcdefghijklmnopqrstuvwxyz*&!#1234567890-=|:ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+            byte[] data = new byte[1];
+            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
+            {
+                crypto.GetNonZeroBytes(data);
+                data = new byte[maxSize];
+                crypto.GetNonZeroBytes(data);
+            }
+            StringBuilder result = new StringBuilder(maxSize);
+            foreach (byte b in data)
+                result.Append(chars[b % (chars.Length)]);
+                
+            return result.ToString();
+        }
+
+        private StringBuilder Hash(StringBuilder wordHashing)
         {
             using (SHA512Managed security = new SHA512Managed())
             {
-                byte[] hashed = security.ComputeHash(Encoding.UTF8.GetBytes(wordHashing));
+                byte[] hashed = security.ComputeHash(Encoding.UTF8.GetBytes(wordHashing.ToString()));
 
                 StringBuilder result = new StringBuilder(hashed.Length * 2);
 
                 foreach (byte b in hashed)
                     result.Append(b.ToString("X2").ToLower());
 
-                Console.WriteLine(result.ToString());
-
-                return result.ToString();
+                return result;
             }
-        }
-
-        internal string GetWithSalt(string original, string salt)
-        {
-            StringBuilder result = new StringBuilder((original.Length + salt.Length) * 2);
-
-            for (int i = 3; i < original.Length; i++)
-                if (i % 2 != 0)
-                    result.Append(salt[i]);
-                else
-                    result.Append(original[i]);
-
-            if (salt.Length > original.Length)
-                result.Append(salt.Substring(original.Length, salt.Length - original.Length));
-
-            Console.WriteLine("ORIGA " + original);
-            Console.WriteLine("SALT  " + salt);
-            Console.WriteLine("      " + result.ToString());
-
-            return result.ToString();
         }
     }
 }
