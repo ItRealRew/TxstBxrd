@@ -22,18 +22,11 @@ namespace IDENTITY_SERVICE.Services
                 result = Hash(result);
             }
 
-
-            Console.WriteLine("ORIGA " + original);
-            Console.WriteLine("SALT  " + salt);
-            Console.WriteLine("      " + result.ToString());
-            return "Ок";
+            return result.ToString();
         }
 
-        internal string GetUniqueKey(int maxSize)
+        internal string GetUniqueKey(int maxSize, string alphabet)
         {
-            char[] chars = new char[80];
-            chars =
-            "abcdefghijklmnopqrstuvwxyz*&!#1234567890-=|:ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
             byte[] data = new byte[1];
             using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
             {
@@ -43,8 +36,8 @@ namespace IDENTITY_SERVICE.Services
             }
             StringBuilder result = new StringBuilder(maxSize);
             foreach (byte b in data)
-                result.Append(chars[b % (chars.Length)]);
-                
+                result.Append(alphabet[b % (alphabet.Length)]);
+
             return result.ToString();
         }
 

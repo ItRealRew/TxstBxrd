@@ -2,6 +2,7 @@ using IDENTITY_SERVICE.Models;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Threading.Tasks;
+using IDENTITY_SERVICE.Types;
 
 namespace IDENTITY_SERVICE.Services
 {
@@ -40,13 +41,15 @@ namespace IDENTITY_SERVICE.Services
 
                     cache.Set<Personally>(authorizationToken, result, cacheEntryOptions);
 
-                    security.GetSecurePassword("hfpDB20,", security.GetUniqueKey(13), 5);
-
                     return authorizationToken;
             }
         }
 
-        internal async Task<bool> Registration(Registration newUser) => await dao.addUser(newUser);
+        internal async Task<bool> Registration(Registration newUser)
+        {
+            newUser.Password = security.GetSecurePassword(newUser.Password, security.GetUniqueKey(13, Alphabet.Hard.Value), 5);
+            return await dao.addUser(newUser);
+        }
 
         internal bool Verification(VerificationPermission userPermission) =>
                                 cache.TryGetValue(userPermission.authorizationToken, out Personally received) ?
