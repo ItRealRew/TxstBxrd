@@ -59,6 +59,42 @@ namespace IDENTITY_SERVICE.Services
             return result;
         }
 
+        public async Task<string> getSalt(string LogIn)
+        {
+            var result = "N";
+            try
+            {
+                datebase.Connection.Open();
+
+                using var cmd = datebase.Connection.CreateCommand();
+                cmd.CommandText = @"CALL `userstxstbxrd`.`getSalt`(@LogIn);";
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@LogIn",
+                    DbType = DbType.Int16,
+                    Value = LogIn,
+                });
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        result = reader.GetString(0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                await datebase.Connection.CloseAsync();
+            }
+            return result;
+        }
+
         public async Task<Dictionary<string, bool>> getUserPermissions(int userId)
         {
             var result = new Dictionary<string, bool>();
@@ -81,7 +117,6 @@ namespace IDENTITY_SERVICE.Services
                     while (await reader.ReadAsync())
                     {
                         result.Add(reader.GetString(0), true);
-                        Console.WriteLine(reader.GetString(0));
                     }
                 }
             }

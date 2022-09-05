@@ -32,7 +32,7 @@ CREATE TABLE `details` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `details_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `details` (
 
 LOCK TABLES `details` WRITE;
 /*!40000 ALTER TABLE `details` DISABLE KEYS */;
+INSERT INTO `details` VALUES (5,9,'root1','root1');
 /*!40000 ALTER TABLE `details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +83,7 @@ CREATE TABLE `salt` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `salt_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +92,7 @@ CREATE TABLE `salt` (
 
 LOCK TABLES `salt` WRITE;
 /*!40000 ALTER TABLE `salt` DISABLE KEYS */;
-INSERT INTO `salt` VALUES (1,1,'qwerty');
+INSERT INTO `salt` VALUES (1,1,'qwerty'),(4,9,'&LRt12knFqKhDZx8');
 /*!40000 ALTER TABLE `salt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +108,7 @@ CREATE TABLE `users` (
   `Login` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +117,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'root','root'),(8,'User','User');
+INSERT INTO `users` VALUES (1,'root','root'),(8,'User','User'),(9,'root1','a69c2afe015539c67177ede6822414fcca212567c50d9c57ab9e60dd9079144d02b7ccb8031e61c94f522bac34480367303376e3faad9085e210328110d746f1');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +144,7 @@ CREATE TABLE `users_permissions` (
 
 LOCK TABLES `users_permissions` WRITE;
 /*!40000 ALTER TABLE `users_permissions` DISABLE KEYS */;
-INSERT INTO `users_permissions` VALUES (1,1),(1,2);
+INSERT INTO `users_permissions` VALUES (1,1),(1,2),(9,2);
 /*!40000 ALTER TABLE `users_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,6 +229,29 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getSalt` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getSalt`(IN logword VARCHAR(255))
+BEGIN
+IF exists (SELECT * FROM userstxstbxrd.users WHERE `Login` = logword) THEN
+	SELECT value FROM userstxstbxrd.users, userstxstbxrd.salt WHERE users.id = salt.userId AND `users`.`Login` = logword;
+    else
+    SELECT 'N';
+    End IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -238,4 +262,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-05 10:12:44
+-- Dump completed on 2022-09-05 11:06:02
