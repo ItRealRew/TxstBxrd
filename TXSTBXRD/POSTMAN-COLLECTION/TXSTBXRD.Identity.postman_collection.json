@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "f0fd9142-20f5-45a0-8c5b-0bd39f7a9fbd",
+		"name": "TXSTBXRD.Identity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21992151"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/identity/identification?login=root&password=root",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"identity",
+						"identification"
+					],
+					"query": [
+						{
+							"key": "login",
+							"value": "root"
+						},
+						{
+							"key": "password",
+							"value": "root"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/identity/registration?Login=root1&Password=root1&UserName=root1&Email=root1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"identity",
+						"registration"
+					],
+					"query": [
+						{
+							"key": "Login",
+							"value": "root1"
+						},
+						{
+							"key": "Password",
+							"value": "root1"
+						},
+						{
+							"key": "UserName",
+							"value": "root1"
+						},
+						{
+							"key": "Email",
+							"value": "root1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/identity/verification?authorizationtoken=3dfec3b2-70af-4d18-9533-d8fc06a8dc79&Permission=root",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"identity",
+						"verification"
+					],
+					"query": [
+						{
+							"key": "authorizationtoken",
+							"value": "3dfec3b2-70af-4d18-9533-d8fc06a8dc79"
+						},
+						{
+							"key": "Permission",
+							"value": "root"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ChangePermission",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/identity/changepermission?Admin=3dfec3b2-70af-4d18-9533-d8fc06a8dc79&UserName=root&RoleName=root&Action=true",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"identity",
+						"changepermission"
+					],
+					"query": [
+						{
+							"key": "Admin",
+							"value": "3dfec3b2-70af-4d18-9533-d8fc06a8dc79"
+						},
+						{
+							"key": "UserName",
+							"value": "root"
+						},
+						{
+							"key": "RoleName",
+							"value": "root"
+						},
+						{
+							"key": "Action",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

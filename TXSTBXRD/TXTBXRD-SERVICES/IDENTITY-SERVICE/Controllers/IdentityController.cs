@@ -27,5 +27,8 @@ namespace IDENTITY_SERVICE.Controllers
 
         [HttpPost("verification")] 
         public bool VerificationUserPermission(VerificationPermission userPermission) => service.Verification(userPermission);
+
+        [HttpPost("changepermission")]
+        public string changeUserPermission(СhangingPermissions user) => service.ChangePermission(user);
     }
 }

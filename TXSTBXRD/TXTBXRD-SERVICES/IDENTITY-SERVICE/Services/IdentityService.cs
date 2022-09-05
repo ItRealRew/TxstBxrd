@@ -22,9 +22,9 @@ namespace IDENTITY_SERVICE.Services
         internal async Task<Guid> Identification(LogIn unknownUser)
         {
             var salt = await dao.getSalt(unknownUser.Password);
-            unknownUser.Password = security.GetSecurePassword(unknownUser.Password, salt, 5);
-            
-            var userId = await dao.authentication(unknownUser);
+            unknownUser.Password = security.GetSecurePassword(unknownUser.Password, salt, (int)IterationSalt.Standart);
+
+            string userId = await dao.authentication(unknownUser);
             switch (userId)
             {
                 case "N":
@@ -51,12 +51,14 @@ namespace IDENTITY_SERVICE.Services
         internal async Task<bool> Registration(Registration newUser)
         {
             string salt = security.GetUniqueKey(((int)GenerationLength.Standart), Alphabet.Hard.Value);
-            newUser.Password = security.GetSecurePassword(newUser.Password, salt, 5);
+            newUser.Password = security.GetSecurePassword(newUser.Password, salt, (int)IterationSalt.Standart);
             return await dao.addUser(newUser, salt);
         }
 
         internal bool Verification(VerificationPermission userPermission) =>
                                 cache.TryGetValue(userPermission.authorizationToken, out Personally received) ?
                                     received.Permissions.ContainsKey(userPermission.Permission) : false;
+
+        internal string ChangePermission(СhangingPermissions user) => "Работать надо?";
     }
 }
