@@ -195,5 +195,49 @@ namespace IDENTITY_SERVICE.Services
             }
             return result;
         }
+
+        public async Task<bool> ChangePermission(string AdminName, string UserName, int RoleName)
+        {
+            var result = false;
+             try
+            {
+                datebase.Connection.Open();
+
+                using var cmd = datebase.Connection.CreateCommand();
+                cmd.CommandText = @"CALL `userstxstbxrd`.`changePermissions`(@Login, @Rolename);";
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@Login",
+                    DbType = DbType.String,
+                    Value = UserName,
+                });
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@Rolename",
+                    DbType = DbType.String,
+                    Value = RoleName,
+                });
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        if (reader.GetValue(0).ToString() == "Y")
+                            result = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                await datebase.Connection.CloseAsync();
+            }
+            return result;
+        }
     }
 }

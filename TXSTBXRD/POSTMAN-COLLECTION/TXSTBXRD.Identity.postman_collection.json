@@ -113,7 +113,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/identity/changepermission?Admin=3dfec3b2-70af-4d18-9533-d8fc06a8dc79&UserName=root&RoleName=root&Action=true",
+					"raw": "https://localhost:5001/identity/changepermission?Admin=3dfec3b2-70af-4d18-9533-d8fc06a8dc79&UserName=root&RoleName=root",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -135,10 +135,6 @@
 						{
 							"key": "RoleName",
 							"value": "root"
-						},
-						{
-							"key": "Action",
-							"value": "true"
 						}
 					]
 				}

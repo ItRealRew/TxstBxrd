@@ -59,6 +59,7 @@ namespace IDENTITY_SERVICE.Services
                                 cache.TryGetValue(userPermission.authorizationToken, out Personally received) ?
                                     received.Permissions.ContainsKey(userPermission.Permission) : false;
 
-        internal string ChangePermission(СhangingPermissions user) => "Работать надо?";
+        internal async Task<bool> ChangePermission(СhangingPermissions user) => cache.TryGetValue(user.authorizationToken, out Personally received) ?
+                                await dao.ChangePermission(received.UserName,user.UserName,user.RoleName) : false;
     }
 }

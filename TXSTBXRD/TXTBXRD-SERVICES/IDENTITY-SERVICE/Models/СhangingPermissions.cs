@@ -7,7 +7,7 @@ namespace IDENTITY_SERVICE.Models
 {
     public class СhangingPermissions
     {
-        public Guid Admin { get; set; }
+        public Guid authorizationToken { get; set; }
         public string UserName { get; set; }
         public int RoleName { get; set; }
     }
