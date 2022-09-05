@@ -82,7 +82,7 @@ CREATE TABLE `salt` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `salt_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,6 +91,7 @@ CREATE TABLE `salt` (
 
 LOCK TABLES `salt` WRITE;
 /*!40000 ALTER TABLE `salt` DISABLE KEYS */;
+INSERT INTO `salt` VALUES (1,1,'qwerty');
 /*!40000 ALTER TABLE `salt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +107,7 @@ CREATE TABLE `users` (
   `Login` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +116,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'root','root');
+INSERT INTO `users` VALUES (1,'root','root'),(8,'User','User');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +164,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addUser`(IN logword VARCHAR(255), IN pasword VARCHAR(255), IN name VARCHAR(255), IN mail VARCHAR(255))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addUser`(IN logword VARCHAR(255), IN pasword VARCHAR(255), IN name VARCHAR(255), IN mail VARCHAR(255), in saltword VARCHAR(255))
 BEGIN
 IF exists (SELECT * FROM userstxstbxrd.users WHERE `Login` = logword) THEN
 	SELECT 'N';
@@ -172,6 +173,7 @@ IF exists (SELECT * FROM userstxstbxrd.users WHERE `Login` = logword) THEN
 	SET @actual = LAST_INSERT_ID();
 	INSERT INTO `userstxstbxrd`.`details` (`userId`, `userName`, `email`) VALUES (@actual, name, mail);
 	INSERT INTO `userstxstbxrd`.`users_permissions` (`user`, `permission`) VALUES (@actual, '2');
+    INSERT INTO `userstxstbxrd`.`salt` (`userId`, `value`) VALUES (@actual, saltword);
     SELECT 'Y';
     END IF;
 END ;;
@@ -236,4 +238,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-26 17:34:28
+-- Dump completed on 2022-09-05 10:12:44

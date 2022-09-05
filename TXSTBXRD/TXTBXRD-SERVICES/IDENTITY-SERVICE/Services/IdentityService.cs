@@ -47,8 +47,9 @@ namespace IDENTITY_SERVICE.Services
 
         internal async Task<bool> Registration(Registration newUser)
         {
-            newUser.Password = security.GetSecurePassword(newUser.Password, security.GetUniqueKey(13, Alphabet.Hard.Value), 5);
-            return await dao.addUser(newUser);
+            string salt = security.GetUniqueKey(((int)GenerationLength.Standart), Alphabet.Hard.Value);
+            newUser.Password = security.GetSecurePassword(newUser.Password, salt, 5);
+            return await dao.addUser(newUser, salt);
         }
 
         internal bool Verification(VerificationPermission userPermission) =>

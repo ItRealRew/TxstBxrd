@@ -96,7 +96,7 @@ namespace IDENTITY_SERVICE.Services
             return result;
         }
 
-        public async Task<bool> addUser(Registration newUser)
+        public async Task<bool> addUser(Registration newUser, string salt)
         {
             var result = false;
             try
@@ -104,7 +104,7 @@ namespace IDENTITY_SERVICE.Services
                 datebase.Connection.Open();
 
                 using var cmd = datebase.Connection.CreateCommand();
-                cmd.CommandText = @"CALL `userstxstbxrd`.`addUser`(@Login, @pasword, @name, @email);";
+                cmd.CommandText = @"CALL `userstxstbxrd`.`addUser`(@Login, @pasword, @name, @email, @salt);";
 
                 cmd.Parameters.Add(new MySqlParameter
                 {
@@ -132,6 +132,13 @@ namespace IDENTITY_SERVICE.Services
                     ParameterName = "@email",
                     DbType = DbType.String,
                     Value = newUser.Email,
+                });
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@salt",
+                    DbType = DbType.String,
+                    Value = salt,
                 });
 
                 using (var reader = await cmd.ExecuteReaderAsync())
