@@ -1,3 +1,5 @@
-# Project Title
-
-A brief description of what this project does and who it's for
+TXSTBXRD:
+    UI:
+        Blazor WASM
+    Services:
+        IDENTITY-SERVICE:  v0.1 https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/IDENTITY-SERVICE
