@@ -227,10 +227,10 @@ namespace IDENTITY_SERVICE.Services
                         switch (reader.GetValue(0).ToString())
                         {
                             case "del":
-                                result = "role is delete";
+                                result = "delete";
                                 break;
                             case "add":
-                                result = "role added";
+                                result = "added";
                                 break;
                         }
                     }

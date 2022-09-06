@@ -140,6 +140,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "LogOut",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/identity/logout",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"identity",
+						"logout"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -55,11 +55,21 @@ namespace IDENTITY_SERVICE.Services
             return await dao.addUser(newUser, salt);
         }
 
+        internal bool loginOut(LogOut loginOut)
+        {
+            if (cache.TryGetValue(loginOut.authorizationToken, out Personally received))
+            {
+                cache.Remove(loginOut.authorizationToken);
+                return true;
+            }
+            return false;
+        }
+
         internal bool Verification(VerificationPermission userPermission) =>
                                 cache.TryGetValue(userPermission.authorizationToken, out Personally received) ?
                                     received.Permissions.ContainsKey(userPermission.Permission) : false;
 
         internal async Task<string> ChangePermission(СhangingPermissions user) => cache.TryGetValue(user.authorizationToken, out Personally received) ?
-                                await dao.ChangePermission(received.UserName,user.UserName,user.RoleName) : "false";
+                                await dao.ChangePermission(received.UserName, user.UserName, user.RoleName) : "false";
     }
 }
