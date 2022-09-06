@@ -144,7 +144,7 @@ CREATE TABLE `users_permissions` (
 
 LOCK TABLES `users_permissions` WRITE;
 /*!40000 ALTER TABLE `users_permissions` DISABLE KEYS */;
-INSERT INTO `users_permissions` VALUES (9,2);
+INSERT INTO `users_permissions` VALUES (1,1),(1,2),(9,2);
 /*!40000 ALTER TABLE `users_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +227,7 @@ BEGIN
 										AND permissions.id = users_permissions.permission
 										AND  `users`.`Login` = logword
                                         AND `permissions`.`Name` = rolename ) THEN
-						DELETE FROM userstxstbxrd.users_permissions WHERE user = @selUserid and @selroleid;
+						DELETE FROM userstxstbxrd.users_permissions WHERE user = @selUserid and permission = @selroleid;
 						SELECT 'del';
                         else 
                         INSERT INTO userstxstbxrd.users_permissions VALUES (@selUserid, @selroleid);
@@ -301,4 +301,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-05 17:42:09
+-- Dump completed on 2022-09-06  9:10:17
