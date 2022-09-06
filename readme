@@ -1,5 +1,0 @@
-TXSTBXRD:
-    UI:
-        Blazor WASM
-    Services:
-        IDENTITY-SERVICE:  v0.1 https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/IDENTITY-SERVICE
