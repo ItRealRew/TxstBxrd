@@ -16,11 +16,11 @@
   </p>
 </p>
 
-## About The Project
+## List Services
 
-![Screen Shot](image\screenshot.png)
+* <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/IDENTITY-SERVICE"><strong>TXSTBXRD.Identity         »</strong></a>
+* <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/EVENT-SERVICE"><strong>TXSTBXRD.Event            »</strong></a>
 
-List Services:
+## Postman Collection 
 
-* <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/IDENTITY-SERVICE"><strong>TXSTBXRD.Identity         -></strong></a>
-* <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/EVENT-SERVICE"><strong>TXSTBXRD.Event            -></strong></a>
+* <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/POSTMAN-COLLECTION"><strong>List Collection</strong></a>
