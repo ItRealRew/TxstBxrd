@@ -15,7 +15,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/identity/identification?login=root&password=root",
+					"raw": "https://localhost:5001/identity/identification?login=root1&password=root1",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -28,11 +28,11 @@
 					"query": [
 						{
 							"key": "login",
-							"value": "root"
+							"value": "root1"
 						},
 						{
 							"key": "password",
-							"value": "root"
+							"value": "root1"
 						}
 					]
 				}
@@ -113,7 +113,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/identity/changepermission?Admin=3dfec3b2-70af-4d18-9533-d8fc06a8dc79&UserName=root&RoleName=root",
+					"raw": "https://localhost:5001/identity/changepermission?authorizationToken=263c3193-3688-4d14-86a2-0bb24ea9adfc&UserName=root&RoleName=root",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -125,8 +125,8 @@
 					],
 					"query": [
 						{
-							"key": "Admin",
-							"value": "3dfec3b2-70af-4d18-9533-d8fc06a8dc79"
+							"key": "authorizationToken",
+							"value": "263c3193-3688-4d14-86a2-0bb24ea9adfc"
 						},
 						{
 							"key": "UserName",

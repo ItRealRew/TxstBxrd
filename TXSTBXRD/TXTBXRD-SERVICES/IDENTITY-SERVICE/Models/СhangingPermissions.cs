@@ -9,6 +9,6 @@ namespace IDENTITY_SERVICE.Models
     {
         public Guid authorizationToken { get; set; }
         public string UserName { get; set; }
-        public int RoleName { get; set; }
+        public string RoleName { get; set; }
     }
 }

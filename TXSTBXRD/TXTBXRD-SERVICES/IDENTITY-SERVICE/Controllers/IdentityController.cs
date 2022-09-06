@@ -29,6 +29,6 @@ namespace IDENTITY_SERVICE.Controllers
         public bool VerificationUserPermission(VerificationPermission userPermission) => service.Verification(userPermission);
 
         [HttpPost("changepermission")]
-        public async Task<bool> changeUserPermission(СhangingPermissions user) => await  service.ChangePermission(user);
+        public async Task<string> changeUserPermission(СhangingPermissions user) => await  service.ChangePermission(user);
     }
 }

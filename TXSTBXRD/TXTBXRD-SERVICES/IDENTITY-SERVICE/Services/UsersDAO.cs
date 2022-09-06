@@ -196,36 +196,43 @@ namespace IDENTITY_SERVICE.Services
             return result;
         }
 
-        public async Task<bool> ChangePermission(string AdminName, string UserName, int RoleName)
+        public async Task<string> ChangePermission(string adminName, string login, string roleName)
         {
-            var result = false;
-             try
+            string result = "false";
+            try
             {
                 datebase.Connection.Open();
 
                 using var cmd = datebase.Connection.CreateCommand();
-                cmd.CommandText = @"CALL `userstxstbxrd`.`changePermissions`(@Login, @Rolename);";
+                cmd.CommandText = @"CALL `userstxstbxrd`.`changePermissions`(@logword, @rolename);";
 
                 cmd.Parameters.Add(new MySqlParameter
                 {
-                    ParameterName = "@Login",
+                    ParameterName = "@logword",
                     DbType = DbType.String,
-                    Value = UserName,
+                    Value = login,
                 });
 
                 cmd.Parameters.Add(new MySqlParameter
                 {
-                    ParameterName = "@Rolename",
+                    ParameterName = "@rolename",
                     DbType = DbType.String,
-                    Value = RoleName,
+                    Value = roleName,
                 });
 
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
                     {
-                        if (reader.GetValue(0).ToString() == "Y")
-                            result = true;
+                        switch (reader.GetValue(0).ToString())
+                        {
+                            case "del":
+                                result = "role is delete";
+                                break;
+                            case "add":
+                                result = "role added";
+                                break;
+                        }
                     }
                 }
             }
