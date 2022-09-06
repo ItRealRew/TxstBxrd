@@ -226,10 +226,12 @@ namespace IDENTITY_SERVICE.Services
                     {
                         switch (reader.GetValue(0).ToString())
                         {
-                            case "del":
+                            case "D":
+                                Console.WriteLine(adminName + " удалил права " + roleName + " у пользователя " + login);
                                 result = "delete";
                                 break;
-                            case "add":
+                            case "A":
+                                Console.WriteLine(adminName + " добавил права " + roleName + " пользователю " + login);
                                 result = "added";
                                 break;
                         }

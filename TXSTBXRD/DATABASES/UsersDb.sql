@@ -32,7 +32,7 @@ CREATE TABLE `details` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `details_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `details` (
 
 LOCK TABLES `details` WRITE;
 /*!40000 ALTER TABLE `details` DISABLE KEYS */;
-INSERT INTO `details` VALUES (5,9,'root1','root1');
+INSERT INTO `details` VALUES (5,9,'root1','root1'),(6,10,'root2','root2');
 /*!40000 ALTER TABLE `details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +83,7 @@ CREATE TABLE `salt` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `salt_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,7 @@ CREATE TABLE `salt` (
 
 LOCK TABLES `salt` WRITE;
 /*!40000 ALTER TABLE `salt` DISABLE KEYS */;
-INSERT INTO `salt` VALUES (1,1,'qwerty'),(4,9,'&LRt12knFqKhDZx8');
+INSERT INTO `salt` VALUES (1,1,'qwerty'),(4,9,'&LRt12knFqKhDZx8'),(5,10,'CA8Kczn4TG1t&Mfa');
 /*!40000 ALTER TABLE `salt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +108,7 @@ CREATE TABLE `users` (
   `Login` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +117,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'root','root'),(8,'User','User'),(9,'root1','a69c2afe015539c67177ede6822414fcca212567c50d9c57ab9e60dd9079144d02b7ccb8031e61c94f522bac34480367303376e3faad9085e210328110d746f1');
+INSERT INTO `users` VALUES (1,'root','root'),(8,'User','User'),(9,'root1','a69c2afe015539c67177ede6822414fcca212567c50d9c57ab9e60dd9079144d02b7ccb8031e61c94f522bac34480367303376e3faad9085e210328110d746f1'),(10,'root2','a43c4f8d1062d5e1d633ef9f53aece39a3cd38ae96c194b38a767b55e3132ecc532a9e550fdee65efced81aafcde6642eb5c95b720ddabc48f2dae4b9752ddf9');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +144,7 @@ CREATE TABLE `users_permissions` (
 
 LOCK TABLES `users_permissions` WRITE;
 /*!40000 ALTER TABLE `users_permissions` DISABLE KEYS */;
-INSERT INTO `users_permissions` VALUES (1,1),(1,2),(9,2);
+INSERT INTO `users_permissions` VALUES (1,1),(1,2),(9,2),(10,2);
 /*!40000 ALTER TABLE `users_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,10 +228,10 @@ BEGIN
 										AND  `users`.`Login` = logword
                                         AND `permissions`.`Name` = rolename ) THEN
 						DELETE FROM userstxstbxrd.users_permissions WHERE user = @selUserid and permission = @selroleid;
-						SELECT 'del';
+						SELECT 'D';
                         else 
                         INSERT INTO userstxstbxrd.users_permissions VALUES (@selUserid, @selroleid);
-                        SELECT 'add';
+                        SELECT 'A';
                         End IF;
 			else
 			SELECT 'N';
@@ -301,4 +301,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-06  9:10:17
+-- Dump completed on 2022-09-06 12:47:08

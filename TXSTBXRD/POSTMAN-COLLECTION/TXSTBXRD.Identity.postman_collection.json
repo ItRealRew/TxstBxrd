@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Login",
+			"name": "LogIn",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -147,7 +147,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/identity/logout",
+					"raw": "https://localhost:5001/identity/logout?authorizationToken=12856e66-5eae-4135-a791-75095bef4bf3",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -156,6 +156,12 @@
 					"path": [
 						"identity",
 						"logout"
+					],
+					"query": [
+						{
+							"key": "authorizationToken",
+							"value": "12856e66-5eae-4135-a791-75095bef4bf3"
+						}
 					]
 				}
 			},
