@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "71586a2b-933e-428d-97e2-d1cccdfea3da",
+		"name": "TXSTBXRD.Event",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21992151"
+	},
+	"item": [
+		{
+			"name": "AddSystemLog",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7043/event/add",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7043",
+					"path": [
+						"event",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
