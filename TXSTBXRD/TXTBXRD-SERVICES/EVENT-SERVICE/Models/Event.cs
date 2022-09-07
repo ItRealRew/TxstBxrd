@@ -1,10 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+
 namespace EVENT_SERVICE.Models
 {
-    public class Event
+    public partial class Event
     {
-        public string Customer { get; set; }
-        public string EventType { get; set; }
-        public string Description { get; set; }
-        public DateTime Date { get; set; }
+        public int EventId { get; set; }
+        public string[] Customer { get; set; } = null!;
+        public int EventType { get; set; }
+        public string[]? Description { get; set; }
+        public DateTime EventDate { get; set; }
     }
 }
