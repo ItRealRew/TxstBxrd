@@ -1,32 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using EVENT_SERVICE.Models;
 
 namespace EVENT_SERVICE.Services
 {
     public partial class EventDBContext : DbContext
     {
-        public EventDBContext()
-        {
-        }
-
-        public EventDBContext(DbContextOptions<EventDBContext> options)
-            : base(options)
-        {
-        }
+        public EventDBContext(DbContextOptions<EventDBContext> options) : base(options) { }
 
         public virtual DbSet<Event> Events { get; set; } = null!;
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=localhost;port=5432;Username=postgres;Password=root;Database=EventDB");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

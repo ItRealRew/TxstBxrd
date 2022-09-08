@@ -11,9 +11,9 @@ namespace EVENT_SERVICE.Services
     {
         private readonly EventDBContext database;
 
-        public EventService()
+        public EventService(EventDBContext database)
         {
-            this.database = new EventDBContext();
+            this.database = database;
         }
 
         public async Task<List<Event>> GetAllEvent()

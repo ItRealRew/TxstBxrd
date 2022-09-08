@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddControllers();
 builder.Services.AddEntityFrameworkNpgsql().AddDbContext<EventDBContext>(options =>
 {
@@ -11,7 +13,8 @@ builder.Services.AddEntityFrameworkNpgsql().AddDbContext<EventDBContext>(options
 );
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSingleton<EventService>();
+
+builder.Services.AddTransient<EventService>();
 
 var app = builder.Build();
 
