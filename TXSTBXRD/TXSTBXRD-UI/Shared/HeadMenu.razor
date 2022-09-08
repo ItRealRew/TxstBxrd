@@ -1,0 +1,33 @@
+﻿<div class="header">
+    <ul class="menu-main">
+        <a class="menu-link" href="#login">LogIn</a>
+        <a class="menu-link" href="#Support">Support</a>
+    </ul>
+
+    <ul class="menu-main-mobile">
+        <button title="Navigation menu" class="menu-main-button" @onclick="ToggleNavMenu">
+            <div class="container" onclick="myFunction(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+        </button>
+    </ul>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}
