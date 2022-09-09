@@ -1,0 +1,38 @@
+﻿.center-form {
+    padding: 20px;
+    text-align: center;
+}
+
+.login-form {
+    display: inline-block;
+    padding: 50px;
+    width: 200px;
+}
+
+input {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+}
+
+.login-form>input {
+    padding: 15px 5px;
+    margin-left: 10px;
+    margin-top: 20px;
+    width: 260px;
+    border: none;
+    text-align: left;
+    color: #757575;
+}
+
+.btn-login {
+    background-color: #26C6DA;
+    border: none;
+    padding: 10px;
+    width: 200px;
+    border-radius: 3px;
+    box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    margin-top: 10px;
+    cursor: pointer;
+}
