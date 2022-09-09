@@ -1,24 +1,23 @@
 ﻿<div class="header">
+    <a class="navbar-brand noselect" href="#home">TXSTBXRD</a>
+
     <ul class="menu-main">
-        <a class="menu-link" href="#login">LogIn</a>
-        <a class="menu-link" href="#Support">Support</a>
+        <a class="menu-link noselect" href="#login">LogIn</a>
+        <a class="menu-link noselect" href="#Support">Support</a>
     </ul>
 
-    <ul class="menu-main-mobile">
-        <button title="Navigation menu" class="menu-main-button" @onclick="ToggleNavMenu">
-            <div class="container" onclick="myFunction(this)">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
 
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </div>
-        </button>
-    </ul>
+    <div class="hamburger-menu">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle">
+            <span></span>
+        </label>
+
+        <ul class="mobile-menu-box">
+            <li><a class="menu-link-mobile noselect" href="#login">LogIn</a></li>
+            <li><a class="menu-link-mobile noselect" href="#Support">Support</a></li>
+        </ul>
+    </div>
 </div>
 
 @code {
