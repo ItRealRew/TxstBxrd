@@ -4,8 +4,22 @@
 
 <div class="center-form">
     <div class="login-form">
-        <input type="text" placeholder="Name" />
-        <input type="text" placeholder="Password" />
-        <button class="btn-login">Ok</button>
+        <input class="login-input" type="text" placeholder="Name" />
+        <input class="login-input" type="text" placeholder="Password" />
+        <div class="login-left-position">
+            <li class="checkboxline noselect">
+                <label class="login-lable" for="checkbox" onclick="@clickLabel">
+                    <input @bind="IsDisabled" type="checkbox" name="checkbox" class="login-checkbox"> Remember me
+                </label>
+            </li>
+        </div>
+        <button class="btn-login">Sign in</button>
     </div>
 </div>
+
+
+@code {
+    protected bool IsDisabled { get; set; }
+
+    private void clickLabel() => IsDisabled = !IsDisabled;
+}

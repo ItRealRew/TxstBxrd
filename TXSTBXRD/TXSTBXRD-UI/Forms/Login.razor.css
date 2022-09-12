@@ -6,17 +6,73 @@
 .login-form {
     display: inline-block;
     padding: 50px;
-    width: 200px;
+    width: 400px;
 }
 
 input {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
+    width: available;
+    width: -webkit-fill-available;
 }
 
 .btn-login {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+
+    outline: none;
+}
+
+.login-input {
+    padding: 5px;
+    outline-style: none;
+    margin-bottom: 10px;
+
+}
+
+.login-lable {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    padding-bottom: 2px;
+    line-height: 1rem;
+}
+
+.login-left-position {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.login-checkbox {
+    margin: 0px;
+    width: 16px;
+    height: 16px;
+    
+}
+
+
+.checkboxline label,
+input {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.checkboxline {
+    list-style-type: none;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
