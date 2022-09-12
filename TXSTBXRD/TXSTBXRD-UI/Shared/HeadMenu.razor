@@ -2,31 +2,26 @@
     <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
 
     <ul class="menu-main">
-        <a class="menu-link noselect" href="login">LogIn</a>
-        <a class="menu-link noselect" href="#Support">Support</a>
+        <a onclick="@closeMaimMenu" class="menu-link noselect" href="login">LogIn</a>
+        <a onclick="@closeMaimMenu" class="menu-link noselect" href="#Support">Support</a>
     </ul>
 
 
     <div class="hamburger-menu">
-        <input id="menu__toggle" type="checkbox" />
+        <input id="menu__toggle" type="checkbox"  @bind="IsDisabled" class="position-toogle"/>
         <label class="menu__btn" for="menu__toggle">
             <span></span>
         </label>
 
         <ul class="mobile-menu-box">
-            <li><a class="menu-link-mobile noselect" href="login">LogIn</a></li>
-            <li><a class="menu-link-mobile noselect" href="#Support">Support</a></li>
+            <li><a onclick="@closeMaimMenu" class="menu-link-mobile noselect" href="login">LogIn</a></li>
+            <li><a onclick="@closeMaimMenu" class="menu-link-mobile noselect" href="#Support">Support</a></li>
         </ul>
     </div>
 </div>
 
 @code {
-    private bool collapseNavMenu = true;
+    protected bool IsDisabled { get; set; }
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
+    private void closeMaimMenu() => IsDisabled = !IsDisabled;
 }

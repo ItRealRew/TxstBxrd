@@ -53,7 +53,11 @@
     color: #FFFFFF;
 }
 
-
+.position-toogle {
+    position: fixed;
+    top: 5px;
+    right: 20px;
+}
 
 #menu__toggle {
     opacity: 0;
@@ -162,8 +166,9 @@
         visibility: hidden;
     }
 
-    .mobile-menu-box {
+    #menu__toggle:checked~.mobile-menu-box {
         visibility: hidden;
+        right: 0;
     }
 }
 
