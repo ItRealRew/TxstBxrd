@@ -8,7 +8,7 @@
 
 
     <div class="hamburger-menu">
-        <input id="menu__toggle" type="checkbox"  @bind="IsDisabled" class="position-toogle"/>
+        <input id="menu__toggle" type="checkbox" @bind="IsDisabled" class="position-toogle" />
         <label class="menu__btn" for="menu__toggle">
             <span></span>
         </label>
@@ -23,5 +23,9 @@
 @code {
     protected bool IsDisabled { get; set; }
 
-    private void closeMainMenu() => IsDisabled = !IsDisabled;
+    private void closeMainMenu()
+    {
+        if (IsDisabled)
+            IsDisabled = !IsDisabled;
+    }
 }

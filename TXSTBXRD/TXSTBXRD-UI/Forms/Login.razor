@@ -1,19 +1,32 @@
 ﻿@page "/login"
+@layout EmptyLayout
+
 
 <PageTitle>LogIn</PageTitle>
 
 <div class="center-form">
+        <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
+        <p class="login-form-description">Sign in to TXSTBXRD</p>
     <div class="login-form">
         <input class="login-input" type="text" placeholder="Name" />
         <input class="login-input" type="text" placeholder="Password" />
-        <div class="login-left-position">
-            <li class="checkboxline noselect">
-                <label class="login-lable" for="checkbox" onclick="@clickLabel">
-                    <input @bind="IsDisabled" type="checkbox" name="checkbox" class="login-checkbox"> Remember me
-                </label>
-            </li>
+        <div class="login-options noselect">
+            <div class="login-left-position">
+                <li class="checkboxline">
+                    <label class="login-lable" for="checkbox" onclick="@clickLabel">
+                        <input @bind="IsDisabled" type="checkbox" name="checkbox" class="login-checkbox"> Remember me
+                    </label>
+                </li>
+            </div>
+            <div class="login-right-position">
+                <a class="login-link" href="#wasap">Forgot your password?</a>
+            </div>
         </div>
         <button class="btn-login">Sign in</button>
+    </div>
+    <br>
+    <div class="login-form">
+        WAZAP!
     </div>
 </div>
 
