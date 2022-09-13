@@ -5,15 +5,20 @@
 <PageTitle>LogIn</PageTitle>
 
 <div class="center-form">
-        <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
-        <p class="login-form-description">Sign in to TXSTBXRD</p>
+    <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
+    <p class="login-form-description">Sign in to TXSTBXRD</p>
+    <div class="login-validate" style="display: @(validateVisible ? "none" : "inline-block")">
+        <p class="login-lable-validate noselect">Incorrect username or password.</p>
+        <a class="close" @onclick="closeValidate"></a>
+    </div>
+    <br style="display: @(validateVisible ? "none" : "inline-block")">
     <div class="login-form">
         <input class="login-input" type="text" placeholder="Name" />
         <input class="login-input" type="text" placeholder="Password" />
         <div class="login-options noselect">
             <div class="login-left-position">
                 <li class="checkboxline">
-                    <label class="login-lable" for="checkbox" onclick="@clickLabel">
+                    <label class="login-lable-click" for="checkbox" @onclick="clickLabel">
                         <input @bind="IsDisabled" type="checkbox" name="checkbox" class="login-checkbox"> Remember me
                     </label>
                 </li>
@@ -25,14 +30,18 @@
         <button class="btn-login">Sign in</button>
     </div>
     <br>
-    <div class="login-form">
-        WAZAP!
+    <div class="login-form-add-users noselect">
+        <p class="add-user-content login-lable"> Don't have an account yet? <a class="login-link" href="#create">Create
+                now</a></p>
     </div>
 </div>
 
 
 @code {
+    protected bool validateVisible { get; set; } = false;
     protected bool IsDisabled { get; set; }
 
     private void clickLabel() => IsDisabled = !IsDisabled;
+
+    private void closeValidate() => validateVisible = !validateVisible;
 }
