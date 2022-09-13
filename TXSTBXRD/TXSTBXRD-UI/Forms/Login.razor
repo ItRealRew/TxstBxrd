@@ -11,7 +11,7 @@
         <p class="login-lable-validate noselect">Incorrect username or password.</p>
         <a class="close" @onclick="closeValidate"></a>
     </div>
-    <br style="display: @(validateVisible ? "none" : "inline-block")">
+    <br class="noselect" style="display: @(validateVisible ? "none" : "inline-block")">
     <div class="login-form">
         <input class="login-input" type="text" placeholder="Name" />
         <input class="login-input" type="text" placeholder="Password" />

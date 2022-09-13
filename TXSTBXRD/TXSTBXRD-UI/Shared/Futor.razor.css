@@ -1,0 +1,97 @@
+.futor-background {
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 306px;
+    text-align: center;
+}
+
+.futor-content {
+    background-color: blueviolet;
+    position: relative;
+    display: inline-block;
+    width: 1170px;
+    height: 306px;
+}
+
+.futor-brand {
+    position: absolute;
+    left: 8.19%;
+
+    margin-top: 65px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: justify;
+
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.futor-brand:hover {
+    border-bottom: 2px solid rgb(255, 255, 255);
+    padding-bottom: 0px;
+    text-decoration: none;
+}
+
+.year-start-impl {
+    position: absolute;
+    left: 8.19%;
+    bottom: 12.61%;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: justify;
+
+    color: #FFFFFF;
+    margin: 0;
+}
+
+
+.futor-list {
+    position: relative;
+    left: -35px;
+    display: inline-block;
+    list-style-type: none;
+    text-align: justify;
+    margin-left: 135px;
+    margin-top: 60px;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+.futor-list-link {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.futor-list-link:hover {
+    border-bottom: 1px solid rgb(255, 255, 255);
+    padding-bottom: 0px;
+    text-decoration: none;
+}
+
+.futor-list>li {
+    padding: 5px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: justify;
+    color: #FFFFFF;
+}
+
+.futor-share {
+    background-color: brown;
+    width: 130px;
+    height: 25px;
+    position: relative;
+    bottom: 40px;
+    right: 40px;
+}
