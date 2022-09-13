@@ -41,18 +41,22 @@ input {
     font-style: normal;
     font-weight: 400;
 
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 10px;
     width: 100%;
 
     outline: none;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .login-input {
-    padding: 5px;
+    padding: 10px;
     outline-style: none;
     margin-bottom: 10px;
-
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .login-lable-click {
@@ -189,20 +193,39 @@ input {
     width: 20px;
     height: 20px;
     opacity: 1;
-  }
-  .close:hover {
+}
+
+.close:hover {
     opacity: 0.6;
-  }
-  .close:before, .close:after {
+}
+
+.close:before,
+.close:after {
     position: absolute;
     content: ' ';
     height: 20px;
     width: 3px;
     background-color: rgb(248, 59, 59);
-  }
-  .close:before {
+}
+
+.close:before {
     transform: rotate(45deg);
-  }
-  .close:after {
+}
+
+.close:after {
     transform: rotate(-45deg);
-  }
+}
+
+@media screen and (max-width: 441px) {
+
+    .login-validate {
+        width: calc(90% - 10px)
+    }
+
+    .login-form,
+    .login-form-add-users {
+        width: 90%;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
