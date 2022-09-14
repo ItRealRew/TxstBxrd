@@ -1,31 +1,47 @@
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .futor-background {
     background: rgba(0, 0, 0, 0.8);
     width: 100%;
-    height: 306px;
     text-align: center;
 }
 
 .futor-content {
-    background-color: blueviolet;
     position: relative;
     display: inline-block;
     width: 1170px;
-    height: 306px;
+    height: 100%;
+}
+
+.futor-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.futor-card {
+    width: 230px;
+    min-height: 306px;
+    transition: all 0.2s;
+    text-align: left;
 }
 
 .futor-brand {
-    position: absolute;
-    left: 8.19%;
-
-    margin-top: 65px;
-
+    position: relative;
+    top: 65px;
+    left: 35px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 29px;
-    text-align: justify;
-
     text-decoration: none;
     color: #FFFFFF;
 }
@@ -36,10 +52,11 @@
     text-decoration: none;
 }
 
-.year-start-impl {
+
+.since {
     position: absolute;
-    left: 8.19%;
-    bottom: 12.61%;
+    bottom: 20px;
+    left: 45px;
 
     font-family: 'Inter';
     font-style: normal;
@@ -49,18 +66,14 @@
     text-align: justify;
 
     color: #FFFFFF;
-    margin: 0;
 }
-
 
 .futor-list {
     position: relative;
-    left: -35px;
     display: inline-block;
     list-style-type: none;
     text-align: justify;
-    margin-left: 135px;
-    margin-top: 60px;
+    margin-top: 65px;
     margin-bottom: 0px;
     padding: 0px;
 }
@@ -71,7 +84,7 @@
 }
 
 .futor-list-link:hover {
-    border-bottom: 1px solid rgb(255, 255, 255);
+    color: rgba(255, 255, 255, 0.5);
     padding-bottom: 0px;
     text-decoration: none;
 }
@@ -87,11 +100,159 @@
     color: #FFFFFF;
 }
 
-.futor-share {
-    background-color: brown;
+.futor-list>li:nth-of-type(1n+8) {
+    display: none;
+}
+
+.futor-link-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.share {
+    position: absolute;
+    bottom: 20px;
+    right: 35px;
     width: 130px;
     height: 25px;
-    position: relative;
-    bottom: 40px;
-    right: 40px;
+    background-color: darkseagreen;
+}
+
+
+/** delete in complete component IMPL.
+it is to color card futor.
+for develop.
+
+.card1 {
+    background-color: blueviolet;
+}
+
+.card2 {
+    background-color: darkcyan;
+}
+
+**/
+@media screen and (max-width: 1170px) {
+
+    .futor-content {
+        width: 100%
+    }
+
+    .futor-card {
+        width: 22.5%;
+        min-height: 100%;
+    }
+
+    .last-card {
+        min-height: 100px;
+        width: 90%;
+    }
+
+    .since {
+        position: relative;
+        bottom: 40px;
+        left: 7%;
+    }
+
+    .share {
+        bottom: 30px;
+        right: 75px;
+    }
+}
+
+@media screen and (max-width: 1025px) {
+
+    .futor-card {
+        width: 30%;
+    }
+
+    .second-last-card,
+    .last-card {
+        width: 90%;
+    }
+
+    .futor-second-last-card {
+        margin-top: 0px;
+        margin-left: 35px;
+    }
+
+    .since {
+        position: relative;
+        bottom: 40px;
+        left: 9%;
+    }
+
+    .share {
+        bottom: 30px;
+        right: 19%;
+    }
+}
+
+@media screen and (max-width: 770px) {
+
+    .futor-card {
+        width: 45%;
+    }
+
+    .last-card {
+        width: 90%
+    }
+
+    .futor-second-last-card {
+        margin-top: 20px;
+        margin-left: 0px;
+    }
+
+    .futor-midle-card {
+        margin-top: 20px;
+        margin-left: 35px;
+    }
+
+    .since {
+        position: relative;
+        bottom: 40px;
+        left: 11%;
+    }
+
+    .share {
+        bottom: 30px;
+        right: 75px;
+    }
+}
+
+@media screen and (max-width: 513px) {
+    .futor-card {
+        width: 100%;
+        min-height: 100%;
+    }
+
+    .futor-cards {
+        height: 100%;
+    }
+
+    .first-card {
+        height: 100px;
+    }
+
+    .last-card {
+        height: 100px;
+    }
+
+    .futor-list {
+        margin-top: 0px;
+        margin-bottom: 10px;
+        left: 35px;
+    }
+
+    .futor-midle-card {
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+
+    .futor-list>li:nth-of-type(1) {
+        font-size: 20px;
+    }
 }
