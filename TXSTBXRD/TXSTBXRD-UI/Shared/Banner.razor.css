@@ -23,7 +23,7 @@
 
 .banner-title {
     position: absolute;
-    top: 40%;
+    top: 40vh;
     left: 40%;
     transform: translate(-50%, -50%);
     white-space: pre;
@@ -42,7 +42,7 @@
 
 .banner-description {
     position: absolute;
-    top: 58%;
+    top: 58vh;
     left: 63%;
     transform: translate(-50%, -50%);
     white-space: pre;
@@ -70,5 +70,55 @@
 
     to {
         -webkit-mask-position: -50%;
+    }
+}
+
+
+/* iPhone 5 in landscape */
+@media (min-device-width: 320px) and (max-device-width: 1200px) and (orientation: landscape) {
+    .banner-description {
+        top: inherit;
+        bottom: 5px;
+        left: 50%;
+        font-size: 24px;
+    }
+
+    .banner-title {
+        font-size: 65px;
+        left: 50%;
+        line-height: 90px;
+    }
+
+    .banner-img {
+        opacity: 0.8;
+    }
+
+    .banner-content {
+        background: rgba(0, 0, 0, 1);
+    }
+}
+
+/* iPhone 5 in portrait */
+@media (min-device-width: 280px) and (max-device-width: 1200px) and (orientation: portrait) {
+    .banner-description {
+        top: inherit;
+        bottom: 50px;
+        left: 50%;
+        font-size: 24px;
+    }
+
+    .banner-title {
+        white-space: pre-wrap;
+        text-align: right;
+        left: 50%;
+        line-height: 90px;
+    }
+
+    .banner-img {
+        opacity: 0.8;
+    }
+
+    .banner-content {
+        background: rgba(0, 0, 0, 1);
     }
 }
