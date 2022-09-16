@@ -1,0 +1,77 @@
+﻿.major-slider-container {
+    margin: 0 auto;
+    width: 1170px;
+    height: 670px;
+    margin-bottom: 50px;
+}
+
+.major-banner-img {
+    background-color: deeppink;
+    width: 1170px;
+    height: 340px;
+}
+
+.major-banner-text-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.major-banner-title {
+    width: 310px;
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 84px;
+    text-align: right;
+
+    color: #000000;
+}
+
+.major-banner-description {
+    margin-top: 20px;
+    width: 825px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 44px;
+    text-align: justify;
+}
+
+.major-banner-content{
+    height: 270px;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -ms-line-clamp: 6;
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
+    display: -webkit-box;
+    display: box;
+    word-wrap: break-word;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.major-banner-link {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    color: rgb(0, 0, 0);
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+    text-decoration: none;
+    text-align: justify;
+}
+
+.major-banner-link:hover {
+    border-bottom: 2px solid rgb(0, 0, 0);
+    padding-bottom: 0px;
+    text-decoration: none;
+}
