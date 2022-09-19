@@ -1,23 +1,21 @@
 ﻿<div class="major-slider-container ">
       <div class="major-banner-img-container">
-            <input type="radio" name="switch" id="switch-btn-first" checked>
-            <input type="radio" name="switch" id="switch-btn-second">
-            <input type="radio" name="switch" id="switch-btn-third">
-
             <div class="major-banner-switch">
-                  <label for="switch-btn-first"></label>
-                  <label for="switch-btn-second"></label>
-                  <label for="switch-btn-third"></label>
+                  <label class="switch-btn-default @((startPosition == 0 ? "switch-btn-active" : ""))"
+                        @onclick="gotoFirstSlide"></label>
+                  <label class="switch-btn-default @((startPosition == -1170 ? "switch-btn-active" : ""))"
+                        @onclick="gotoSecondSlide"></label>
+                  <label class="switch-btn-default @((startPosition == -2340 ? "switch-btn-active" : ""))"
+                        @onclick="gotoThirdSlide"></label>
             </div>
 
-            <div class="major-banner-slider-inner noselect">
+            <div class="major-banner-slider-inner noselect" @ontouchstart="HandleTouchStart"
+                  @ontouchmove="HandleTouchMove" @ontouchend="HandleTouchEnd" @bind-style="swapeAnimation"
+                  @bind-style:event="oninput">
                   <div class="major-banner-slides">
-                        <img
-                              src="/Resource/MAJOR-SLIDER1.png" />
-                        <img
-                              src="/Resource/MAJOR-SLIDER2.png" />
-                        <img
-                              src="/Resource/MAJOR-SLIDER3.png" />
+                        <img src="/Resource/MAJOR-SLIDER1.png" />
+                        <img src="/Resource/MAJOR-SLIDER2.png" />
+                        <img src="/Resource/MAJOR-SLIDER3.png" />
                   </div>
             </div>
       </div>
@@ -35,3 +33,111 @@
             </div>
       </div>
 </div>
+
+@code {
+      TouchPoint referencePoint = null!;
+
+      double startPosition = 0;
+      double imgPosition = 0;
+      string swapeAnimation = "transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;";
+
+      void HandleTouchStart(TouchEventArgs t) => referencePoint = t.TargetTouches[0];
+
+      void HandleTouchMove(TouchEventArgs t)
+      {
+            if (referencePoint == null)
+                  return;
+
+            var endReferencePoint = t.TargetTouches[0];
+
+            var diffX = referencePoint.ClientX - endReferencePoint.ClientX;
+            var diffY = referencePoint.ClientY - endReferencePoint.ClientY;
+
+            if (Math.Abs(diffX) > Math.Abs(diffY))
+            {
+                  switch (diffX)
+                  {
+                        case > 0:
+                              imgPosition = -diffX + startPosition;
+                              swapeAnimation = "transform: translate3d(" + imgPosition + "px, 0px, 0px); transition-duration: 0ms;";
+                              break;
+                        case < 0:
+                              imgPosition = -diffX + startPosition;
+                              swapeAnimation = "transform: translate3d(" + imgPosition + "px, 0px, 0px); transition-duration: 0ms;";
+                              break;
+
+                  }
+            }
+      }
+      void HandleTouchEnd(TouchEventArgs t)
+      {
+            switch (startPosition)
+            {
+                  case 0:
+                        switch (imgPosition)
+                        {
+                              case <= 0:
+                                    startPosition = -1170;
+                                    imgPosition = startPosition;
+                                    break;
+                              default:
+                                    startPosition = 0;
+                                    imgPosition = startPosition;
+                                    break;
+                        }
+                        break;
+                  case -1170:
+                        switch (imgPosition)
+                        {
+                              case >= -487:
+                                    startPosition = 0;
+                                    imgPosition = startPosition;
+                                    break;
+                              case <= -1840:
+                                    startPosition = -2340;
+                                    imgPosition = startPosition;
+                                    break;
+                              default:
+                                    startPosition = -1170;
+                                    imgPosition = startPosition;
+                                    break;
+                        }
+                        break;
+
+                  case -2340:
+                        switch (imgPosition)
+                        {
+                              case >= -1658:
+                                    startPosition = -1170;
+                                    imgPosition = startPosition;
+                                    break;
+                              default:
+                                    startPosition = -2340;
+                                    imgPosition = startPosition;
+                                    break;
+                        }
+                        break;
+            }
+
+            swapeAnimation = "transform: translate3d(" + imgPosition + "px, 0px, 0px); transition-duration: 300ms;";
+      }
+
+      void gotoFirstSlide()
+      {
+            startPosition = 0;
+            swapeAnimation = "transform: translate3d(" + startPosition + "px, 0px, 0px); transition-duration: 300ms;";
+      }
+
+
+      void gotoSecondSlide()
+      {
+            startPosition = -1170;
+            swapeAnimation = "transform: translate3d(" + startPosition + "px, 0px, 0px); transition-duration: 300ms;";
+      }
+
+      void gotoThirdSlide()
+      {
+            startPosition = -2340;
+            swapeAnimation = "transform: translate3d(" + startPosition + "px, 0px, 0px); transition-duration: 300ms;";
+      }
+}
