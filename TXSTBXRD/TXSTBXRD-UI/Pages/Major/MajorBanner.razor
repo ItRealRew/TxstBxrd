@@ -1,11 +1,11 @@
 ﻿<div class="major-slider-container ">
       <div class="major-banner-img-container">
             <div class="major-banner-switch">
-                  <label class="switch-btn-default @((startPosition == 0 ? "switch-btn-active" : ""))"
+                  <label class="switch-btn-default @((startPosition == FirstPosition ? "switch-btn-active" : ""))"
                         @onclick="gotoFirstSlide"></label>
-                  <label class="switch-btn-default @((startPosition == -1170 ? "switch-btn-active" : ""))"
+                  <label class="switch-btn-default @((startPosition == SecondPosition ? "switch-btn-active" : ""))"
                         @onclick="gotoSecondSlide"></label>
-                  <label class="switch-btn-default @((startPosition == -2340 ? "switch-btn-active" : ""))"
+                  <label class="switch-btn-default @((startPosition == ThirdPosition ? "switch-btn-active" : ""))"
                         @onclick="gotoThirdSlide"></label>
             </div>
 
@@ -35,11 +35,40 @@
 </div>
 
 @code {
+      System.Threading.Timer timer = null!;
       TouchPoint referencePoint = null!;
 
-      double startPosition = 0;
-      double imgPosition = 0;
+      double startPosition = FirstPosition;
+      double imgPosition = FirstPosition;
       string swapeAnimation = "transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;";
+
+      public const int FirstPosition = 0;
+      public const int SecondPosition = -100;
+      public const int ThirdPosition = -200;
+
+      protected override async Task OnInitializedAsync()
+      {
+            await base.OnInitializedAsync();
+            timer = new System.Threading.Timer(SetClock, new System.Threading.AutoResetEvent(false), 5000, 5000);
+      }
+
+      private void SetClock(object stateInfo)
+      {
+            switch (startPosition)
+            {
+                  case FirstPosition:
+                        gotoSecondSlide();
+            break;
+                  case SecondPosition:
+                        gotoThirdSlide();
+                        break;
+                  case ThirdPosition:
+                        gotoFirstSlide();
+                        break;
+            }
+            StateHasChanged();
+      }
+
 
       void HandleTouchStart(TouchEventArgs t) => referencePoint = t.TargetTouches[0];
 
@@ -73,71 +102,71 @@
       {
             switch (startPosition)
             {
-                  case 0:
+                  case FirstPosition:
                         switch (imgPosition)
                         {
                               case <= 0:
-                                    startPosition = -1170;
+                                    startPosition = SecondPosition;
                                     imgPosition = startPosition;
                                     break;
                               default:
-                                    startPosition = 0;
+                                    startPosition = FirstPosition;
                                     imgPosition = startPosition;
                                     break;
                         }
                         break;
-                  case -1170:
+                  case SecondPosition:
                         switch (imgPosition)
                         {
                               case >= -487:
-                                    startPosition = 0;
+                                    startPosition = FirstPosition;
                                     imgPosition = startPosition;
                                     break;
                               case <= -1840:
-                                    startPosition = -2340;
+                                    startPosition = ThirdPosition;
                                     imgPosition = startPosition;
                                     break;
                               default:
-                                    startPosition = -1170;
+                                    startPosition = SecondPosition;
                                     imgPosition = startPosition;
                                     break;
                         }
                         break;
 
-                  case -2340:
+                  case ThirdPosition:
                         switch (imgPosition)
                         {
                               case >= -1658:
-                                    startPosition = -1170;
+                                    startPosition = SecondPosition;
                                     imgPosition = startPosition;
                                     break;
                               default:
-                                    startPosition = -2340;
+                                    startPosition = ThirdPosition;
                                     imgPosition = startPosition;
                                     break;
                         }
                         break;
             }
 
-            swapeAnimation = "transform: translate3d(" + imgPosition + "px, 0px, 0px); transition-duration: 300ms;";
+            swapeAnimation = "transform: translate3d(" + imgPosition + "%, 0px, 0px); transition-duration: 300ms;";
       }
 
       void gotoFirstSlide()
       {
-            startPosition = 0;
-            swapeAnimation = "transform: translate3d(" + startPosition + "px, 0px, 0px); transition-duration: 300ms;";
+            startPosition = FirstPosition;
+            swapeAnimation = "transform: translate3d(" + startPosition + "%, 0px, 0px); transition-duration: 300ms;";
       }
 
 
       void gotoSecondSlide()
       {
-            startPosition = -1170;
-            swapeAnimation = "transform: translate3d(" + startPosition + "px, 0px, 0px); transition-duration: 300ms;";
+            startPosition = SecondPosition;
+            swapeAnimation = "transform: translate3d(" + startPosition + "%, 0px, 0px); transition-duration: 300ms;";
       }
 
       void gotoThirdSlide()
       {
-            startPosition = -2340;
-            swapeAnimation = "transform: translate3d(" + startPosition + "px, 0px, 0px); transition-duration: 300ms;";
+            startPosition = ThirdPosition;
+            swapeAnimation = "transform: translate3d(" + startPosition + "%, 0px, 0px); transition-duration: 300ms;";
       }
 }
