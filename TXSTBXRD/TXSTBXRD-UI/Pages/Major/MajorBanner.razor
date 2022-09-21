@@ -1,4 +1,6 @@
-﻿<div class="major-slider-container ">
+﻿@inject IJSRuntime JsRuntime
+
+<div class="major-slider-container ">
       <div class="major-banner-img-container">
             <div class="major-banner-switch">
                   <label class="switch-btn-default @((startPosition == FirstPosition ? "switch-btn-active" : ""))"
@@ -35,6 +37,8 @@
 </div>
 
 @code {
+      private IJSObjectReference jsModule;
+      
       System.Threading.Timer timer = null!;
       TouchPoint referencePoint = null!;
 
@@ -80,10 +84,6 @@
             var endReferencePoint = t.TargetTouches[0];
 
             var diffX = referencePoint.ClientX - endReferencePoint.ClientX;
-            var diffY = referencePoint.ClientY - endReferencePoint.ClientY;
-
-            if (Math.Abs(diffX) > Math.Abs(diffY))
-            {
                   switch (diffX)
                   {
                         case > 0:
@@ -96,8 +96,8 @@
                               break;
 
                   }
-            }
       }
+
       void HandleTouchEnd(TouchEventArgs t)
       {
             switch (startPosition)
