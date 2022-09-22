@@ -37,8 +37,14 @@
 </div>
 
 @code {
-      private IJSObjectReference jsModule;
-      
+      private IJSObjectReference jsModule = null!;
+
+      public class WindowDimensions
+      {
+            public int Width { get; set; }
+            public int Height { get; set; }
+      }
+
       System.Threading.Timer timer = null!;
       TouchPoint referencePoint = null!;
 
@@ -49,6 +55,16 @@
       public const int FirstPosition = 0;
       public const int SecondPosition = -100;
       public const int ThirdPosition = -200;
+
+      protected override async Task OnAfterRenderAsync(bool firstRender)
+      {
+            if (firstRender)
+            {
+                  jsModule = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./services/getSize.js");
+                  var dimension = await jsModule.InvokeAsync<WindowDimensions>("getSize");
+                  Console.WriteLine(dimension.Width);
+            }
+      }
 
       protected override async Task OnInitializedAsync()
       {
@@ -62,7 +78,7 @@
             {
                   case FirstPosition:
                         gotoSecondSlide();
-            break;
+                        break;
                   case SecondPosition:
                         gotoThirdSlide();
                         break;
@@ -84,18 +100,18 @@
             var endReferencePoint = t.TargetTouches[0];
 
             var diffX = referencePoint.ClientX - endReferencePoint.ClientX;
-                  switch (diffX)
-                  {
-                        case > 0:
-                              imgPosition = -diffX + startPosition;
-                              swapeAnimation = "transform: translate3d(" + imgPosition + "px, 0px, 0px); transition-duration: 0ms;";
-                              break;
-                        case < 0:
-                              imgPosition = -diffX + startPosition;
-                              swapeAnimation = "transform: translate3d(" + imgPosition + "px, 0px, 0px); transition-duration: 0ms;";
-                              break;
+            switch (diffX)
+            {
+                  case > 0:
+                        imgPosition = -diffX + startPosition;
+                        swapeAnimation = "transform: translate3d(" + imgPosition + "px, 0px, 0px); transition-duration: 0ms;";
+                        break;
+                  case < 0:
+                        imgPosition = -diffX + startPosition;
+                        swapeAnimation = "transform: translate3d(" + imgPosition + "px, 0px, 0px); transition-duration: 0ms;";
+                        break;
 
-                  }
+            }
       }
 
       void HandleTouchEnd(TouchEventArgs t)

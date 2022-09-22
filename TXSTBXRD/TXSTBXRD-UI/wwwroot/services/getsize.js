@@ -1,4 +1,4 @@
-export function getWindowSize()
+export function getSize()
 {
     return {
         width: window.innerWidth,
