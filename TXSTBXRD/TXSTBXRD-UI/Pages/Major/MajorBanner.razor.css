@@ -12,8 +12,6 @@
     height: 340px;
 }
 
-
-
 .major-banner-switch {
     position: absolute;
     display: flex;
@@ -120,4 +118,108 @@
 
 .switch-btn-active {
     background-color: rgb(126, 38, 107);
+}
+
+@media (max-width: 1230px) {
+    .major-slider-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .major-banner-img-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .major-banner-slider-inner {
+        width: 100%;
+    }
+
+    .major-banner-slides img {
+        width: 100%;
+        height: auto;
+        float: left;
+    }
+
+    .major-banner-switch {
+        position: absolute;
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
+        justify-content: center;
+        left: 0;
+        bottom: 10px;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .major-banner-switch label {
+        display: inline-block;
+        width: 50px;
+        height: 10px;
+        cursor: pointer;
+    }
+
+    .major-banner-text-container {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        height: auto;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    .major-banner-title {
+        width: 100%;
+        font-family: 'JetBrains Mono';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 36px;
+        text-align: center;
+        color: rgb(0, 0, 0);
+        line-height: 40px;
+    }
+
+    .major-banner-description {
+        margin-top: 20px;
+        width: auto;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 30px;
+        text-align: justify;
+    }
+
+    .major-banner-content {
+        height: auto;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -ms-line-clamp: 4;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        display: -webkit-box;
+        display: box;
+        word-wrap: break-word;
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+    }
+
+    .major-banner-link {
+        position: absolute;
+        right: 0px;
+        color: rgb(0, 0, 0);
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 39px;
+        text-decoration: none;
+        text-align: justify;
+    }
 }

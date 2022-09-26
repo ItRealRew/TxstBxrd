@@ -11,8 +11,7 @@
                         @onclick="gotoThirdSlide"></label>
             </div>
 
-            <div class="major-banner-slider-inner noselect" @ontouchstart="HandleTouchStart"
-                  @ontouchmove="HandleTouchMove" @ontouchend="HandleTouchEnd" @bind-style="swapeAnimation"
+            <div class="major-banner-slider-inner noselect" @bind-style="swapeAnimation"
                   @bind-style:event="oninput">
                   <div class="major-banner-slides">
                         <img src="/Resource/MAJOR-SLIDER1.png" />
@@ -62,7 +61,7 @@
             {
                   jsModule = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./services/getSize.js");
                   var dimension = await jsModule.InvokeAsync<WindowDimensions>("getSize");
-                  Console.WriteLine(dimension.Width);
+                  SetCarousel(dimension.Width);
             }
       }
 
@@ -72,6 +71,15 @@
             timer = new System.Threading.Timer(SetClock, new System.Threading.AutoResetEvent(false), 5000, 5000);
       }
 
+      private void SetCarousel(int trueWidth)
+      {
+            switch (trueWidth)
+            {
+                  case >= 1300:
+                        Console.WriteLine("Desctop");
+                        break;
+            }
+      }
       private void SetClock(object stateInfo)
       {
             switch (startPosition)
@@ -164,7 +172,7 @@
                         break;
             }
 
-            swapeAnimation = "transform: translate3d(" + imgPosition + "%, 0px, 0px); transition-duration: 300ms;";
+            swapeAnimation = "transform: translate3d(" + imgPosition + "px, 0px, 0px); transition-duration: 300ms;";
       }
 
       void gotoFirstSlide()
