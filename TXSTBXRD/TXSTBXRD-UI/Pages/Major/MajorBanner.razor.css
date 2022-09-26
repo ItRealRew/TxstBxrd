@@ -211,13 +211,13 @@
     }
 
     .major-banner-link {
-        position: absolute;
+        position: relative;
         right: 0px;
         color: rgb(0, 0, 0);
         font-family: 'Inter';
         font-style: normal;
-        font-weight: 400;
-        font-size: 32px;
+        font-weight: 700;
+        font-size: 24px;
         line-height: 39px;
         text-decoration: none;
         text-align: justify;
