@@ -1,4 +1,5 @@
 ﻿.cookies-main {
+    pointer-events: none;
     z-index: 1;
     position: fixed;
     bottom: 20px;
@@ -6,12 +7,12 @@
     background: #FFFFFF;
     border-radius: 10px;
     width: 375px;
-    height: 265px;
+    height: 340px;
     box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
 }
 
 .cookies-content {
-    padding: 29px 20px 27px 20px;
+    padding: 7px 20px 27px 20px;
 }
 
 .cookies-header {
@@ -21,8 +22,8 @@
     font-size: 24px;
     line-height: 20px;
     text-align: justify;
-
-    color: #000000;
+    margin-bottom: 17px;
+    color: rgb(0, 0, 0);
 
 }
 
@@ -33,11 +34,41 @@
     font-size: 14px;
     line-height: 16px;
     text-align: justify;
-    color: #9B9B9B;
+    color: rgb(155, 155, 155)
 }
 
-.cookies-control{
-    background-color: aquamarine;
+.cookies-control {
+    pointer-events: auto;
+    text-align: center;
+    margin-bottom: 17px;
+    width: 338px;
+    height: 30px;
+}
+
+.cookies-control-button {
+    background: rgb(113, 188, 120);
+    border-radius: 25px;
+    display: block;
+    text-decoration: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.cookies-more {
+    pointer-events: auto;
+    color: rgb(0, 0, 0);
+}
+
+.cookies-img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 17px;
+    background: url(/Resource/cookies.png);
 }
 
 @media (max-width: 415px) {
