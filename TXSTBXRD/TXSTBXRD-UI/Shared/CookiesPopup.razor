@@ -1,13 +1,45 @@
-﻿<div class="cookies-main noselect">
-    <div class="cookies-content">
-        <div class="cookies-img"></div>
-        <div class="cookies-header">By continuing to use the website, you agree to the use of cookies </div>
-        <div class="cookies-control">
-            <a class="cookies-control-button" href="/#">agree</a>
+﻿@inject ICookie cookie
+
+@if (visible)
+{
+    <div class="cookies-main noselect">
+        <div class="cookies-content">
+            <div class="cookies-img"></div>
+            <div class="cookies-header">By continuing to use the website, you agree to the use of cookies </div>
+            <div class="cookies-control">
+                <a @onclick="setSecurityPolicy" class="cookies-control-button" href="/#">agree</a>
+            </div>
+            <div class="cookies-body">This website uses cookies for your quick and convenient work with it. <a
+                class="cookies-more" href="/#">read more.</a>
+                <br>
+                You can change the cookie settings in your browser, but the functionality of the site in this case may be
+                limited.
+            </div>
         </div>
-        <div class="cookies-body">This website uses cookies for your quick and convenient work with it. <a class="cookies-more" href="/#">read more.</a>
-            <br>
-            You can change the cookie settings in your browser, but the functionality of the site in this case may be
-            limited.</div>
     </div>
-</div>
+}
+
+@code {
+    public bool visible = true;
+
+    private static Random random = new Random();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrEmpty(await cookie.GetValue("SecurityPolicy")))
+            visible = false;
+    }
+
+    async Task setSecurityPolicy()
+    {
+        await cookie.SetValue("SecurityPolicy", RandomString(8));
+        visible = false;
+    }
+
+    public static string RandomString(int length)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        return new string(Enumerable.Repeat(chars, length)
+        .Select(s => s[random.Next(s.Length)]).ToArray());
+    }
+}
