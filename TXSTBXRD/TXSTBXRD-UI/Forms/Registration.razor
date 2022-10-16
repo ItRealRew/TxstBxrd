@@ -1,4 +1,4 @@
-﻿@page "/login"
+﻿@page "/registration"
 @layout EmptyLayout
 
 
@@ -6,7 +6,7 @@
 
 <div class="center-form">
     <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
-    <p class="login-form-description">Sign in to TXSTBXRD</p>
+    <p class="login-form-description">Create new account to TXSTBXRD</p>
     <div class="login-validate" style="display: @(validateVisible ? "none" : "inline-block")">
         <p class="login-lable-validate noselect">Incorrect username or password.</p>
         <a class="close" @onclick="closeValidate"></a>
@@ -27,11 +27,11 @@
                 <a class="login-link" href="#wasap">Forgot your password?</a>
             </div>
         </div>
-        <button class="btn-login">Sign in</button>
+        <button class="btn-login">Create</button>
     </div>
     <br>
     <div class="login-form-add-users noselect">
-        <p class="add-user-content login-lable"> Don't have an account yet? <a class="login-link" href="/registration">Create
+        <p class="add-user-content login-lable"> Don't have an account yet? <a class="login-link" href="#create">Create
                 now</a></p>
     </div>
 </div>
