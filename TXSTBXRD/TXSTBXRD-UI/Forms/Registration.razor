@@ -1,47 +1,45 @@
 ﻿@page "/registration"
 @layout EmptyLayout
 
+<link href="css/login-validation.css" rel="stylesheet" />
 
-<PageTitle>LogIn</PageTitle>
+@using System.ComponentModel.DataAnnotations
+@using TXSTBXRD_UI.Models.Forms
 
-<div class="center-form">
-    <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
-    <p class="login-form-description">Create new account to TXSTBXRD</p>
-    <div class="login-validate" style="display: @(validateVisible ? "none" : "inline-block")">
-        <p class="login-lable-validate noselect">Incorrect username or password.</p>
-        <a class="close" @onclick="closeValidate"></a>
-    </div>
-    <br class="noselect" style="display: @(validateVisible ? "none" : "inline-block")">
-    <div class="login-form">
-        <input class="login-input" type="text" placeholder="Name" />
-        <input class="login-input" type="text" placeholder="Password" />
-        <div class="login-options noselect">
-            <div class="login-left-position">
-                <li class="checkboxline">
-                    <label class="login-lable-click" for="checkbox" @onclick="clickLabel">
-                        <input @bind="IsDisabled" type="checkbox" name="checkbox" class="login-checkbox"> Remember me
-                    </label>
-                </li>
+<PageTitle>Create new account</PageTitle>
+
+<EditForm Model="create">
+    <DataAnnotationsValidator />
+    <div class="center-form">
+        <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
+        <p class="login-form-description">Create new account to TXSTBXRD</p>
+        <div class="login-form">
+            <div class="create-selection">
+                <input class="create-input" type="text" placeholder="First Name" />
+                <input class="create-input" type="text" placeholder="Last Name" />
             </div>
-            <div class="login-right-position">
-                <a class="login-link" href="#wasap">Forgot your password?</a>
+            <InputText class="login-input" placeholder="Username" @bind-Value="create.Username" />
+            <ValidationMessage For="@(() => create.Username)" />
+
+            <InputText class="login-input" placeholder="Email" @bind-Value="create.Email" />
+            <ValidationMessage For="@(() => create.Email)" />
+
+            <InputText class="login-input" placeholder="Password" @bind-Value="create.Password" type="password"/>
+            <ValidationMessage For="@(() => create.Password)" />
+                
+            <div class="login-options noselect">
             </div>
+            <button class="btn-login">Create</button>
         </div>
-        <button class="btn-login">Create</button>
+        <br>
+        <div class="login-form-add-users noselect">
+            <p class="add-user-content login-lable"> Already have login and password?
+                <a class="login-link" href="/login">Sign in</a>
+            </p>
+        </div>
     </div>
-    <br>
-    <div class="login-form-add-users noselect">
-        <p class="add-user-content login-lable"> Don't have an account yet? <a class="login-link" href="#create">Create
-                now</a></p>
-    </div>
-</div>
-
+</EditForm>
 
 @code {
-    protected bool validateVisible { get; set; } = false;
-    protected bool IsDisabled { get; set; }
-
-    private void clickLabel() => IsDisabled = !IsDisabled;
-
-    private void closeValidate() => validateVisible = !validateVisible;
+    Create create = new();
 }

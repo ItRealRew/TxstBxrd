@@ -50,6 +50,10 @@ input {
     border-width: 1px;
 }
 
+.btn-login:hover {
+    background-color: rgba(217, 217, 217, 1);
+}
+
 .login-input {
     padding: 10px;
     outline-style: none;
@@ -57,7 +61,25 @@ input {
     border-radius: 6px;
     border-style: solid;
     border-width: 1px;
+    width: -moz-available;
 }
+
+.create-selection {
+    width: 100%;
+    display: flex;
+    grid-gap: 10px;
+}
+
+.create-input {
+    width: 48%;
+    padding: 10px;
+    outline-style: none;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
+}
+
 
 .login-lable-click {
     font-family: 'Inter';
