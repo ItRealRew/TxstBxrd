@@ -80,6 +80,20 @@ input {
     border-width: 1px;
 }
 
+.create-password-container{
+    position: relative;
+}
+
+.create-password-btn{
+    position: absolute;
+	top: 6px;
+	right: 6px;
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+    cursor: pointer;
+    background: url(/Resource/hide.png) 0 0 no-repeat;
+}
 
 .login-lable-click {
     font-family: 'Inter';

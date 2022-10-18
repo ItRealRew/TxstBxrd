@@ -15,18 +15,24 @@
         <p class="login-form-description">Create new account to TXSTBXRD</p>
         <div class="login-form">
             <div class="create-selection">
-                <input class="create-input" type="text" placeholder="First Name" />
-                <input class="create-input" type="text" placeholder="Last Name" />
+                <InputText class="create-input" placeholder="First Name" @bind-Value="create.FirstName" />
+                <InputText class="create-input" placeholder="Last Name" @bind-Value="create.LastName" />
             </div>
+            <ValidationMessage For="@(() => create.FirstName)" />
+            <ValidationMessage For="@(() => create.LastName)" />
+
             <InputText class="login-input" placeholder="Username" @bind-Value="create.Username" />
             <ValidationMessage For="@(() => create.Username)" />
 
             <InputText class="login-input" placeholder="Email" @bind-Value="create.Email" />
             <ValidationMessage For="@(() => create.Email)" />
 
-            <InputText class="login-input" placeholder="Password" @bind-Value="create.Password" type="password"/>
+            <div class="create-password-container">
+                <InputText class="login-input" placeholder="Password" @bind-Value="create.Password" type="password" />
+                <div class="create-password-btn"></div>
+            </div>
             <ValidationMessage For="@(() => create.Password)" />
-                
+
             <div class="login-options noselect">
             </div>
             <button class="btn-login">Create</button>

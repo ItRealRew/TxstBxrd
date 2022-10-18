@@ -4,6 +4,12 @@ namespace TXSTBXRD_UI.Models.Forms
 {
     public class Create
     {
+        [Required]
+        public string FirstName { get; set; }
+        
+        [Required]
+        public string LastName { get; set; }
+        
         [Required(ErrorMessage = "Username should be from 3 to 50 length")]
         [StringLength(50, MinimumLength = 3)]
         public string Username { get; set; }
