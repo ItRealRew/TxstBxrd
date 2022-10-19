@@ -1,0 +1,17 @@
+﻿<div class="breeding-bg-control">
+    <div class="breeding-control">
+        <div class="breeding-control-container">
+            <input @onfocus="searchIconHide" @onfocusout="searchIconShow" class="breeding-search"
+                placeholder="@((visible ? "Here search string" : ""))">
+            <div class="noselect breeding-search-icon" style="@((visible ? "" : "visibility: hidden;"))"></div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool visible = true;
+
+    private void searchIconHide() => visible = false;
+
+    private void searchIconShow() => visible = true;
+}

@@ -1,0 +1,20 @@
+﻿.breeding-banner-container {
+    background-color: rgb(126, 38, 107);
+    height: 490px;
+}
+
+.breeding-banner-content {
+    padding-top: 76px;
+    flex: 1;
+    overflow-x: hidden;
+    padding-left: 2rem !important;
+    padding-right: 1.5rem !important;
+}
+
+.breeding-banner-area {
+    width: 1170px;
+    height: 410px;
+    background-color: rgba(217, 217, 217, 1);
+    margin-left: auto;
+    margin-right: auto;
+}
