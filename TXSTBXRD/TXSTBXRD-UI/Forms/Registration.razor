@@ -28,8 +28,10 @@
             <ValidationMessage For="@(() => create.Email)" />
 
             <div class="create-password-container">
-                <InputText class="login-input" placeholder="Password" @bind-Value="create.Password" type="password" />
-                <div class="create-password-btn"></div>
+                <InputText class="login-input" placeholder="Password" @bind-Value="create.Password"
+                    type="@((visible ? "text" : "password"))" minlength="8" maxlength="15" size="15" />
+                <div class="noselect @((visible ? "hide-password-btn" : "show-password-btn"))"
+                    @onclick="changeVisibility"></div>
             </div>
             <ValidationMessage For="@(() => create.Password)" />
 
@@ -48,4 +50,8 @@
 
 @code {
     Create create = new();
+
+    private bool visible = false;
+
+    private void changeVisibility() => visible = !visible;
 }
