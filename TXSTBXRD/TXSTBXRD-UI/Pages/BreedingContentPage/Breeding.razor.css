@@ -1,11 +1,11 @@
 ﻿.breeding-bg-control {
     background-color: rgb(126, 38, 107);
-    height: 100px;
+    min-height: 157px;
 }
 
 .breeding-control-container {
     position: relative;
-    width: 1170px;
+    max-width: 1170px;
     margin-left: auto;
     margin-right: auto;
     height: auto;
@@ -21,7 +21,7 @@
 
 .breeding-search {
     width: -webkit-fill-available;
-    width: -moz-available; 
+    width: -moz-available;
     padding: 5px;
     outline-style: none;
     border: 1px solid #000000;
@@ -35,12 +35,118 @@
     text-align: justify;
 }
 
-.breeding-search-icon {
+.bredding-search-btn-area {
+    margin: 30px auto;
+    padding: 0;
+    text-align: center;
+    display: block;
+}
+
+.breeding-search-button {
     position: absolute;
-    top: 3px;
-    right: 6px;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+
+    background-color: #8c225a;
+    border: 1px solid #000000;
+    border-left-width: 0px;
+    color: #ffffff;
+
+    font-size: 24px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+
+    transition: all 0.3s cubic-bezier(0.42, 0, 0.58, 1) 0s;
     display: inline-block;
-    width: 24px;
-    height: 24px;
-    background: url(/Resource/search.png) 0 0 no-repeat;
+
+    width: 119px;
+    height: 29px;
+    text-decoration: none;
+    z-index: 1;
+    border-radius: 0px 4px 4px 0px;
+}
+
+.breeding-search-button::before {
+    color: #fff;
+    content: "";
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    position: absolute;
+    transition: all 0.3s cubic-bezier(0.42, 0, 0.58, 1) 0s;
+    z-index: -1;
+    background-color: rgb(255 255 255 / 30%);
+}
+
+.breeding-search-button:hover::before {
+    left: 0;
+    right: auto;
+    width: 100%;
+}
+
+.breeding-search-button:hover {
+    color: #fff;
+    text-shadow: 0 1px 2px #333;
+}
+
+.breeding-search-button:active {
+    color: rgb(216, 216, 216);
+    font-size: 22px;
+    transition: all 0.1s cubic-bezier(0.38, 0.34, 1, 1) 0s;
+}
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.breding-mask-arrow {
+    background: rgb(255 255 255 / 30%);
+    position: absolute;
+    width: 30px;
+    top: -14px;
+    height: 26px;
+    right: -15px
+}
+
+.breeding-search-arrow {
+    position: absolute;
+    top: 6px;
+    right: 120px;
+    border: 10px solid transparent;
+    border-right: 15px solid #8c225a;
+}
+
+.breeding-category-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    max-width: 1170px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: justify;
+    color: #D9D9D9;
+}
+
+.breeding-category-link {
+    padding-right: 40px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: justify;
+    color: #D9D9D9;
+    cursor: pointer;
 }

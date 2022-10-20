@@ -3,13 +3,32 @@
         <div class="breeding-control-container">
             <input @onfocus="searchIconHide" @onfocusout="searchIconShow" class="breeding-search"
                 placeholder="@((visible ? "Here search string" : ""))">
-            <div class="noselect breeding-search-icon" style="@((visible ? "" : "visibility: hidden;"))"></div>
+            <div class="noselect breeding-search-arrow">
+                @if (arrowHover)
+                {
+                    <div class="breding-mask-arrow"></div>
+                }
+            </div>
+            <div class="noselect bredding-search-btn-area">
+                <a class="breeding-search-button" @onmouseover="onMouseOverSearchButton"
+                    @onmouseout="onMouseOutSearchButton">search</a>
+            </div>
+        </div>
+        <div class="breeding-category-container">
+            <a class="breeding-category-link">Category 1</a>
+            <a class="breeding-category-link">Category 2</a>
+            <a class="breeding-category-link">Category 3</a>
         </div>
     </div>
 </div>
 
 @code {
+    private bool arrowHover = false;
     private bool visible = true;
+
+    private void onMouseOverSearchButton() => arrowHover = true;
+
+    private void onMouseOutSearchButton() => arrowHover = false;
 
     private void searchIconHide() => visible = false;
 
