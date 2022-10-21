@@ -12,7 +12,7 @@
 }
 
 .breeding-banner-area {
-    width: 1170px;
+    max-width: 1170px;
     height: 410px;
     background-color: rgba(217, 217, 217, 1);
     margin-left: auto;
