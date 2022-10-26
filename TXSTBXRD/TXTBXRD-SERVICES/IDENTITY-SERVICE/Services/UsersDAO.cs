@@ -4,6 +4,7 @@ using IDENTITY_SERVICE.Models;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using TXSTBXRD_MIDDLEWARE.IDENTITY;
 
 
 namespace IDENTITY_SERVICE.Services

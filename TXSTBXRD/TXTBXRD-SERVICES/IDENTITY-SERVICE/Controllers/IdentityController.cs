@@ -4,6 +4,7 @@ using IDENTITY_SERVICE.Services;
 using IDENTITY_SERVICE.Models;
 using System;
 using System.Threading.Tasks;
+using TXSTBXRD_MIDDLEWARE.IDENTITY;
 
 namespace IDENTITY_SERVICE.Controllers
 {

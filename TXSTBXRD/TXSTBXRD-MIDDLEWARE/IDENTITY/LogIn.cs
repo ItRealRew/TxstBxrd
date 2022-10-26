@@ -1,4 +1,4 @@
-namespace IDENTITY_SERVICE.Models
+namespace TXSTBXRD_MIDDLEWARE.IDENTITY
 {
     public class LogIn
     {
