@@ -4,6 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Threading.Tasks;
 using IDENTITY_SERVICE.Types;
+using System.Text.Json;
 
 namespace IDENTITY_SERVICE.Services
 {
@@ -22,10 +23,17 @@ namespace IDENTITY_SERVICE.Services
         }
         internal async Task<Guid> Identification(LogIn unknownUser)
         {
+            Console.WriteLine(unknownUser);
+            Console.WriteLine(unknownUser.Login);
+            Console.WriteLine(unknownUser.Password);
+            
             var salt = await dao.getSalt(unknownUser.Password);
             unknownUser.Password = security.GetSecurePassword(unknownUser.Password, salt, (int)IterationSalt.Standart);
 
             string userId = await dao.authentication(unknownUser);
+
+            Console.WriteLine(userId);
+
             switch (userId)
             {
                 case "N":

@@ -9,6 +9,7 @@ using TXSTBXRD_MIDDLEWARE.IDENTITY;
 namespace IDENTITY_SERVICE.Controllers
 {
     [Route("[controller]")]
+    [ApiController]
     public class IdentityController : Controller
     {
         private readonly ILogger<IdentityController> logger;
@@ -21,7 +22,7 @@ namespace IDENTITY_SERVICE.Controllers
         }
 
         [HttpPost("identification")]
-        public async Task<Guid> IdentificationUser(LogIn unknownUser) => await service.Identification(unknownUser);
+        public async Task<Guid> IdentificationUser([FromBody] LogIn unknownUser) => await service.Identification(unknownUser);
 
         [HttpPost("registration")]
         public async Task<bool> RegistrationUser(Registration newUser) => await service.Registration(newUser);

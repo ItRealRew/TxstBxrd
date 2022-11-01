@@ -2,6 +2,9 @@
 @layout EmptyLayout
 
 
+@inject Services.IdentityService identity
+@using TXSTBXRD_MIDDLEWARE.IDENTITY
+
 <PageTitle>LogIn</PageTitle>
 
 <div class="center-form">
@@ -13,8 +16,8 @@
     </div>
     <br class="noselect" style="display: @(validateVisible ? "none" : "inline-block")">
     <div class="login-form">
-        <input class="login-input" type="text" placeholder="Username" />
-        <input class="login-input" type="text" placeholder="Password" />
+        <input @bind="login.Login" class="login-input" type="text" placeholder="Username" />
+        <input @bind="login.Password" class="login-input" type="text" placeholder="Password" />
         <div class="login-options noselect">
             <div class="login-left-position">
                 <li class="checkboxline">
@@ -27,21 +30,28 @@
                 <a class="login-link" href="#wasap">Forgot your password?</a>
             </div>
         </div>
-        <button class="btn-login">Sign in</button>
+        <button @onclick="Authorize" class="btn-login">Sign in</button>
     </div>
     <br>
     <div class="login-form-add-users noselect">
-        <p class="add-user-content login-lable"> Don't have an account yet? <a class="login-link" href="/registration">Create
-                now</a></p>
+        <p class="add-user-content login-lable"> Don't have an account yet?
+            <a class="login-link" href="/registration">Create now</a>
+        </p>
     </div>
 </div>
 
 
 @code {
+    LogIn login = new();
     protected bool validateVisible { get; set; } = false;
     protected bool IsDisabled { get; set; }
 
     private void clickLabel() => IsDisabled = !IsDisabled;
 
     private void closeValidate() => validateVisible = !validateVisible;
+
+    private async void Authorize()
+    {
+        Console.WriteLine(await identity.Authentication()); 
+    }
 }

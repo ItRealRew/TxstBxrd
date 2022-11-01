@@ -33,6 +33,7 @@ namespace IDENTITY_SERVICE
             services.AddSingleton<SecurityService>();
             services.AddSingleton<UsersDAO>();
             services.AddTransient<UsersDbContext>(_ => new UsersDbContext(Configuration["ConnectionStrings:Default"]));
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +49,9 @@ namespace IDENTITY_SERVICE
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(options => options.WithOrigins("http://localhost:5117").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(options => options.WithOrigins("https://localhost:7114").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {
