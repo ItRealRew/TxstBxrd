@@ -221,6 +221,32 @@ input {
     transform: rotate(-45deg);
 }
 
+.create-password-container {
+    position: relative;
+}
+
+.show-password-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background: url(/Resource/show.png) 0 0 no-repeat;
+}
+
+.hide-password-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background: url(/Resource/hide.png) 0 0 no-repeat;
+}
+
 @media screen and (max-width: 441px) {
 
     .login-validate {

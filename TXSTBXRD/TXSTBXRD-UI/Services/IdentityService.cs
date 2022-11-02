@@ -15,17 +15,16 @@ namespace TXSTBXRD_UI.Services
             _httpClient = client;
         }
 
-        public async Task<Guid> Authentication()
+        public async Task<string?> Authentication(LogIn loginData)
         {
-            var login = new LogIn { Login = "root1", Password = "root1" };
-            string json = JsonSerializer.Serialize<LogIn>(login);
+            string json = JsonSerializer.Serialize<LogIn>(loginData);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync("identification", content);
             response.EnsureSuccessStatusCode();
 
             using var responseContent = await response.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync<Guid>(responseContent);
+            return await JsonSerializer.DeserializeAsync<string>(responseContent);
         }
     }
 }
