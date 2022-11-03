@@ -12,7 +12,7 @@
 
 <PageTitle>LogIn</PageTitle>
 
-<EditForm Model="login" OnValidSubmit=@ValidFormSubmitted OnInvalidSubmit=@InvalidFormSubmitted> 
+<EditForm EditContext="editContext">
     <DataAnnotationsValidator />
     <div class="center-form">
         <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
@@ -25,8 +25,9 @@
         <div class="login-form">
             <InputText class="login-input" placeholder="Username" autocomplete="username" @bind-Value="login.Login" />
             <div class="create-password-container">
-                <InputText class="login-input" placeholder="Password" autocomplete="current-password" @bind-Value="login.Password"
-                    type="@((visible ? "text" : "password"))" minlength="8" maxlength="15" size="15" />
+                <InputText class="login-input" placeholder="Password" autocomplete="current-password"
+                    @bind-Value="login.Password" type="@((visible ? "text" : "password"))" minlength="8" maxlength="15"
+                    size="15" />
                 <div class="noselect @((visible ? "hide-password-btn" : "show-password-btn"))"
                     @onclick="changeVisibility"></div>
             </div>
@@ -56,11 +57,11 @@
 
 @code {
     private LogIn login = new();
-
+    EditContext editContext;
     protected bool validateVisible { get; set; } = false;
     protected bool IsDisabled { get; set; }
     private bool visible = false;
-    private bool isFormValid = false;
+    private bool isFormValid = true;
 
     private void clickLabel() => IsDisabled = !IsDisabled;
     private void openValidateVisible() => validateVisible = true;
@@ -68,9 +69,16 @@
 
     private void changeVisibility() => visible = !visible;
 
+    protected override void OnInitialized()
+    {
+        editContext = new(login);
+    }
 
     private async void Authorize()
     {
+        if (!editContext.Validate())
+            return;
+
         string response = await identity.Authentication(login);
 
         if (response == Guid.Empty.ToString())
@@ -81,15 +89,5 @@
 
         await LocalStorage.SaveStringAsync("user", response);
         NavigationManager.NavigateTo("/");
-    }
-
-    void ValidFormSubmitted(EditContext editContext)
-    {
-        Console.WriteLine("1");
-    }
-
-    void InvalidFormSubmitted(EditContext editContext)
-    {
-        Console.WriteLine("2");
     }
 }
