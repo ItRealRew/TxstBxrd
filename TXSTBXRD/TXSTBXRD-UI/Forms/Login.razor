@@ -24,6 +24,7 @@
         <br class="noselect" style="display: @(validateVisible ? "inline-block" : "none")">
         <div class="login-form">
             <InputText class="login-input" placeholder="Username" autocomplete="username" @bind-Value="login.Login" />
+            <ValidationMessage For="@(() => login.Login)" />
             <div class="create-password-container">
                 <InputText class="login-input" placeholder="Password" autocomplete="current-password"
                     @bind-Value="login.Password" type="@((visible ? "text" : "password"))" minlength="8" maxlength="15"
@@ -31,11 +32,12 @@
                 <div class="noselect @((visible ? "hide-password-btn" : "show-password-btn"))"
                     @onclick="changeVisibility"></div>
             </div>
+            <ValidationMessage For="@(() => login.Password)" />
             <div class="login-options noselect">
                 <div class="login-left-position">
                     <li class="checkboxline">
-                        <label class="login-lable-click" for="checkbox" @onclick="clickLabel">
-                            <input @bind="IsDisabled" type="checkbox" name="checkbox" class="login-checkbox"> Remember
+                        <label class="login-lable-click" for="checkbox" @onclick="clickLabelRememberMe">
+                            <input @bind="IsRememberMe" type="checkbox" name="checkbox" class="login-checkbox"> Remember
                             me
                         </label>
                     </li>
@@ -44,7 +46,7 @@
                     <a class="login-link" href="#wasap">Forgot your password?</a>
                 </div>
             </div>
-            <button @onclick="Authorize" disabled="@isFormValid" class="btn-login">Sign in</button>
+            <button @onclick="Authorize" class="btn-login">Sign in</button>
         </div>
         <br>
         <div class="login-form-add-users noselect">
@@ -59,11 +61,10 @@
     private LogIn login = new();
     EditContext editContext;
     protected bool validateVisible { get; set; } = false;
-    protected bool IsDisabled { get; set; }
+    protected bool IsRememberMe { get; set; }
     private bool visible = false;
-    private bool isFormValid = true;
 
-    private void clickLabel() => IsDisabled = !IsDisabled;
+    private void clickLabelRememberMe() => IsRememberMe = !IsRememberMe;
     private void openValidateVisible() => validateVisible = true;
     private void closeValidateVisible() => validateVisible = false;
 
@@ -77,7 +78,11 @@
     private async void Authorize()
     {
         if (!editContext.Validate())
+        {
+            Console.WriteLine(IsRememberMe);
             return;
+        }
+
 
         string response = await identity.Authentication(login);
 
@@ -87,7 +92,7 @@
             return;
         }
 
-        await LocalStorage.SaveStringAsync("user", response);
+        await LocalStorage.SaveStringAsync("authorizationToken", response);
         NavigationManager.NavigateTo("/");
     }
 }
