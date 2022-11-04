@@ -70,25 +70,45 @@
 
     private void changeVisibility() => visible = !visible;
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
         editContext = new(login);
+
+        var IsSavedLogin = await LocalStorage.GetStringAsync("RememberedUserName");
+
+        if (IsSavedLogin != null)
+        {
+            login.Login = IsSavedLogin;
+            IsRememberMe = true;
+        }
+
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 
     private async void Authorize()
     {
         if (!editContext.Validate())
-        {
-            Console.WriteLine(IsRememberMe);
             return;
-        }
 
+        if (IsRememberMe)
+        {
+            await LocalStorage.SaveStringAsync("RememberedUserName", login.Login);
+        }
 
         string response = await identity.Authentication(login);
 
         if (response == Guid.Empty.ToString())
         {
             openValidateVisible();
+
+            await InvokeAsync(() =>
+            {
+                StateHasChanged();
+            });
+            
             return;
         }
 
