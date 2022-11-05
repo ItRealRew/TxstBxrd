@@ -7,6 +7,7 @@
 
 @using TXSTBXRD_MIDDLEWARE.IDENTITY
 @using TXSTBXRD_UI.Models.Forms
+@using TXSTBXRD_UI.Utils.Libs
 
 <link href="css/login-validation.css" rel="stylesheet" />
 
@@ -27,9 +28,9 @@
             <ValidationMessage For="@(() => login.Login)" />
             <div class="create-password-container">
                 <InputText class="login-input" placeholder="Password" autocomplete="current-password"
-                    @bind-Value="login.Password" type="@((visible ? "text" : "password"))" minlength="8" maxlength="15"
+                    @bind-Value="login.Password" type="@((visiblePassword ? "text" : "password"))" minlength="8" maxlength="15"
                     size="15" />
-                <div class="noselect @((visible ? "hide-password-btn" : "show-password-btn"))"
+                <div class="noselect @((visiblePassword ? "hide-password-btn" : "show-password-btn"))"
                     @onclick="changeVisibility"></div>
             </div>
             <ValidationMessage For="@(() => login.Password)" />
@@ -62,19 +63,19 @@
     EditContext editContext;
     protected bool validateVisible { get; set; } = false;
     protected bool IsRememberMe { get; set; }
-    private bool visible = false;
+    private bool visiblePassword = false;
 
     private void clickLabelRememberMe() => IsRememberMe = !IsRememberMe;
     private void openValidateVisible() => validateVisible = true;
     private void closeValidateVisible() => validateVisible = false;
 
-    private void changeVisibility() => visible = !visible;
+    private void changeVisibility() => visiblePassword = !visiblePassword;
 
     protected override async void OnInitialized()
     {
         editContext = new(login);
 
-        var IsSavedLogin = await LocalStorage.GetStringAsync("RememberedUserName");
+        var IsSavedLogin = await LocalStorage.GetStringAsync(RegularStorageName.RememberedUserName);
 
         if (IsSavedLogin != null)
         {
@@ -95,7 +96,7 @@
 
         if (IsRememberMe)
         {
-            await LocalStorage.SaveStringAsync("RememberedUserName", login.Login);
+            await LocalStorage.SaveStringAsync(RegularStorageName.RememberedUserName, login.Login);
         }
 
         string response = await identity.Authentication(login);
@@ -104,15 +105,19 @@
         {
             openValidateVisible();
 
+            if (!IsRememberMe)
+                login.Login = "";
+            login.Password = "";
+
             await InvokeAsync(() =>
             {
                 StateHasChanged();
             });
-            
+
             return;
         }
 
-        await LocalStorage.SaveStringAsync("authorizationToken", response);
+        await LocalStorage.SaveStringAsync(RegularStorageName.AuthorizationToken, response);
         NavigationManager.NavigateTo("/");
     }
 }
