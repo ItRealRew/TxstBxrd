@@ -1,50 +1,75 @@
-﻿.validation-errors {
-    background-color: rgba(255, 97, 97, 0.5);
-    padding: 8px;
-    font-size: 16px;
+﻿.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.validation-errors,
+div.validation-message {
     font-weight: 500;
+    background-color: rgba(255, 97, 97, .5)
+}
+
+.validation-errors {
+    padding: 8px;
+    font-size: 16px
 }
 
 li.validation-message {
-    color: #FFFFFF;
+    color: #fff;
     font-weight: 500
 }
 
 div.validation-message {
-    color: #000000;
-    font-weight: 500;
+    color: #000;
     text-align: justify;
     position: relative;
     display: inline-block;
     padding: 5px;
-    width: -webkit-fill-available;
     width: -moz-available;
     height: auto;
     border-style: solid;
     border-width: 1px;
     border-radius: 6px;
-    border-color: rgba(255, 97, 97, 0.5);
-    background-color: rgba(255, 97, 97, 0.5);
-    margin-bottom: 10px;
+    border-color: rgba(255, 97, 97, .5);
+    margin-bottom: 10px
 }
 
+.invalid,
 modified.valid {
-    border: solid 3px rgba(255, 97, 97, 0.8);
+    border: solid 3px rgba(255, 97, 97, .8)
 }
 
-.invalid {
-    border: solid 3px rgba(255, 97, 97, 0.8);
+.login-input,
+div.validation-message,
+input {
+    width: -webkit-fill-available
 }
 
-.login-input {
-    padding: 10px;
-    outline-style: none;
-    margin-bottom: 10px;
-    border-radius: 6px;
+.login-lable-validate {
+    text-align: justify
+}
+
+.recovery-warning {
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+    width: 390px;
+    height: 50px;
     border-style: solid;
     border-width: 1px;
-    width: -webkit-fill-available;
-    width: -moz-available;
+    border-radius: 6px;
+    border-color: rgb(255 165 0/60%);
+    background-color: rgb(255 153 0/80%)
+}
+
+.create-selection {
+    width: 100%;
+    display: flex;
+    grid-gap: 10px
 }
 
 .create-input {
@@ -54,5 +79,250 @@ modified.valid {
     margin-bottom: 10px;
     border-radius: 6px;
     border-style: solid;
+    border-width: 1px
+}
+
+
+.center-form {
+    text-align: center
+}
+
+.login-form,
+.login-form-add-users {
+    display: inline-block;
+    padding: 20px;
+    width: 400px
+}
+
+.login-form-add-users {
+    padding: 5px 20px 20px
+}
+
+input {
+    width: available
+}
+
+.btn-login,
+.login-input {
+    padding: 10px;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px
+}
+
+.btn-login,
+input {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400
+}
+
+.btn-login {
+    cursor: pointer;
+    width: 100%;
+    outline: 0
+}
+
+.btn-login:hover {
+    background-color: #d9d9d9
+}
+
+.login-input {
+    outline-style: none;
+    margin-bottom: 10px;
+    width: -moz-available
+}
+
+.login-lable-click {
+    padding-bottom: 2px;
+    cursor: pointer
+}
+
+.login-lable,
+.login-lable-click,
+.login-lable-validate {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1rem
+}
+
+.login-lable {
+    padding-bottom: 2px
+}
+
+.login-lable-validate {
+    padding: 8px;
+    margin: 0
+}
+
+.login-left-position {
+    margin-bottom: 10px;
+    text-align: left;
+    width: calc(100% - 51%);
+    display: inline-block
+}
+
+.login-options {
+    white-space: nowrap
+}
+
+.login-right-position {
+    margin-bottom: 10px;
+    text-align: right;
+    width: calc(100% - 50%);
+    display: inline-block
+}
+
+.login-checkbox {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer
+}
+
+.login-link {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    padding-bottom: 2px;
+    line-height: 1rem;
+    color: #000
+}
+
+.login-link:link {
+    color: #000;
+    text-decoration: none
+}
+
+.login-link:hover {
+    border-bottom: 1px solid #000;
+    padding-bottom: 0;
+    text-decoration: none
+}
+
+.checkboxline label,
+input {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.checkboxline {
+    list-style-type: none
+}
+
+.login-form-description,
+.navbar-brand {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400
+}
+
+.navbar-brand {
+    text-decoration: none;
+    width: 167px;
+    height: 39px;
+    left: 20px;
+    top: 8px;
+    font-size: 32px;
+    line-height: 39px;
+    color: #fff;
+    background: linear-gradient(0deg, rgba(196, 20, 20, .2), rgba(196, 20, 20, .2)), #7e266b;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .25)
+}
+
+.login-form-description {
+    font-size: 24px;
+    margin-bottom: 15px
+}
+
+.add-user-content {
+    margin: 0
+}
+
+.login-validate {
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+    width: 390px;
+    height: 30px;
+    border-style: solid;
     border-width: 1px;
+    border-radius: 6px;
+    border-color: rgba(255, 97, 97, .5);
+    background-color: rgba(255, 97, 97, .5)
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    opacity: 1
+}
+
+.close:hover {
+    opacity: .6
+}
+
+.close:after,
+.close:before {
+    position: absolute;
+    content: " ";
+    height: 20px;
+    width: 3px;
+    background-color: #f83b3b
+}
+
+.close:before {
+    transform: rotate(45deg)
+}
+
+.close:after {
+    transform: rotate(-45deg)
+}
+
+.create-password-container {
+    position: relative
+}
+
+.hide-password-btn,
+.show-password-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    cursor: pointer
+}
+
+.show-password-btn {
+    background: url(/Resource/show.png)0 0 no-repeat
+}
+
+.hide-password-btn {
+    background: url(/Resource/hide.png)0 0 no-repeat
+}
+
+@media screen and (max-width:441px) {
+    .recovery-warning {
+        width: calc(90% - 10px);
+        height: auto
+    }
+
+    .login-validate {
+        width: calc(90% - 10px)
+    }
+
+    .login-form,
+    .login-form-add-users {
+        width: 90%;
+        padding-left: 5px;
+        padding-right: 5px
+    }
 }

@@ -6,7 +6,6 @@
 @inject Utils.ILocalStorage LocalStorage
 
 @using TXSTBXRD_MIDDLEWARE.IDENTITY
-@using TXSTBXRD_UI.Models.Forms
 @using TXSTBXRD_UI.Utils.Libs
 
 <link href="css/login-validation.css" rel="stylesheet" />
@@ -44,7 +43,7 @@
                     </li>
                 </div>
                 <div class="login-right-position">
-                    <a class="login-link" href="#wasap">Forgot your password?</a>
+                    <a class="login-link" href="/recovery">Forgot your password?</a>
                 </div>
             </div>
             <button @onclick="Authorize" class="btn-login">Sign in</button>

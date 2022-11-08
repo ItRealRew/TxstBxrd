@@ -1,0 +1,53 @@
+﻿@page "/recovery"
+@layout EmptyLayout
+
+@inject NavigationManager NavigationManager
+@inject Services.IdentityService identity
+@inject Utils.ILocalStorage LocalStorage
+
+@using TXSTBXRD_MIDDLEWARE.NOTIFICATIONS
+@using TXSTBXRD_UI.Utils.Libs
+
+<link href="css/login-validation.css" rel="stylesheet" />
+
+<PageTitle>Recovery</PageTitle>
+
+<EditForm EditContext="editContext">
+    <DataAnnotationsValidator />
+    <div class="center-form">
+        <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
+        <p class="login-form-description"></p>
+        <div class="recovery-warning" style="display: inline-block">
+            <p class="login-lable-validate noselect">Enter your user account's verified email address and we will send you a password reset link.</p>
+        </div>
+        <br class="noselect" style="display: inline-block">
+        <div class="login-form">
+            <InputText class="login-input" placeholder="Email" autocomplete="email" @bind-Value="recovery.email" />
+            <ValidationMessage For="@(() => recovery.email)" />
+            <div class="login-options noselect">
+                
+            </div>
+            <button @onclick="Authorize" class="btn-login">Reset password</button>
+        </div>
+        <br>
+        <div class="login-form-add-users noselect">
+            <p class="add-user-content login-lable"> Already have login and password?
+                <a class="login-link" href="/login">Sign in</a>
+            </p>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    private PasswordRecovery recovery = new();
+    EditContext editContext;
+
+    protected override async void OnInitialized()
+    {
+        editContext = new(recovery);
+    }
+
+    private async void Authorize()
+    {
+    }
+}
