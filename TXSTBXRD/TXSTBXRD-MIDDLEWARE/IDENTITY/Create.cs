@@ -1,13 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
-namespace TXSTBXRD_UI.Models.Forms
+namespace TXSTBXRD_MIDDLEWARE.IDENTITY
 {
     public class Create
     {
         [Required]
         public string FirstName { get; set; }
         
-        [Required]
         public string LastName { get; set; }
         
         [Required(ErrorMessage = "Username should be from 3 to 50 length")]

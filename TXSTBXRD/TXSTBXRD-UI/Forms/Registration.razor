@@ -3,8 +3,7 @@
 
 <link href="css/login-validation.css" rel="stylesheet" />
 
-@using System.ComponentModel.DataAnnotations
-@using TXSTBXRD_UI.Models.Forms
+@using TXSTBXRD_MIDDLEWARE.IDENTITY
 
 <PageTitle>Create new account</PageTitle>
 
@@ -19,7 +18,6 @@
                 <InputText class="create-input" placeholder="Last Name" @bind-Value="create.LastName" />
             </div>
             <ValidationMessage For="@(() => create.FirstName)" />
-            <ValidationMessage For="@(() => create.LastName)" />
 
             <InputText class="login-input" placeholder="Username" @bind-Value="create.Username" />
             <ValidationMessage For="@(() => create.Username)" />

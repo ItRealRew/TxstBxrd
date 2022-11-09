@@ -177,6 +177,13 @@ namespace IDENTITY_SERVICE.Services
                     Value = salt,
                 });
 
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@secondname",
+                    DbType = DbType.String,
+                    Value = "test",
+                });
+
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())

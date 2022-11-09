@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `userstxstbxrd` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `userstxstbxrd`;
--- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: userstxstbxrd
+-- Host: localhost    Database: userstxstbxrd
 -- ------------------------------------------------------
--- Server version	8.0.30
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,6 +27,7 @@ CREATE TABLE `details` (
   `userId` int NOT NULL,
   `userName` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `lastName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `details_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
@@ -41,7 +40,7 @@ CREATE TABLE `details` (
 
 LOCK TABLES `details` WRITE;
 /*!40000 ALTER TABLE `details` DISABLE KEYS */;
-INSERT INTO `details` VALUES (5,9,'root1','root1'),(6,10,'root2','root2');
+INSERT INTO `details` VALUES (5,9,'ItRealRew','rew-proninmax@yandex.ru',NULL),(6,10,'root2','root2',NULL);
 /*!40000 ALTER TABLE `details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,14 +164,14 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addUser`(IN logword VARCHAR(255), IN pasword VARCHAR(255), IN name VARCHAR(255), IN mail VARCHAR(255), in saltword VARCHAR(255))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addUser`(IN logword VARCHAR(255), IN pasword VARCHAR(255), IN name VARCHAR(255), IN mail VARCHAR(255), IN saltword VARCHAR(255), IN secondname VARCHAR(255))
 BEGIN
 IF exists (SELECT * FROM userstxstbxrd.users WHERE `Login` = logword) THEN
 	SELECT 'N';
     else
     INSERT INTO `userstxstbxrd`.`users` (`Login`, `Password`) VALUES (logword, pasword);
 	SET @actual = LAST_INSERT_ID();
-	INSERT INTO `userstxstbxrd`.`details` (`userId`, `userName`, `email`) VALUES (@actual, name, mail);
+	INSERT INTO `userstxstbxrd`.`details` (`userId`, `userName`, `email`, `lastName`) VALUES (@actual, name, mail, secondname);
 	INSERT INTO `userstxstbxrd`.`users_permissions` (`user`, `permission`) VALUES (@actual, '2');
     INSERT INTO `userstxstbxrd`.`salt` (`userId`, `value`) VALUES (@actual, saltword);
     SELECT 'Y';
@@ -301,4 +300,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-06 12:47:08
+-- Dump completed on 2022-11-09 12:50:36

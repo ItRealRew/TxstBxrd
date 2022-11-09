@@ -30,10 +30,13 @@ namespace IDENTITY_SERVICE.Controllers
         [HttpPost("logout")]
         public bool LogOutUser(LogOut loginOut) => service.loginOut(loginOut);
 
-        [HttpPost("verification")] 
+        [HttpPost("verification")]
         public bool VerificationUserPermission(VerificationPermission userPermission) => service.Verification(userPermission);
 
         [HttpPost("changepermission")]
-        public async Task<string> changeUserPermission(СhangingPermissions user) => await  service.ChangePermission(user);
+        public async Task<string> changeUserPermission(СhangingPermissions user) => await service.ChangePermission(user);
+
+        [HttpPost("detail")]
+        public async Task getUserDetail() { }
     }
 }
