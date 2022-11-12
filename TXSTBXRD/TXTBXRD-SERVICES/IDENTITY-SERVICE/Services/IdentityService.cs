@@ -23,16 +23,10 @@ namespace IDENTITY_SERVICE.Services
         }
         internal async Task<Guid> Identification(LogIn unknownUser)
         {
-            Console.WriteLine(unknownUser);
-            Console.WriteLine(unknownUser.Login);
-            Console.WriteLine(unknownUser.Password);
-            
             var salt = await dao.getSalt(unknownUser.Password);
             unknownUser.Password = security.GetSecurePassword(unknownUser.Password, salt, (int)IterationSalt.Standart);
 
             string userId = await dao.authentication(unknownUser);
-
-            Console.WriteLine(userId);
 
             switch (userId)
             {
@@ -57,7 +51,7 @@ namespace IDENTITY_SERVICE.Services
             }
         }
 
-        internal async Task<bool> Registration(Registration newUser)
+        internal async Task<bool> Registration(Create newUser)
         {
             string salt = security.GetUniqueKey(((int)GenerationLength.Standart), Alphabet.Hard.Value);
             newUser.Password = security.GetSecurePassword(newUser.Password, salt, (int)IterationSalt.Standart);

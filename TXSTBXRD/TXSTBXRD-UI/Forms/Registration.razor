@@ -1,13 +1,15 @@
 ﻿@page "/registration"
 @layout EmptyLayout
 
-<link href="css/login-validation.css" rel="stylesheet" />
+@inject Services.IdentityService identity
 
 @using TXSTBXRD_MIDDLEWARE.IDENTITY
 
+<link href="css/login-validation.css" rel="stylesheet" />
+
 <PageTitle>Create new account</PageTitle>
 
-<EditForm Model="create">
+<EditForm EditContext="editContext">
     <DataAnnotationsValidator />
     <div class="center-form">
         <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
@@ -35,7 +37,7 @@
 
             <div class="login-options noselect">
             </div>
-            <button class="btn-login">Create</button>
+            <button @onclick="CreateAccount" class="btn-login">Create</button>
         </div>
         <br>
         <div class="login-form-add-users noselect">
@@ -47,9 +49,29 @@
 </EditForm>
 
 @code {
-    Create create = new();
-
+    private Create create = new();
+    EditContext? editContext;
     private bool visible = false;
 
     private void changeVisibility() => visible = !visible;
+
+
+    protected override async void OnInitialized()
+    {
+        editContext = new(create);
+
+
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+
+    private async void CreateAccount()
+    {
+        if (!editContext.Validate())
+            return;
+
+        bool response = await identity.AddUser(create);
+    }
 }

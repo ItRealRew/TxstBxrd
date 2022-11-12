@@ -59,7 +59,7 @@
 
 @code {
     private LogIn login = new();
-    EditContext editContext;
+    EditContext? editContext;
     protected bool validateVisible { get; set; } = false;
     protected bool IsRememberMe { get; set; }
     private bool visiblePassword = false;
@@ -98,7 +98,7 @@
             await LocalStorage.SaveStringAsync(RegularStorageName.RememberedUserName, login.Login);
         }
 
-        string response = await identity.Authentication(login);
+        string? response = await identity.Authentication(login);
 
         if (response == Guid.Empty.ToString())
         {

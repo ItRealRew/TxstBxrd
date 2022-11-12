@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f0fd9142-20f5-45a0-8c5b-0bd39f7a9fbd",
+		"_postman_id": "33e6e2a6-03ad-4bd3-a27e-d192cf30795e",
 		"name": "TXSTBXRD.Identity",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21992151"
+		"_exporter_id": "24058817"
 	},
 	"item": [
 		{
@@ -14,8 +14,17 @@
 				},
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"login\":\"root1\",\"password\":\"root1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "https://localhost:5001/identity/identification?login=root1&password=root1",
+					"raw": "https://localhost:5001/identity/identification",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -24,16 +33,6 @@
 					"path": [
 						"identity",
 						"identification"
-					],
-					"query": [
-						{
-							"key": "login",
-							"value": "root1"
-						},
-						{
-							"key": "password",
-							"value": "root1"
-						}
 					]
 				}
 			},
@@ -44,8 +43,12 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fname\":\"root1\",\"password\":\"root1\"}"
+				},
 				"url": {
-					"raw": "https://localhost:5001/identity/registration?Login=root1&Password=root1&UserName=root1&Email=root1",
+					"raw": "https://localhost:5001/identity/registration",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -54,24 +57,6 @@
 					"path": [
 						"identity",
 						"registration"
-					],
-					"query": [
-						{
-							"key": "Login",
-							"value": "root1"
-						},
-						{
-							"key": "Password",
-							"value": "root1"
-						},
-						{
-							"key": "UserName",
-							"value": "root1"
-						},
-						{
-							"key": "Email",
-							"value": "root1"
-						}
 					]
 				}
 			},

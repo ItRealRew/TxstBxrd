@@ -26,5 +26,17 @@ namespace TXSTBXRD_UI.Services
             using var responseContent = await response.Content.ReadAsStreamAsync();
             return await JsonSerializer.DeserializeAsync<string>(responseContent);
         }
+
+        public async Task<bool> AddUser(Create newUser)
+        {
+            string json = JsonSerializer.Serialize<Create>(newUser);
+            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("registration", content);
+            response.EnsureSuccessStatusCode();
+
+            using var responseContent = await response.Content.ReadAsStreamAsync();
+            return await JsonSerializer.DeserializeAsync<bool>(responseContent);
+        }
     }
 }

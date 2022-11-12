@@ -27,7 +27,7 @@
             <div class="login-options noselect">
                 
             </div>
-            <button @onclick="Authorize" class="btn-login">Reset password</button>
+            <button class="btn-login">Reset password</button>
         </div>
         <br>
         <div class="login-form-add-users noselect">
@@ -40,14 +40,10 @@
 
 @code {
     private PasswordRecovery recovery = new();
-    EditContext editContext;
+    EditContext? editContext;
 
-    protected override async void OnInitialized()
+    protected override void OnInitialized()
     {
         editContext = new(recovery);
-    }
-
-    private async void Authorize()
-    {
     }
 }

@@ -25,7 +25,7 @@ namespace IDENTITY_SERVICE.Controllers
         public async Task<Guid> IdentificationUser([FromBody] LogIn unknownUser) => await service.Identification(unknownUser);
 
         [HttpPost("registration")]
-        public async Task<bool> RegistrationUser(Registration newUser) => await service.Registration(newUser);
+        public async Task<bool> RegistrationUser([FromBody] Create newUser) => await service.Registration(newUser);
 
         [HttpPost("logout")]
         public bool LogOutUser(LogOut loginOut) => service.loginOut(loginOut);
