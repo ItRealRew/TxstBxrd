@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "0aa47583-807f-47f5-9e71-4fb8b9aee01e",
+		"name": "TXSTBXRD.Communications",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24058817"
+	},
+	"item": [
+		{
+			"name": "ResetPassword",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"фываывм\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7053/communications/resetpswd",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7053",
+					"path": [
+						"communications",
+						"resetpswd"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
