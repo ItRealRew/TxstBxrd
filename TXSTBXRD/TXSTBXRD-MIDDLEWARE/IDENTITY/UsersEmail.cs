@@ -1,11 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace TXSTBXRD_MIDDLEWARE.COMMUNICATIONS
+
+namespace TXSTBXRD_MIDDLEWARE.IDENTITY
 {
-    public class ResetPassword
+    public class UsersEmail
     {
         [Required]
+        [EmailAddress]
         [JsonPropertyName("email")]
         public string? Email { get; set; }
     }

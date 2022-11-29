@@ -256,5 +256,80 @@ namespace IDENTITY_SERVICE.Services
             }
             return result;
         }
+
+        public async Task<UserDetails> GetUserDetails(int userId)
+        {
+            UserDetails result = new UserDetails();
+
+            try
+            {
+                datebase.Connection.Open();
+
+                using var cmd = datebase.Connection.CreateCommand();
+                cmd.CommandText = @"CALL `userstxstbxrd`.`getUserDetails`(@id);";
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@id",
+                    DbType = DbType.String,
+                    Value = userId,
+                });
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        result.FirstName = reader.GetValue(2).ToString();
+                        result.Email = reader.GetValue(3).ToString();
+                        result.LastName = reader.GetValue(4).ToString();
+                    }
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+                return null;
+            }
+            finally
+            {
+                await datebase.Connection.CloseAsync();
+            }
+        }
+
+        public async Task<int> GetUserIdByEmail(string email)
+        {
+            try
+            {
+                datebase.Connection.Open();
+
+                using var cmd = datebase.Connection.CreateCommand();
+                cmd.CommandText = @"CALL `userstxstbxrd`.`getUserIdByEmail`(@mail);";
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@mail",
+                    DbType = DbType.String,
+                    Value = email,
+                });
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        return int.Parse(reader.GetValue(0).ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                await datebase.Connection.CloseAsync();
+            }
+            return -1;
+        }
     }
 }

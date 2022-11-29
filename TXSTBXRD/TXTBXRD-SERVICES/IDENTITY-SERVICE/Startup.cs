@@ -53,6 +53,8 @@ namespace IDENTITY_SERVICE
             app.UseCors(options => options.WithOrigins("http://localhost:5117").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseCors(options => options.WithOrigins("https://localhost:7114").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+            app.UseCors(options => options.WithOrigins("http://localhost:5224").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

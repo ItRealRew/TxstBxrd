@@ -36,7 +36,7 @@ namespace IDENTITY_SERVICE.Controllers
         [HttpPost("changepermission")]
         public async Task<string> changeUserPermission(СhangingPermissions user) => await service.ChangePermission(user);
 
-        [HttpPost("detail")]
-        public async Task getUserDetail() { }
+        [HttpPost("emaildetails")]
+        public async Task<UserDetails> getUserDetailsByEmail([FromBody] UsersEmail usersDate) => await service.GetUserDetailsByEmail(usersDate.Email);
     }
 }

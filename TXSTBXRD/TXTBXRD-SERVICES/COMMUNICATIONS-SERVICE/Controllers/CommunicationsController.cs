@@ -16,6 +16,6 @@ namespace COMMUNICATIONS_SERVICE.Controllers
         }
 
         [HttpPost("resetpswd")]
-        public async Task<bool> ResetUserPassword([FromBody] ResetPassword dateReset) => await service.ResetUserPassword(dateReset);
+        public async Task<bool> ResetUserPassword([FromBody] PasswordRecovery dateReset) => await service.ResetUserPassword(dateReset);
     }
 }

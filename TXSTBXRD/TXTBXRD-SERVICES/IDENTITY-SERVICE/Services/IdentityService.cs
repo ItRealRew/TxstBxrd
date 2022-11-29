@@ -74,5 +74,7 @@ namespace IDENTITY_SERVICE.Services
 
         internal async Task<string> ChangePermission(СhangingPermissions user) => cache.TryGetValue(user.authorizationToken, out Personally received) ?
                                 await dao.ChangePermission(received.UserName, user.UserName, user.RoleName) : "false";
+
+        internal async Task<UserDetails> GetUserDetailsByEmail(string email) => await dao.GetUserDetails(await dao.GetUserIdByEmail(email));
     }
 }
