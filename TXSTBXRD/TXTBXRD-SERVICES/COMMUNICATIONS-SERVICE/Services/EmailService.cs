@@ -15,8 +15,11 @@ namespace COMMUNICATIONS_SERVICE.Services
         }
         public async Task<bool> ResetUserPassword(PasswordRecovery dateReset)
         {
-            if (await IsValidUserEmail(dateReset) == null)
+            var details = await IsValidUserEmail(dateReset);
+
+            if (details?.Email is null)
                 return false;
+            
             return true;
         }
 
@@ -25,11 +28,15 @@ namespace COMMUNICATIONS_SERVICE.Services
             string json = JsonSerializer.Serialize<PasswordRecovery>(userMail);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("registration", content);
+            var response = await _httpClient.PostAsync("emaildetails", content);
             response.EnsureSuccessStatusCode();
 
             using var responseContent = await response.Content.ReadAsStreamAsync();
             return await JsonSerializer.DeserializeAsync<UserDetails>(responseContent);
+        }
+
+        public void SendMessage(){
+            
         }
     }
 }
