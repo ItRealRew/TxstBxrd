@@ -2,6 +2,9 @@ using TXSTBXRD_MIDDLEWARE.COMMUNICATIONS;
 using TXSTBXRD_MIDDLEWARE.IDENTITY;
 using System.Text.Json;
 using System.Text;
+using System.Net;
+using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
 
 namespace COMMUNICATIONS_SERVICE.Services
 {
@@ -19,7 +22,8 @@ namespace COMMUNICATIONS_SERVICE.Services
 
             if (details?.Email is null)
                 return false;
-            
+
+            SendMessage(details.Email);
             return true;
         }
 
@@ -35,8 +39,28 @@ namespace COMMUNICATIONS_SERVICE.Services
             return await JsonSerializer.DeserializeAsync<UserDetails>(responseContent);
         }
 
-        public void SendMessage(){
-            
+        public void SendMessage(string userMail)
+        {
+            var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            MailMessage mail = new MailMessage();
+
+            var From = MyConfig.GetValue<string>("EmailSettings:UserName");
+            var Host = MyConfig.GetValue<string>("EmailSettings:SmtpHost");
+            var Port = MyConfig.GetValue<int>("EmailSettings:SmtpPort");
+            var UserName = MyConfig.GetValue<string>("EmailSettings:UserName"); 
+            var Password = MyConfig.GetValue<string>("EmailSettings:Password"); 
+
+            mail.From = new MailAddress(From); // Адрес отправителя
+            mail.To.Add(new MailAddress(userMail)); // Адрес получателя
+            mail.Subject = "Заголовок";
+            mail.Body = "Письмо........................";
+            SmtpClient client = new SmtpClient();
+            client.Host = Host;
+            client.Port =  Port;
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential(UserName, Password);
+            client.Send(mail);
         }
     }
 }
