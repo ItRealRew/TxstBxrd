@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `userstxstbxrd` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `userstxstbxrd`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: userstxstbxrd
@@ -31,7 +33,7 @@ CREATE TABLE `details` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `details_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +42,7 @@ CREATE TABLE `details` (
 
 LOCK TABLES `details` WRITE;
 /*!40000 ALTER TABLE `details` DISABLE KEYS */;
-INSERT INTO `details` VALUES (5,9,'ItRealRew','rew-proninmax@yandex.ru',NULL),(6,10,'root2','root2',NULL);
+INSERT INTO `details` VALUES (5,9,'ItRealRew','rew-proninmax@yandex.ru',NULL),(6,10,'root2','root2',NULL),(7,11,'root23','test@test.ru','wasap'),(8,12,'MyName','test@test.test','123');
 /*!40000 ALTER TABLE `details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +84,7 @@ CREATE TABLE `salt` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `salt_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +93,7 @@ CREATE TABLE `salt` (
 
 LOCK TABLES `salt` WRITE;
 /*!40000 ALTER TABLE `salt` DISABLE KEYS */;
-INSERT INTO `salt` VALUES (1,1,'qwerty'),(4,9,'&LRt12knFqKhDZx8'),(5,10,'CA8Kczn4TG1t&Mfa');
+INSERT INTO `salt` VALUES (1,1,'qwerty'),(4,9,'&LRt12knFqKhDZx8'),(5,10,'CA8Kczn4TG1t&Mfa'),(6,11,'AlShn-DW*0vmJiWK'),(7,12,'5|tvjG7lf55BYQtY');
 /*!40000 ALTER TABLE `salt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +109,7 @@ CREATE TABLE `users` (
   `Login` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COMMENT='Table "Users"';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +118,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'root','root'),(8,'User','User'),(9,'root1','a69c2afe015539c67177ede6822414fcca212567c50d9c57ab9e60dd9079144d02b7ccb8031e61c94f522bac34480367303376e3faad9085e210328110d746f1'),(10,'root2','a43c4f8d1062d5e1d633ef9f53aece39a3cd38ae96c194b38a767b55e3132ecc532a9e550fdee65efced81aafcde6642eb5c95b720ddabc48f2dae4b9752ddf9');
+INSERT INTO `users` VALUES (1,'root','root'),(8,'User','User'),(9,'root1','a69c2afe015539c67177ede6822414fcca212567c50d9c57ab9e60dd9079144d02b7ccb8031e61c94f522bac34480367303376e3faad9085e210328110d746f1'),(10,'root2','a43c4f8d1062d5e1d633ef9f53aece39a3cd38ae96c194b38a767b55e3132ecc532a9e550fdee65efced81aafcde6642eb5c95b720ddabc48f2dae4b9752ddf9'),(11,'djtape','9b83fbd1faee9a39660358f7a83d575dde2d507c0003adf45ea2ea2089ac527c3bbe0056b1b42c50571bb4dd47f7b9f36e8adda6e3ba9bf1fc7fd0caca59b103'),(12,'TestRegistration1','de9dbf7c41df41513ddbdcd294d1ed66a31f7df22eb11c50e44014ad05effabd4d1515ad32eab5a38250a6b43276e7654759366dfd3943f50dd170457914e419');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +145,7 @@ CREATE TABLE `users_permissions` (
 
 LOCK TABLES `users_permissions` WRITE;
 /*!40000 ALTER TABLE `users_permissions` DISABLE KEYS */;
-INSERT INTO `users_permissions` VALUES (1,1),(1,2),(9,2),(10,2);
+INSERT INTO `users_permissions` VALUES (1,1),(1,2),(9,2),(10,2),(11,2),(12,2);
 /*!40000 ALTER TABLE `users_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,6 +292,44 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getUserDetails` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserDetails`(IN id int)
+BEGIN
+SELECT * FROM userstxstbxrd.details WHERE userId = id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getUserIdByEmail` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserIdByEmail`(IN mail VARCHAR(255))
+BEGIN
+SELECT userId FROM userstxstbxrd.details WHERE `email` = mail;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -300,4 +340,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-09 12:50:36
+-- Dump completed on 2022-12-29 19:12:39
