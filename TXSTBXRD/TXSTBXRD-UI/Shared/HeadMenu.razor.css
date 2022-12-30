@@ -193,8 +193,6 @@
 
 .auth-btn {
     cursor: pointer;
-    padding: 10px;
-
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -204,17 +202,11 @@
     color: rgb(255, 255, 255);
 }
 
-.auth-btn:hover {
-    background-color: #FFFFFF;
-    color: rgb(0, 0, 0);
-    border-radius: 5px;
-}
-
 .auth-items {
     display: none;
 }
 
-.auth-btn:hover~.auth-items,
+.auth-users:hover~.auth-items,
 .auth-items:hover {
     display: flex;
     background-color: #FFFFFF;
@@ -231,12 +223,16 @@
 .auth-popup {
     display: inline-table;
     width: max-content;
+    margin-top: -10px;
 }
 
-.auth-popup:hover>.auth-btn {
+.auth-popup:hover>.auth-users {
     background-color: #FFFFFF;
     border-radius: 5px;
-    color: black;
+}
+
+.auth-btn:hover>.auth-users {
+    color: rgb(0, 0, 0);
 }
 
 .auth-item {
@@ -249,4 +245,16 @@
     color: #000000;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.auth-users {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: -15px;
+    display: flex;
+    align-items: center;
+}
+
+.auth-users:hover {
+    background-color: white;
 }
