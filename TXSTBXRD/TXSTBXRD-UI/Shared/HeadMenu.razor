@@ -2,13 +2,13 @@
     <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
 
     <ul class="menu-main">
-        <div class="dropdown">
-            <img src="/Resource/avatar30x30.png" style="width: 30px; height: 30px; z-index: 2; margin-right: 7px;">
-            <a class="dropbtn">ItRealRew</a>
-            <div class="dropdown-content">
-                <a href="#" style="padding-top: 45px;">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
+        <div class="auth-popup">
+            <a class="auth-btn">ItRealRew</a>
+
+            <div class="auth-items">
+                <a class="auth-item">link</a>
+                <a class="auth-item">link</a>
+                <a class="auth-item">link</a>
             </div>
         </div>
         <a @onclick="closeMainMenu" class="menu-link noselect" href="login">LogIn</a>
@@ -21,80 +21,6 @@
         <label class="menu__btn" for="menu__toggle">
             <span></span>
         </label>
-
-        <div class="auth-popup">
-            <a class="auth-btn">ItRealRew</a>
-
-            <div class="auth-item">
-                <a>link</a>
-                <a>link</a>
-                <a>link</a>
-            </div>
-        </div>
-
-        <style>
-            body {
-                background-color: #000000;
-                padding: 40px;
-            }
-
-            a {
-                color: white;
-            }
-
-            .auth-btn {
-                cursor: pointer;
-                padding: 10px;
-            }
-
-            .auth-btn:hover {
-                background-color: #FFFFFF;
-                color: black;
-                border-radius: 5px;
-            }
-
-            .auth-item {
-                display: none;
-            }
-
-            .auth-btn:hover~.auth-item {
-                display: flex;
-                background-color: #FFFFFF;
-                flex-wrap: nowrap;
-                flex-direction: column;
-                justify-content: space-around;
-                border-radius: 5px;
-            }
-
-            .auth-item:hover~.auth-btn {
-                background-color: #FFFFFF;
-                color: black;
-                border-radius: 5px;
-            }
-
-            .auth-item a {
-                color: black;
-            }
-
-            .auth-popup {
-                width: max-content;
-            }
-
-            .auth-item:hover {
-                display: flex;
-                background-color: #FFFFFF;
-                flex-wrap: nowrap;
-                flex-direction: column;
-                justify-content: space-around;
-                border-radius: 5px;
-            }
-
-            .auth-popup:hover>.auth-btn {
-                background-color: #FFFFFF;
-                border-radius: 5px;
-                color: black;
-            }
-        </style>
 
         <ul class="mobile-menu-box">
             <li><a @onclick="closeMainMenu" class="menu-link-mobile noselect" href="login">LogIn</a></li>

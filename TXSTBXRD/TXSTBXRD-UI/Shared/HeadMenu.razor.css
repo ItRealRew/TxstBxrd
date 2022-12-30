@@ -191,60 +191,62 @@
 
 /* дроп даун*/
 
-.dropbtn {
+.auth-btn {
+    cursor: pointer;
+    padding: 10px;
+
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    color: #FFFFFF;
     font-size: 20px;
-    border: none;
-    z-index: 2;
-    cursor: pointer;
-    position: relative;
+    line-height: 24px;
+
+    color: rgb(255, 255, 255);
 }
 
-.dropdown {
-    position: relative;
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    padding-right: 30px;
+.auth-btn:hover {
+    background-color: #FFFFFF;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
 }
 
-.dropdown-content {
+.auth-items {
     display: none;
-    position: absolute;
-    background-color: #ffffff;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
-    z-index: 1;
-    top: -8px;
-    left: -7px;
-    border-radius: 5px;
 }
 
-.dropdown-content a {
+.auth-btn:hover~.auth-items,
+.auth-items:hover {
+    display: flex;
+    background-color: #FFFFFF;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 5px;
+    align-items: flex-start;
+    gap: 5px;
+    padding-bottom: 7px;
+    padding-top: 12px;
+}
+
+.auth-popup {
+    display: inline-table;
+    width: max-content;
+}
+
+.auth-popup:hover>.auth-btn {
+    background-color: #FFFFFF;
+    border-radius: 5px;
     color: black;
-    padding: 10px;
-    padding-top: 0px;
-    padding-bottom: 5px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
+}
+
+.auth-item {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
     font-size: 20px;
-}
+    line-height: 24px;
 
-.dropdown-content a:hover {
-    background-color: #FFFFFF;
-    border-radius: 5px;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #FFFFFF;
-    color: black;
+    color: #000000;
+    margin-left: 10px;
+    margin-right: 10px;
 }
