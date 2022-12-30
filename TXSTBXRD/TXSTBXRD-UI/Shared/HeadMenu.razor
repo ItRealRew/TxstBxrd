@@ -22,6 +22,74 @@
             <span></span>
         </label>
 
+        <div class="auth-popup">
+            <a class="auth-btn">ItRealRew</a>
+
+            <div class="auth-item">
+                <a>link</a>
+                <a>link</a>
+                <a>link</a>
+            </div>
+        </div>
+
+        <style>
+            body {
+                background-color: #000000;
+                padding: 40px;
+            }
+
+            a {
+                color: white;
+            }
+
+            .auth-btn {
+                cursor: pointer;
+                padding: 10px;
+            }
+
+            .auth-btn:hover {
+                background-color: #FFFFFF;
+                color: black;
+                border-radius: 5px;
+            }
+
+            .auth-item {
+                display: none;
+            }
+
+            .auth-btn:hover~.auth-item {
+                display: flex;
+                background-color: #FFFFFF;
+                flex-wrap: nowrap;
+                flex-direction: column;
+                justify-content: space-around;
+                border-radius: 5px;
+            }
+
+            .auth-item:hover~.auth-btn {
+                background-color: #FFFFFF;
+                color: black;
+                border-radius: 5px;
+            }
+
+            .auth-item a {
+                color: black;
+            }
+
+            .auth-popup {
+                width: max-content;
+            }
+
+            .auth-item:hover {
+                display: flex;
+                background-color: #FFFFFF;
+                flex-wrap: nowrap;
+                flex-direction: column;
+                justify-content: space-around;
+                border-radius: 5px;
+            }
+        </style>
+
         <ul class="mobile-menu-box">
             <li><a @onclick="closeMainMenu" class="menu-link-mobile noselect" href="login">LogIn</a></li>
             <li><a @onclick="closeMainMenu" class="menu-link-mobile noselect" href="#Support">Support</a></li>
