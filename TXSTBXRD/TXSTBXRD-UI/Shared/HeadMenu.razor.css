@@ -219,6 +219,7 @@
     padding-bottom: 7px;
     padding-top: 12px;
     padding-left: 3px;
+    position: relative;
 }
 
 .auth-popup {
@@ -231,6 +232,7 @@
 .auth-popup:hover>.auth-users {
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
+    position: relative;
 }
 
 .auth-btn:hover>.auth-users {
@@ -240,7 +242,7 @@
 .auth-users {
     padding: 10px;
     border-radius: 5px;
-    margin-bottom: -15px;
+    margin-bottom: -13px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -270,10 +272,10 @@
 .auth-item {
     display: flex;
     align-items: center;
-
+    width: -webkit-fill-available;
+    width: -moz-available;
     color: rgb(0, 0, 0);
-    margin-left: 10px;
-    margin-right: 10px;
+    padding-left: 10px;
     cursor: pointer;
 }
 
@@ -291,4 +293,37 @@
     color: rgb(0, 0, 0);
 
     margin-left: 10px;
+}
+
+.auth-profile {
+    position: absolute;
+    background-color: rgb(255 0 0 / 20%);
+    width: -webkit-fill-available;
+    width: -moz-available;
+    height: 80%;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-left: -5px;
+    z-index: 1;
+    display: none;
+}
+
+.auth-users:hover>.auth-profile {
+    display: inline;
+}
+
+.item {
+    width: -webkit-fill-available;
+    width: -moz-available;
+    height: 30px;
+    margin-left: -8px;
+    margin-right: 5px;
+    background-color: rgb(255 0 0 / 20%);
+    position: absolute;
+     display: none;
+    border-radius: 5px;
+}
+
+.auth-item:hover>.item{
+    display: inline;
 }
