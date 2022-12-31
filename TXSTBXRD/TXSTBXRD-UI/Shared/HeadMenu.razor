@@ -4,14 +4,23 @@
     <ul class="menu-main">
         <div class="auth-popup">
             <div class="auth-users">
-                <img src="/Resource/avatar30x30.png" style="width: 30px; height: 30px; z-index: 2; margin-right: 7px;">
+                <img src="/Resource/userAvatar.png" class="auth-users-img">
                 <a class="auth-btn">ItRealRew</a>
             </div>
 
             <div class="auth-items">
-                <a class="auth-item">link</a>
-                <a class="auth-item">link</a>
-                <a class="auth-item">link</a>
+                <div class="auth-item">
+                    <img src="/Resource/projects.png" class="auth-item-img">
+                    <a class="auth-item-link">Projects</a>
+                </div>
+                <div class="auth-item">
+                    <img src="/Resource/settings.png" class="auth-item-img">
+                    <a class="auth-item-link">Settings</a>
+                </div>
+                <div class="auth-item">
+                    <img src="/Resource/guide.png" class="auth-item-img">
+                    <a class="auth-item-link">Support</a>
+                </div>
             </div>
         </div>
         <a @onclick="closeMainMenu" class="menu-link noselect" href="login">LogIn</a>
