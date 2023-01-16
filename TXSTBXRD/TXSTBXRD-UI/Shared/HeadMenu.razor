@@ -1,24 +1,8 @@
 ﻿<div class="header">
     <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
 
-    <TXSTBXRD_UI.Components.Header.UserPopup />
-    <ul class="menu-main">
-        <a @onclick="closeMainMenu" class="menu-link noselect" href="login">LogIn</a>
-        <a @onclick="closeMainMenu" class="menu-link noselect" href="#Support">Support</a>
-    </ul>
-
-
-    <div class="hamburger-menu">
-        <input id="menu__toggle" type="checkbox" @bind="IsDisabled" class="position-toogle" />
-        <label class="menu__btn" for="menu__toggle">
-            <span></span>
-        </label>
-
-        <ul class="mobile-menu-box">
-            <li><a @onclick="closeMainMenu" class="menu-link-mobile noselect" href="login">LogIn</a></li>
-            <li><a @onclick="closeMainMenu" class="menu-link-mobile noselect" href="#Support">Support</a></li>
-        </ul>
-    </div>
+    <!-- <TXSTBXRD_UI.Components.Header.UserPopup /> -->
+    <TXSTBXRD_UI.Components.Header.Guest />
 </div>
 
 @code {
