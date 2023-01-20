@@ -60,9 +60,18 @@
     cursor: pointer;
 }
 
+.cookies-control-button:hover{
+    background: rgb(73, 133, 79);
+    color: rgb(255, 255, 255);  
+}
+
 .cookies-more {
     pointer-events: auto;
     color: rgb(0, 0, 0);
+}
+
+.cookies-more:hover {
+    color: rgb(140 34 89);
 }
 
 .cookies-img {
