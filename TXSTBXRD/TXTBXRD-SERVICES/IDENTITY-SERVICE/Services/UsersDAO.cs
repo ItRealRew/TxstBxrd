@@ -257,7 +257,47 @@ namespace IDENTITY_SERVICE.Services
             return result;
         }
 
-        public async Task<UserDetails> GetUserDetails(int userId)
+        public async Task<UserDetails> GetDetailsByLogin(String userName)
+        {
+            UserDetails result = new UserDetails();
+
+            try
+            {
+                datebase.Connection.Open();
+
+                using var cmd = datebase.Connection.CreateCommand();
+                cmd.CommandText = @"CALL `userstxstbxrd`.`getDetailsByUserName`(@name);";
+
+                cmd.Parameters.Add(new MySqlParameter
+                {
+                    ParameterName = "@name",
+                    DbType = DbType.String,
+                    Value = userName,
+                });
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        result.FirstName = reader.GetValue(2).ToString();
+                        result.Email = reader.GetValue(3).ToString();
+                        result.LastName = reader.GetValue(4).ToString();
+                    }
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+                return null;
+            }
+            finally
+            {
+                await datebase.Connection.CloseAsync();
+            }
+        }
+
+        public async Task<UserDetails> GetDetailsByUserId(int userId)
         {
             UserDetails result = new UserDetails();
 

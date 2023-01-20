@@ -4,7 +4,7 @@ namespace IDENTITY_SERVICE.Models
 {
     public class Personally
     {
-        public string UserName { get; set; }
-        public Dictionary<string, bool> Permissions { get; set;}
+        public string Login { get; set; }
+        public Dictionary<string, bool> Permissions { get; set; }
     }
 }

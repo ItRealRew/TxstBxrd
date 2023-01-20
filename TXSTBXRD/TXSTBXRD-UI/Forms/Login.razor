@@ -117,6 +117,9 @@
         }
 
         await LocalStorage.SaveStringAsync(RegularStorageName.AuthorizationToken, response);
+
+        Console.WriteLine(await identity.GetDetails(response));
+
         NavigationManager.NavigateTo("/");
     }
 }

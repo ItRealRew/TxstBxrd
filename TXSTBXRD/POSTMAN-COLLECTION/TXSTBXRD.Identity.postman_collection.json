@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "33e6e2a6-03ad-4bd3-a27e-d192cf30795e",
+		"_postman_id": "23a86280-a029-447c-9050-5c11548592b5",
 		"name": "TXSTBXRD.Identity",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24058817"
+		"_exporter_id": "21992151"
 	},
 	"item": [
 		{
@@ -33,6 +33,38 @@
 					"path": [
 						"identity",
 						"identification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TokenDetails",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"authorizationToken\":\"7601f7c5-e2a6-4318-a585-618f3010629b\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/identity/tokendetails",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"identity",
+						"tokendetails"
 					]
 				}
 			},

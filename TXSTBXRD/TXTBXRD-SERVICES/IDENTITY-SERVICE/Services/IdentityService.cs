@@ -37,7 +37,7 @@ namespace IDENTITY_SERVICE.Services
 
                     var result = new Personally();
                     result.Permissions = await dao.getUserPermissions(Convert.ToInt16(userId));
-                    result.UserName = unknownUser.Login;
+                    result.Login = unknownUser.Login;
 
                     var cacheEntryOptions = new MemoryCacheEntryOptions()
                                  .SetSize(1)
@@ -72,9 +72,13 @@ namespace IDENTITY_SERVICE.Services
                                 cache.TryGetValue(userPermission.authorizationToken, out Personally received) ?
                                     received.Permissions.ContainsKey(userPermission.Permission) : false;
 
-        internal async Task<string> ChangePermission(СhangingPermissions user) => cache.TryGetValue(user.authorizationToken, out Personally received) ?
-                                await dao.ChangePermission(received.UserName, user.UserName, user.RoleName) : "false";
+        internal string FindLoginByToken(Guid authorizationToken) =>  cache.TryGetValue(authorizationToken, out Personally received) ?
+                                    received.Login: "false";
 
-        internal async Task<UserDetails> GetUserDetailsByEmail(string email) => await dao.GetUserDetails(await dao.GetUserIdByEmail(email));
+        internal async Task<string> ChangePermission(СhangingPermissions user) => cache.TryGetValue(user.authorizationToken, out Personally received) ?
+                                await dao.ChangePermission(received.Login, user.UserName, user.RoleName) : "false";
+
+        internal async Task<UserDetails> GetUserDetailsByEmail(string email) => await dao.GetDetailsByUserId(await dao.GetUserIdByEmail(email));
+        internal async Task<UserDetails> GetUserDetailsByToken(Guid userToken) => await dao.GetDetailsByLogin(FindLoginByToken(userToken));
     }
 }

@@ -38,5 +38,16 @@ namespace TXSTBXRD_UI.Services
             using var responseContent = await response.Content.ReadAsStreamAsync();
             return await JsonSerializer.DeserializeAsync<bool>(responseContent);
         }
+
+        public async Task<UserDetails> GetDetails(string Guid) { 
+            string json = JsonSerializer.Serialize<string>(Guid);
+            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("tokendetails", content);
+            response.EnsureSuccessStatusCode();
+
+            using var responseContent = await response.Content.ReadAsStreamAsync();
+            return await JsonSerializer.DeserializeAsync<UserDetails>(responseContent);
+        }
     }
 }

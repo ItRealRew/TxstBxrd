@@ -38,5 +38,8 @@ namespace IDENTITY_SERVICE.Controllers
 
         [HttpPost("emaildetails")]
         public async Task<UserDetails> getUserDetailsByEmail([FromBody] UsersEmail usersDate) => await service.GetUserDetailsByEmail(usersDate.Email);
+
+        [HttpPost("tokendetails")]
+        public async Task<UserDetails> getUserDetailsByToken([FromBody] UserToken usersDate) => await service.GetUserDetailsByToken(usersDate.authorizationToken);
     }
 }
