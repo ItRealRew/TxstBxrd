@@ -39,8 +39,8 @@ namespace TXSTBXRD_UI.Services
             return await JsonSerializer.DeserializeAsync<bool>(responseContent);
         }
 
-        public async Task<UserDetails> GetDetails(string Guid) { 
-            string json = JsonSerializer.Serialize<string>(Guid);
+        public async Task<UserDetails> GetDetails(UserToken userToken) { 
+            string json = JsonSerializer.Serialize<UserToken>(userToken);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync("tokendetails", content);

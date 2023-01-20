@@ -118,7 +118,14 @@
 
         await LocalStorage.SaveStringAsync(RegularStorageName.AuthorizationToken, response);
 
-        Console.WriteLine(await identity.GetDetails(response));
+        UserToken details =  new UserToken();
+        details.authorizationToken = new Guid(response);
+
+        UserDetails userDetails = await identity.GetDetails(details);
+
+        Console.WriteLine(userDetails.Email);
+        Console.WriteLine(userDetails.FirstName);
+        Console.WriteLine(userDetails.LastName);
 
         NavigationManager.NavigateTo("/");
     }
