@@ -60,9 +60,10 @@
     cursor: pointer;
 }
 
-.cookies-control-button:hover{
+.cookies-control-button:hover {
+    transition-duration: .2s;
     background: rgb(73, 133, 79);
-    color: rgb(255, 255, 255);  
+    color: rgb(255, 255, 255);
 }
 
 .cookies-more {
