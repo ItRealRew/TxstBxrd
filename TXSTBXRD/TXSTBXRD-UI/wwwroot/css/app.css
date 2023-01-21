@@ -66,3 +66,43 @@ body {
 .blazor-error-boundary::after {
     content: "An error has occurred."
 }
+
+.hello-container {
+    position: absolute;
+    top: 30vh;
+    width: 100%;
+    text-align: center
+}
+
+.loader-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center
+}
+
+.loader {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  .loader:after {
+    content: " ";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    border: 6px solid rgba(255, 255, 255, 0);
+    border-color: rgb(126, 38, 107) transparent rgb(126, 38, 107) transparent;
+    animation: loader 1.2s linear infinite;
+  }
+  @keyframes loader {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

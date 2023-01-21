@@ -27,8 +27,8 @@
             <ValidationMessage For="@(() => login.Login)" />
             <div class="create-password-container">
                 <InputText class="login-input" placeholder="Password" autocomplete="current-password"
-                    @bind-Value="login.Password" type="@((visiblePassword ? "text" : "password"))" minlength="8" maxlength="15"
-                    size="15" />
+                    @bind-Value="login.Password" type="@((visiblePassword ? "text" : "password"))" minlength="8"
+                    maxlength="15" size="15" />
                 <div class="noselect @((visiblePassword ? "hide-password-btn" : "show-password-btn"))"
                     @onclick="changeVisibility"></div>
             </div>
@@ -37,7 +37,8 @@
                 <div class="login-left-position">
                     <li class="checkboxline">
                         <label class="login-lable-click" for="checkbox" @onclick="clickLabelRememberMe">
-                            <input @bind="IsRememberMe" type="checkbox" name="checkbox" class="login-checkbox"> Remember
+                            <input @bind="IsRememberMe" type="checkbox" name="checkbox" class="login-checkbox">
+                            Remember
                             me
                         </label>
                     </li>
@@ -46,7 +47,7 @@
                     <a class="login-link" href="/recovery">Forgot your password?</a>
                 </div>
             </div>
-            <button @onclick="Authorize" class="btn-login">Sign in</button>
+            <button @onclick="Authorize" class="btn-login" disabled="@InProcess">Sign in</button>
         </div>
         <br>
         <div class="login-form-add-users noselect">
@@ -62,6 +63,7 @@
     EditContext? editContext;
     protected bool validateVisible { get; set; } = false;
     protected bool IsRememberMe { get; set; }
+    protected bool InProcess { get; set; }
     private bool visiblePassword = false;
 
     private void clickLabelRememberMe() => IsRememberMe = !IsRememberMe;
@@ -90,8 +92,13 @@
 
     private async void Authorize()
     {
+        InProcess = true;
+
         if (!editContext.Validate())
+        {
+            UpdForms();
             return;
+        }
 
         if (IsRememberMe)
         {
@@ -108,17 +115,13 @@
                 login.Login = "";
             login.Password = "";
 
-            await InvokeAsync(() =>
-            {
-                StateHasChanged();
-            });
-
+            UpdForms();
             return;
         }
 
         await LocalStorage.SaveStringAsync(RegularStorageName.AuthorizationToken, response);
 
-        UserToken details =  new UserToken();
+        UserToken details = new UserToken();
         details.authorizationToken = new Guid(response);
 
         UserDetails userDetails = await identity.GetDetails(details);
@@ -128,5 +131,16 @@
         Console.WriteLine(userDetails.LastName);
 
         NavigationManager.NavigateTo("/");
+    }
+
+    private async void UpdForms()
+    {
+        InProcess = !InProcess;
+
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+
     }
 }
