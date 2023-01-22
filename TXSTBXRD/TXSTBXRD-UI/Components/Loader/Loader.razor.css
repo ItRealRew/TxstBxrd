@@ -1,0 +1,37 @@
+﻿.loader-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1;
+}
+
+.loader-wait {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: conic-gradient(transparent, rgb(126, 38, 107));
+    animation: rotating 1s cubic-bezier(0.67, 0.28, 0.35, 0.82) infinite;
+}
+
+.loader-wait::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    left: 10px;
+    border-radius: 50%;
+    background: white;
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
