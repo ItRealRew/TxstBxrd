@@ -94,6 +94,7 @@
 
 .major-banner-link {
     position: absolute;
+    padding-bottom: 2px;
     bottom: 8px;
     right: 0px;
     color: rgb(0, 0, 0);
