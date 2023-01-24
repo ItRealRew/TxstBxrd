@@ -1,3 +1,11 @@
-﻿<div class="loader-container">
-    <div class="loader-wait"></div>
-</div>
+﻿@if (@visible)
+{
+    <div class="loader-container">
+        <div class="loader-wait"></div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public bool visible { get; set; }
+}
