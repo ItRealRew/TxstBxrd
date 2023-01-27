@@ -17,6 +17,10 @@ body {
     margin: 0;
 }
 
+#app {
+    overflow-x: hidden;
+}
+
 .noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -85,8 +89,9 @@ body {
     display: inline-block;
     width: 80px;
     height: 80px;
-  }
-  .loader:after {
+}
+
+.loader:after {
     content: " ";
     display: block;
     width: 40px;
@@ -97,12 +102,14 @@ body {
     border: 6px solid rgba(255, 255, 255, 0);
     border-color: rgb(126, 38, 107) transparent rgb(126, 38, 107) transparent;
     animation: loader 1.2s linear infinite;
-  }
-  @keyframes loader {
+}
+
+@keyframes loader {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
