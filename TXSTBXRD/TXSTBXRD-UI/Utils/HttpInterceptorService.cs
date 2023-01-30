@@ -15,7 +15,7 @@ namespace TXSTBXRD_UI.Utils
         public void RegisterEvent() => _interceptor.AfterSend += InterceptResponse;
         private void InterceptResponse(object sender, HttpClientInterceptorEventArgs e)
         {
-            _navManager.NavigateTo("/404");
+            //_navManager.NavigateTo("/404");
         }
         public void DisposeEvent() => _interceptor.AfterSend -= InterceptResponse;
     }

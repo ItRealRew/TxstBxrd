@@ -12,8 +12,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddSingleton<ILocalStorage, LocalStorage>();
 builder.Services.AddScoped<ICookie, Cookie>();
 
-//builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
 builder.Services.AddHttpClient<IdentityService>("IdentityAPI", (sharepoint, client) =>
     {
         client.BaseAddress = new Uri("https://localhost:5001/identity/");
@@ -26,6 +24,8 @@ builder.Services.AddHttpClient<IdentityService>("IdentityAPI", (sharepoint, clie
 builder.Services.AddHttpClientInterceptor();
 
 builder.Services.AddScoped<HttpInterceptorService>();
+
+builder.Services.AddScoped<NotificationService>();
 
 await builder.Build().RunAsync();
 
