@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Toolbelt.Blazor.Extensions.DependencyInjection;
 using TXSTBXRD_UI;
 using TXSTBXRD_UI.Utils;
 using TXSTBXRD_UI.Services;
@@ -11,12 +12,20 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddSingleton<ILocalStorage, LocalStorage>();
 builder.Services.AddScoped<ICookie, Cookie>();
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+//builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-builder.Services.AddHttpClient<IdentityService>(client =>
-{
-    client.BaseAddress = new Uri("https://localhost:5001/identity/");
-});
+builder.Services.AddHttpClient<IdentityService>("IdentityAPI", (sharepoint, client) =>
+    {
+        client.BaseAddress = new Uri("https://localhost:5001/identity/");
+        client.EnableIntercept(sharepoint);
+    });
+
+ builder.Services.AddScoped(
+        sharepoint => sharepoint.GetService<IHttpClientFactory>().CreateClient("IdentityAPI"));
+
+builder.Services.AddHttpClientInterceptor();
+
+builder.Services.AddScoped<HttpInterceptorService>();
 
 await builder.Build().RunAsync();
 
