@@ -1,0 +1,92 @@
+﻿@inject NotificationService ToastService
+@using TXSTBXRD_UI.Utils.Types
+@implements IDisposable
+
+
+@if (@_loading)
+{
+    <TXSTBXRD_UI.Components.Loader.Loader visible="@_loading" />
+}
+@if (!@_loading)
+{
+<div class="cs-toast @(_isVisible ? "cs-toast-visible" : null) @_backgroundCssClass">
+    <div class="cs-toast-icon">
+        <i class="fa fa-@_iconCssClass" aria-hidden="true"></i>
+    </div>
+    <div class="cs-toast-body">
+        <h5>@_heading</h5>
+        <p>@_message</p>
+    </div>
+</div>
+}
+
+
+
+@code {
+    private bool _loading = false;
+    private string? _heading;
+    private string? _message;
+    private bool _isVisible;
+    private string? _backgroundCssClass;
+    private string? _iconCssClass;
+
+    protected override void OnInitialized()
+    {
+        ToastService.OnShow += ShowToast;
+        ToastService.OnHide += HideToast;
+    }
+
+    private void ShowToast(string message, NotificationLevel level)
+    {
+        BuildToastSettings(level, message);
+        _isVisible = true;
+        StateHasChanged();
+    }
+
+    private void HideToast()
+    {
+        _isVisible = false;
+        StateHasChanged();
+    }
+
+    private void BuildToastSettings(NotificationLevel level, string message)
+    {
+        _loading = false;
+        switch (level)
+        {
+            case NotificationLevel.Loading:
+                _loading = true;
+                break;
+            case NotificationLevel.Info:
+                _backgroundCssClass = $"bg-info";
+                _iconCssClass = "info";
+                _heading = "Info";
+                break;
+            case NotificationLevel.Success:
+                _backgroundCssClass = $"bg-success";
+                _iconCssClass = "check";
+                _heading = "Success";
+                break;
+            case NotificationLevel.Warning:
+                _backgroundCssClass = $"bg-warning";
+                _iconCssClass = "exclamation";
+                _heading = "Warning";
+                break;
+            case NotificationLevel.Error:
+                _backgroundCssClass = "bg-danger";
+                _iconCssClass = "times";
+                _heading = "Error";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(level), level, null);
+        }
+
+        _message = message;
+    }
+
+    void IDisposable.Dispose()
+    {
+        ToastService.OnShow -= ShowToast;
+        ToastService.OnHide -= HideToast;
+    }
+}
