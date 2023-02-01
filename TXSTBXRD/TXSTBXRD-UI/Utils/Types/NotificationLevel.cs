@@ -5,7 +5,6 @@ namespace TXSTBXRD_UI.Utils.Types
         Info,
         Success,
         Warning,
-        Error,
-        Loading
+        Error
     }
 }

@@ -3,27 +3,26 @@
 @implements IDisposable
 
 
-@if (@_loading)
-{
-    <TXSTBXRD_UI.Components.Loader.Loader visible="@_loading" />
-}
-@if (!@_loading)
-{
-<div class="cs-toast @(_isVisible ? "cs-toast-visible" : null) @_backgroundCssClass">
-    <div class="cs-toast-icon">
-        <i class="fa fa-@_iconCssClass" aria-hidden="true"></i>
+<div class="nf-container @(_isVisible ? "nf-visible" : null) @_backgroundCssClass">
+    <div class="nf-main-icon">
+        <i class="@_iconCssClass" aria-hidden="true"></i>
     </div>
-    <div class="cs-toast-body">
-        <h5>@_heading</h5>
-        <p>@_message</p>
+    <div class="nf-content">
+        <div class="nf-title-container">
+            <h5 class="nf-title">@_heading</h5>
+            <div class="nf-control-btn">
+                <i class="reload-icon control-btn" aria-hidden="true" onclick="location.reload()"></i>
+                <i class="close-icon control-btn" aria-hidden="true" @onclick="HideToast"></i>
+            </div>
+        </div>
+        <div class="nf-text">@_message</div>
     </div>
 </div>
-}
+
 
 
 
 @code {
-    private bool _loading = false;
     private string? _heading;
     private string? _message;
     private bool _isVisible;
@@ -51,30 +50,26 @@
 
     private void BuildToastSettings(NotificationLevel level, string message)
     {
-        _loading = false;
         switch (level)
         {
-            case NotificationLevel.Loading:
-                _loading = true;
-                break;
             case NotificationLevel.Info:
-                _backgroundCssClass = $"bg-info";
-                _iconCssClass = "info";
+                _backgroundCssClass = "nf-bg-info";
+                _iconCssClass = $"info-icon";
                 _heading = "Info";
                 break;
             case NotificationLevel.Success:
-                _backgroundCssClass = $"bg-success";
-                _iconCssClass = "check";
+                _backgroundCssClass = "nf-bg-success";
+                _iconCssClass = $"success-icon";
                 _heading = "Success";
                 break;
             case NotificationLevel.Warning:
-                _backgroundCssClass = $"bg-warning";
-                _iconCssClass = "exclamation";
+                _backgroundCssClass = "nf-bg-warning";
+                _iconCssClass = $"warning-icon";
                 _heading = "Warning";
                 break;
             case NotificationLevel.Error:
-                _backgroundCssClass = "bg-danger";
-                _iconCssClass = "times";
+                _backgroundCssClass = "nf-bg-error";
+                _iconCssClass = $"error-icon";
                 _heading = "Error";
                 break;
             default:

@@ -1,42 +1,124 @@
-﻿.cs-toast {
+﻿.nf-container {
     display: none;
-    padding: 1.5rem;
-    color: #fff;
+    padding: 10px;
+    color: rgb(0 0 0);
     z-index: 999;
-    position: absolute;
-    width: 25rem;
-    top: 2rem;
-    border-radius: 1rem;
-    right: 2rem;
+    position: fixed;
+    width: 375px;
+    bottom: 25px;
+    border-radius: 5px;
+    right: 25px;
 }
 
-.cs-toast-icon {
+.nf-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 320px;
+}
+
+.nf-title {
+    font-size: 24px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.nf-control-btn {
+    display: inline-flex;
+    gap: 5px;
+}
+
+.nf-main-icon {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 1rem;
-    font-size: 2.5rem;
+    padding-left: 5px;
 }
 
-.cs-toast-body {
+.nf-content {
     display: flex;
     flex-direction: column;
     flex: 1;
     padding-left: 1rem;
 }
 
-.cs-toast-body p {
-    margin-bottom: 0;
+.nf-text {
+    margin-top: 5px;
+    max-width: 325px;
+    word-wrap: break-word;
+    text-align: justify;
 }
 
-.cs-toast-visible {
+.nf-visible {
     display: flex;
     flex-direction: row;
     animation: fadein 1.5s;
 }
 
-.bg-danger{
-    background-color: aquamarine;
+.control-btn {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.close-icon {
+    background: url(/Resource/notification/close.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.reload-icon {
+    background: url(/Resource/notification/reload.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.error-icon {
+    background: url(/Resource/notification/error.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+
+.warning-icon {
+    background: url(/Resource/notification/warning.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+
+.info-icon {
+    background: url(/Resource/notification/info.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+
+.success-icon {
+    background: url(/Resource/notification/success.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+
+.nf-bg-error {
+    background-color: rgba(255, 97, 97, .5);
+}
+
+.nf-bg-warning {
+    background-color: rgba(255, 130, 67, .5);
+}
+
+.nf-bg-info {
+    background-color: rgb(126 38 107 / 50%);
+}
+
+.nf-bg-success {
+    background-color: rgb(119 221 119 / 50%);
 }
 
 @keyframes fadein {

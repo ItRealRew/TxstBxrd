@@ -34,7 +34,7 @@ namespace TXSTBXRD_UI.Utils
         {
             if (Countdown != null) return;
 
-            Countdown = new System.Timers.Timer(5000);
+            Countdown = new System.Timers.Timer(10000);
             Countdown.Elapsed += HideToast;
             Countdown.AutoReset = false;
         }
