@@ -1,4 +1,4 @@
-﻿@inject NotificationService ToastService
+﻿@inject NotificationService NFService
 @using TXSTBXRD_UI.Utils.Types
 @implements IDisposable
 
@@ -11,8 +11,14 @@
         <div class="nf-title-container">
             <h5 class="nf-title">@_heading</h5>
             <div class="nf-control-btn">
-                <i class="reload-icon control-btn" aria-hidden="true" onclick="location.reload()"></i>
-                <i class="close-icon control-btn" aria-hidden="true" @onclick="HideToast"></i>
+                @if (@_reload)
+                {
+                    <i class="reload-icon control-btn" aria-hidden="true" onclick="location.reload()"></i>
+                }
+                @if (@_close)
+                {
+                    <i class="close-icon control-btn" aria-hidden="true" @onclick="HideToast"></i>
+                }
             </div>
         </div>
         <div class="nf-text">@_message</div>
@@ -25,19 +31,21 @@
 @code {
     private string? _heading;
     private string? _message;
-    private bool _isVisible;
     private string? _backgroundCssClass;
     private string? _iconCssClass;
+    private bool _close;
+    private bool _reload;
+    private bool _isVisible;
 
     protected override void OnInitialized()
     {
-        ToastService.OnShow += ShowToast;
-        ToastService.OnHide += HideToast;
+        NFService.OnShow += ShowToast;
+        NFService.OnHide += HideToast;
     }
 
-    private void ShowToast(string message, NotificationLevel level)
+    private void ShowToast(string message, NotificationLevel level, bool reload, bool close)
     {
-        BuildToastSettings(level, message);
+        BuildToastSettings(level, message, reload, close);
         _isVisible = true;
         StateHasChanged();
     }
@@ -48,27 +56,29 @@
         StateHasChanged();
     }
 
-    private void BuildToastSettings(NotificationLevel level, string message)
+    private void BuildToastSettings(NotificationLevel level, string message, bool reload, bool close)
     {
+        _reload = reload;
+        _close = close;
         switch (level)
         {
             case NotificationLevel.Info:
-                _backgroundCssClass = "nf-bg-info";
+                _backgroundCssClass = $"nf-bg-info";
                 _iconCssClass = $"info-icon";
                 _heading = "Info";
                 break;
             case NotificationLevel.Success:
-                _backgroundCssClass = "nf-bg-success";
+                _backgroundCssClass = $"nf-bg-success";
                 _iconCssClass = $"success-icon";
                 _heading = "Success";
                 break;
             case NotificationLevel.Warning:
-                _backgroundCssClass = "nf-bg-warning";
+                _backgroundCssClass = $"nf-bg-warning";
                 _iconCssClass = $"warning-icon";
                 _heading = "Warning";
                 break;
             case NotificationLevel.Error:
-                _backgroundCssClass = "nf-bg-error";
+                _backgroundCssClass = $"nf-bg-error";
                 _iconCssClass = $"error-icon";
                 _heading = "Error";
                 break;
@@ -81,7 +91,7 @@
 
     void IDisposable.Dispose()
     {
-        ToastService.OnShow -= ShowToast;
-        ToastService.OnHide -= HideToast;
+        NFService.OnShow -= ShowToast;
+        NFService.OnHide -= HideToast;
     }
 }

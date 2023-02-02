@@ -4,6 +4,7 @@
 @inject NavigationManager NavigationManager
 @inject Services.IdentityService identity
 @inject Utils.ILocalStorage LocalStorage
+@inject NotificationService notification
 
 @using TXSTBXRD_MIDDLEWARE.IDENTITY
 @using TXSTBXRD_UI.Utils.Libs
@@ -93,9 +94,9 @@
 
     private async void Authorize()
     {
-        InProcess = true; 
+        InProcess = true;
 
-        if (!editContext.Validate())
+        if (!editContext!.Validate())
         {
             UpdForms();
             return;
@@ -103,10 +104,16 @@
 
         if (IsRememberMe)
         {
-            await LocalStorage.SaveStringAsync(RegularStorageName.RememberedUserName, login.Login);
+            await LocalStorage.SaveStringAsync(RegularStorageName.RememberedUserName, login.Login!);
         }
 
         string? response = await identity.Authentication(login);
+
+        if (response == null)
+        {
+            UpdForms();
+            return;
+        }
 
         if (response == Guid.Empty.ToString())
         {
@@ -120,10 +127,12 @@
             return;
         }
 
-        await LocalStorage.SaveStringAsync(RegularStorageName.AuthorizationToken, response);
+        UpdForms();
+
+        await LocalStorage.SaveStringAsync(RegularStorageName.AuthorizationToken, response!);
 
         UserToken details = new UserToken();
-        details.authorizationToken = new Guid(response);
+        details.authorizationToken = new Guid(response!);
 
         UserDetails userDetails = await identity.GetDetails(details);
 
@@ -131,6 +140,7 @@
         Console.WriteLine(userDetails.FirstName);
         Console.WriteLine(userDetails.LastName);
 
+        notification.ShowToast(Utils.Types.NotificationLevel.Success, "Welcom");
         NavigationManager.NavigateTo("/");
     }
 

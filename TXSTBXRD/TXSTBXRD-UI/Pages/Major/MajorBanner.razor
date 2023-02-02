@@ -68,7 +68,7 @@
       protected override async Task OnInitializedAsync()
       {
             await base.OnInitializedAsync();
-            timer = new System.Threading.Timer(SetClock, new System.Threading.AutoResetEvent(false), 5000, 5000);
+            timer = new System.Threading.Timer(SetClock!, new System.Threading.AutoResetEvent(false), 5000, 5000);
       }
 
       private void SetCarousel(int trueWidth)

@@ -5,12 +5,12 @@ using TXSTBXRD_UI.Utils;
 
 namespace TXSTBXRD_UI.Services
 {
-    public class IdentityService: IDisposable
+    public class IdentityService : IDisposable
     {
         public HttpInterceptorService Interceptor { get; set; }
         public HttpClient _httpClient;
 
-        public IdentityService(HttpClient client, HttpInterceptorService  interceptor)
+        public IdentityService(HttpClient client, HttpInterceptorService interceptor)
         {
             _httpClient = client;
             Interceptor = interceptor;
@@ -22,11 +22,17 @@ namespace TXSTBXRD_UI.Services
             string json = JsonSerializer.Serialize<LogIn>(loginData);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("identification", content);
-            response.EnsureSuccessStatusCode();
-
-            using var responseContent = await response.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync<string>(responseContent);
+            try
+            {
+                var response = await _httpClient.PostAsync("identification", content);
+                response.EnsureSuccessStatusCode();
+                using var responseContent = await response.Content.ReadAsStreamAsync();
+                return await JsonSerializer.DeserializeAsync<string>(responseContent);
+            }
+            catch (HttpRequestException)
+            {
+                return null;
+            }
         }
 
         public async Task<bool> AddUser(Create newUser)

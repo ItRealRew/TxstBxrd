@@ -5,19 +5,25 @@ namespace TXSTBXRD_UI.Utils
 {
     public class NotificationService : IDisposable
     {
-        public event Action<string, NotificationLevel>? OnShow;
+        const int DefoultTime = 10000;
+        public event Action<string, NotificationLevel, bool, bool>? OnShow;
         public event Action? OnHide;
         private System.Timers.Timer? Countdown;
 
-        public void ShowToast(string message, NotificationLevel level)
+        public void ShowToast(NotificationLevel level, string message, bool close = false)
         {
-            OnShow?.Invoke(message, level);
+            OnShow?.Invoke(message, level, false, close);
             StartCountdown();
         }
-
-        private void StartCountdown()
+        public void ShowToast(NotificationLevel level, string message, int time, bool close = false, bool reload = false)
         {
-            SetCountdown();
+            OnShow?.Invoke(message, level, reload, close);
+            StartCountdown(time);
+        }
+
+        private void StartCountdown(int time = DefoultTime)
+        {
+            SetCountdown(time);
 
             if (Countdown!.Enabled)
             {
@@ -30,11 +36,11 @@ namespace TXSTBXRD_UI.Utils
             }
         }
 
-        private void SetCountdown()
+        private void SetCountdown(int time)
         {
             if (Countdown != null) return;
 
-            Countdown = new System.Timers.Timer(10000);
+            Countdown = new System.Timers.Timer(time);
             Countdown.Elapsed += HideToast;
             Countdown.AutoReset = false;
         }

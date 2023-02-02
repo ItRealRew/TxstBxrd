@@ -69,7 +69,7 @@
 
     private async void CreateAccount()
     {
-        if (!editContext.Validate())
+        if (!editContext!.Validate())
             return;
 
         bool response = await identity.AddUser(create);

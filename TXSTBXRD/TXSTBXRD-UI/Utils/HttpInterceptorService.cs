@@ -14,12 +14,16 @@ namespace TXSTBXRD_UI.Utils
             _navManager = navManager;
             _notification = notification;
         }
-        public void RegisterEvent() => _interceptor.AfterSend += InterceptResponse;
+        public void RegisterEvent() => _interceptor.AfterSend += InterceptResponse!;
         private void InterceptResponse(object sender, HttpClientInterceptorEventArgs e)
         {
-            _notification.ShowToast("000000", Utils.Types.NotificationLevel.Success);
+            if (e.Response == null)
+            {
+                _notification.ShowToast(Utils.Types.NotificationLevel.Error, "Oops, something went wrong, try again later", 20000, false, true);
+                return;
+            }
         }
-        public void DisposeEvent() => _interceptor.AfterSend -= InterceptResponse;
+        public void DisposeEvent() => _interceptor.AfterSend -= InterceptResponse!;
     }
 }
 

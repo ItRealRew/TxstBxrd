@@ -81,7 +81,7 @@ public interface ILocalStorage
 		{
 			var str = await jsruntime.InvokeAsync<string>("localStorage.getItem", key).ConfigureAwait(false);
 			if (str == null)
-				return null;
+				return null!;
 			var bytes = await Compressor.DecompressBytesAsync(Convert.FromBase64String(str));
 			return Encoding.UTF8.GetString(bytes);
 		}

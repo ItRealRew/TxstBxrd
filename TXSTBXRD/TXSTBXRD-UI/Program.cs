@@ -19,7 +19,7 @@ builder.Services.AddHttpClient<IdentityService>("IdentityAPI", (sharepoint, clie
     });
 
  builder.Services.AddScoped(
-        sharepoint => sharepoint.GetService<IHttpClientFactory>().CreateClient("IdentityAPI"));
+        sharepoint => sharepoint!.GetService<IHttpClientFactory>()!.CreateClient("IdentityAPI"));
 
 builder.Services.AddHttpClientInterceptor();
 
