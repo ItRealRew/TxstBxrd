@@ -136,9 +136,7 @@
 
         UserDetails userDetails = await identity.GetDetails(details);
 
-        Console.WriteLine(userDetails.Email);
-        Console.WriteLine(userDetails.FirstName);
-        Console.WriteLine(userDetails.LastName);
+        await LocalStorage.SaveStringAsync(RegularStorageName.UserName, userDetails.FirstName!);
 
         notification.ShowToast(Utils.Types.NotificationLevel.Success, "Welcom");
         NavigationManager.NavigateTo("/");

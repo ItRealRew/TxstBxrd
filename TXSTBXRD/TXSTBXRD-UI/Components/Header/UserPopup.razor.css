@@ -33,7 +33,7 @@
     display: inline-table;
     width: max-content;
     min-width: 158px;
-    margin-top: -10px;
+    margin-top: -14px;
 }
 
 .auth-popup:hover>.auth-users {
@@ -98,7 +98,7 @@
     font-size: 20px;
     line-height: 24px;
     color: rgb(0, 0, 0);
-
+    z-index: 1;
     margin-left: 10px;
 }
 
@@ -127,11 +127,11 @@
     margin-right: 5px;
     background-color: rgb(255 0 0 / 20%);
     position: absolute;
-     display: none;
+    display: none;
     border-radius: 5px;
 }
 
-.auth-item:hover>.item{
+.auth-item:hover>.item {
     display: inline;
 }
 

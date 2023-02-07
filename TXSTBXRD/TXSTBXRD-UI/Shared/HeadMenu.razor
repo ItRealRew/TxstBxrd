@@ -1,16 +1,34 @@
-﻿<div class="header">
+﻿@using TXSTBXRD_UI.Utils.Libs
+
+@inject Utils.ILocalStorage LocalStorage
+
+<div class="header">
     <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
 
-    <!-- <TXSTBXRD_UI.Components.Header.UserPopup /> -->
-    <TXSTBXRD_UI.Components.Header.Guest />
+    @if (UserExists)
+    {
+        <TXSTBXRD_UI.Components.Header.UserPopup />
+    }
+    else
+    {
+        <TXSTBXRD_UI.Components.Header.Guest />
+    }
+
 </div>
 
 @code {
-    protected bool IsDisabled { get; set; }
+    protected bool UserExists = false;
 
-    private void closeMainMenu()
+    protected override async void OnInitialized()
     {
-        if (IsDisabled)
-            IsDisabled = !IsDisabled;
+        var token = await LocalStorage.GetStringAsync(RegularStorageName.AuthorizationToken);
+
+        if (token != null)
+            UserExists = true;
+
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 }

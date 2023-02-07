@@ -1,4 +1,9 @@
-﻿<ul class="menu-main">
+﻿@using TXSTBXRD_UI.Utils.Libs
+
+@inject Utils.ILocalStorage LocalStorage
+@inject NavigationManager NavigationManager
+
+<ul class="menu-main">
     <div class="auth-popup">
         <div class="auth-users">
             <div class="auth-profile"></div>
@@ -22,6 +27,20 @@
                 <img src="/Resource/guide.png" class="auth-item-img">
                 <a class="auth-item-link">Support</a>
             </div>
+            <div class="auth-item" @onclick="UserDeAuthorization">
+                <div class="item"></div>
+                <img src="/Resource/exit.png" class="auth-item-img">
+                <a class="auth-item-link">Exit</a>
+            </div>
         </div>
     </div>
 </ul>
+
+
+@code {
+    private async void UserDeAuthorization()
+    {
+        await LocalStorage.RemoveAsync(RegularStorageName.AuthorizationToken);
+        NavigationManager.NavigateTo("/");
+    }
+}
