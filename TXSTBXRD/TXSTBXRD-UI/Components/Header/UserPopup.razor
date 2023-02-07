@@ -38,9 +38,13 @@
 
 
 @code {
+    bool userExists = false;
+
+    [Parameter]
+    public EventCallback<bool> onDeAuth { get; set; }
     private async void UserDeAuthorization()
     {
         await LocalStorage.RemoveAsync(RegularStorageName.AuthorizationToken);
-        NavigationManager.NavigateTo("/");
+        await onDeAuth.InvokeAsync(userExists);
     }
 }

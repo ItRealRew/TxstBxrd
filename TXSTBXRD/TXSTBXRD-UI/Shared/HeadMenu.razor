@@ -7,7 +7,7 @@
 
     @if (UserExists)
     {
-        <TXSTBXRD_UI.Components.Header.UserPopup />
+        <TXSTBXRD_UI.Components.Header.UserPopup onDeAuth="userExists => UserExists = userExists"/>
     }
     else
     {
