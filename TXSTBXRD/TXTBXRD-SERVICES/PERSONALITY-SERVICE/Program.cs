@@ -9,6 +9,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddEntityFrameworkMySql().AddDbContext<UserstxstbxrdContext>(options =>
+{
+    options.UseMySql(builder.Configuration.GetConnectionString("Default"),
+            ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("Default")));
+}
+);
+
+builder.Services.AddTransient<Personality>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

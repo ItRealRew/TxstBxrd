@@ -1,18 +1,14 @@
 ﻿using PERSONALITY_SERVICE.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace PERSONALITY_SERVICE;
+namespace PERSONALITY_SERVICE.Services;
 
 public partial class UserstxstbxrdContext : DbContext
 {
-    public UserstxstbxrdContext()
-    {
-    }
+    public UserstxstbxrdContext() { }
 
     public UserstxstbxrdContext(DbContextOptions<UserstxstbxrdContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public virtual DbSet<Detail> Details { get; set; }
 
@@ -21,10 +17,6 @@ public partial class UserstxstbxrdContext : DbContext
     public virtual DbSet<Salt> Salts { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        =>  optionsBuilder.UseMySql("server=localhost;user=root;password=root;database=userstxstbxrd;",
-            ServerVersion.AutoDetect("server=localhost;user=root;password=root;database=userstxstbxrd;"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
