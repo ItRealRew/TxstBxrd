@@ -1,4 +1,4 @@
-namespace IDENTITY_SERVICE.Types
+namespace Security.Types
 {
     public enum GenerationLength
     {

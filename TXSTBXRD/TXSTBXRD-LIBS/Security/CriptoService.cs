@@ -1,13 +1,12 @@
 using System.Security.Cryptography;
 using System.Text;
-using System;
 
 
-namespace IDENTITY_SERVICE.Services
+namespace Security
 {
-    public class SecurityService
+    public class CriptoSevice
     {
-        internal string GetSecurePassword(string original, string salt, int repeatSalt)
+        public string GetSecurePassword(string original, string salt, int repeatSalt)
         {
             StringBuilder result = new StringBuilder(128 + (salt.Length));
             result.Append(original);
@@ -25,7 +24,7 @@ namespace IDENTITY_SERVICE.Services
             return result.ToString();
         }
 
-        internal string GetUniqueKey(int maxSize, string alphabet)
+        public string GetUniqueKey(int maxSize, string alphabet)
         {
             byte[] data = new byte[1];
             using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())

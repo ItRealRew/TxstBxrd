@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using IDENTITY_SERVICE.Services;
+using Security;
 
 
 namespace IDENTITY_SERVICE
@@ -30,7 +24,7 @@ namespace IDENTITY_SERVICE
             services.AddMemoryCache();
             services.AddControllers();
             services.AddSingleton<IdentityService>();
-            services.AddSingleton<SecurityService>();
+            services.AddSingleton<CriptoSevice>();
             services.AddSingleton<UsersDAO>();
             services.AddTransient<UsersDbContext>(_ => new UsersDbContext(Configuration["ConnectionStrings:Default"]));
             services.AddCors();

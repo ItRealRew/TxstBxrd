@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PERSONALITY_SERVICE.Models;
 using PERSONALITY_SERVICE.Services;
+using TXSTBXRD_MIDDLEWARE.PERSONALITY;
 
 namespace PERSONALITY_SERVICE.Controllers
 {
@@ -15,10 +16,7 @@ namespace PERSONALITY_SERVICE.Controllers
             this.service = service;
         }
 
-        [HttpGet("started")]
-        public async Task<List<User>> RegistrationUser()
-        {
-            return await service.GetAllUsers();
-        }
+        [HttpPost("registration")]
+        public async Task<bool> RegistrationUser([FromBody] Registration newUser) => await service.AddNewUser(newUser);
     }
 }

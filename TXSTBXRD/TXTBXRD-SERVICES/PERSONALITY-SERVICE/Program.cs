@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql;
+using Security;
 using PERSONALITY_SERVICE.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +17,7 @@ builder.Services.AddEntityFrameworkMySql().AddDbContext<UserstxstbxrdContext>(op
 );
 
 builder.Services.AddTransient<Personality>();
+builder.Services.AddTransient<CriptoSevice>();
 
 var app = builder.Build();
 

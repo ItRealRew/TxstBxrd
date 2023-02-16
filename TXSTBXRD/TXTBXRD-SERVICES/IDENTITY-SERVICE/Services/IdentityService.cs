@@ -3,8 +3,8 @@ using TXSTBXRD_MIDDLEWARE.IDENTITY;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Threading.Tasks;
-using IDENTITY_SERVICE.Types;
-using System.Text.Json;
+using Security.Types;
+using Security;
 
 namespace IDENTITY_SERVICE.Services
 {
@@ -14,8 +14,8 @@ namespace IDENTITY_SERVICE.Services
 
         private readonly UsersDAO dao;
 
-        private readonly SecurityService security;
-        public IdentityService(IMemoryCache cache, UsersDAO dao, SecurityService security)
+        private readonly CriptoSevice security;
+        public IdentityService(IMemoryCache cache, UsersDAO dao, CriptoSevice security)
         {
             this.cache = cache;
             this.dao = dao;
