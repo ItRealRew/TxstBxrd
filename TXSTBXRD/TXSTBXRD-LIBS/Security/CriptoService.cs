@@ -27,7 +27,7 @@ namespace Security
         public string GetUniqueKey(int maxSize, string alphabet)
         {
             byte[] data = new byte[1];
-            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
+            using (var crypto =  RandomNumberGenerator.Create())
             {
                 crypto.GetNonZeroBytes(data);
                 data = new byte[maxSize];
@@ -42,7 +42,7 @@ namespace Security
 
         private StringBuilder Hash(StringBuilder wordHashing)
         {
-            using (SHA512Managed security = new SHA512Managed())
+            using (SHA512 security = SHA512.Create())
             {
                 byte[] hashed = security.ComputeHash(Encoding.UTF8.GetBytes(wordHashing.ToString()));
 

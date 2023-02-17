@@ -22,6 +22,9 @@ namespace PERSONALITY_SERVICE.Services
             if (newUser == null || newUser.Password == null || newUser.Username == null)
                 return false;
 
+            if (database.Users!.Where(c => c.Login == newUser.Username).Any())
+                return false;
+                
             using (var transaction = database.Database.BeginTransaction())
             {
                 try
@@ -31,16 +34,16 @@ namespace PERSONALITY_SERVICE.Services
 
 
                     User user = new User { Login = newUser.Username, Password = newUser.Password };
-                    database.Users.Add(user);
+                    database.Users!.Add(user);
                     database.SaveChanges();
 
                     Detail detail = new Detail { UserId = user.Id, UserName = newUser.FirstName, Email = newUser.Email, LastName = newUser.LastName };
                     Salt salt = new Salt { UserId = user.Id, Value = _salt };
 
-                    user.Permissions.Add(database.Permissions.Where(c => c.Name == "Users").First<Permission>());
+                    user.Permissions.Add(database.Permissions!.Where(c => c.Name == "Users").First<Permission>());
 
-                    database.Details.Add(detail);
-                    database.Salts.Add(salt);
+                    database.Details!.Add(detail);
+                    database.Salts!.Add(salt);
 
                     database.SaveChanges();
 

@@ -10,13 +10,13 @@ public partial class UserstxstbxrdContext : DbContext
     public UserstxstbxrdContext(DbContextOptions<UserstxstbxrdContext> options)
         : base(options) { }
 
-    public virtual DbSet<Detail> Details { get; set; }
+    public virtual DbSet<Detail>? Details { get; set; }
 
-    public virtual DbSet<Permission> Permissions { get; set; }
+    public virtual DbSet<Permission>? Permissions { get; set; }
 
-    public virtual DbSet<Salt> Salts { get; set; }
+    public virtual DbSet<Salt>? Salts { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<User>? Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
