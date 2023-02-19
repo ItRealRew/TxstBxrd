@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 
-namespace Security
+namespace TXSTBXRD_LIBS.Security
 {
     public class CriptoSevice
     {

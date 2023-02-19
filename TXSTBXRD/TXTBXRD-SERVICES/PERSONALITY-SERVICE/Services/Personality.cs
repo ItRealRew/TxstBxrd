@@ -1,7 +1,7 @@
 using TXSTBXRD_MIDDLEWARE.PERSONALITY;
 using PERSONALITY_SERVICE.Models;
-using Security;
-using Security.Types;
+using TXSTBXRD_LIBS.Security;
+using TXSTBXRD_LIBS.Security.Types;
 
 namespace PERSONALITY_SERVICE.Services
 {

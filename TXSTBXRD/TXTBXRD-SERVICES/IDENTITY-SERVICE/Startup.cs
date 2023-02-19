@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using IDENTITY_SERVICE.Services;
-using Security;
+using TXSTBXRD_LIBS.Security;
 
 
 namespace IDENTITY_SERVICE

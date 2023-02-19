@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Security;
+using TXSTBXRD_LIBS.Security;
 using PERSONALITY_SERVICE.Services;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -58,7 +58,9 @@ namespace TXSTBXRD_UI.Services
             response.EnsureSuccessStatusCode();
 
             using var responseContent = await response.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync<UserDetails>(responseContent);
+
+            UserDetails? orNull = await JsonSerializer.DeserializeAsync<UserDetails>(responseContent);
+            return orNull ?? throw new JsonException( "Expected deserialized object to be non-null, but encountered null." );;
         }
 
         public void Dispose() => Interceptor.DisposeEvent();

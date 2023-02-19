@@ -1,4 +1,4 @@
-namespace Security.Types
+namespace TXSTBXRD_LIBS.Security.Types
 {
     public class Alphabet
     {

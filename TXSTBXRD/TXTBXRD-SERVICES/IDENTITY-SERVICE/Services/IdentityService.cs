@@ -3,8 +3,8 @@ using TXSTBXRD_MIDDLEWARE.IDENTITY;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Threading.Tasks;
-using Security.Types;
-using Security;
+using TXSTBXRD_LIBS.Security.Types;
+using TXSTBXRD_LIBS.Security;
 
 namespace IDENTITY_SERVICE.Services
 {
