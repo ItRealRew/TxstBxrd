@@ -16,8 +16,8 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TXSTBXRD-MIDDLEWARE\TXSTBXRD-MIDDLEWARE.csproj" />
     <ProjectReference Include="..\..\TXSTBXRD-LIBS\Security\Security.csproj" />
+    <ProjectReference Include="..\..\TXSTBXRD-MIDDLEWARE\PERSONALITY\PERSONALITY.csproj" />
   </ItemGroup>
 
 </Project>

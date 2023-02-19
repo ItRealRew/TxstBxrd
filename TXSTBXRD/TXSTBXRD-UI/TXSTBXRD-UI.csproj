@@ -20,7 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TXSTBXRD-MIDDLEWARE\TXSTBXRD-MIDDLEWARE.csproj" />
+    <ProjectReference Include="..\TXSTBXRD-MIDDLEWARE\COMMUNICATIONS\COMMUNICATIONS.csproj" />
+    <ProjectReference Include="..\TXSTBXRD-MIDDLEWARE\IDENTITY\IDENTITY.csproj" />
+    <ProjectReference Include="..\TXSTBXRD-MIDDLEWARE\PERSONALITY\PERSONALITY.csproj" />
   </ItemGroup>
 
 </Project>
