@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Net.Mail;
 using Microsoft.Extensions.Configuration;
+using TXSTBXD_LIBS.Email;
 
 namespace COMMUNICATIONS_SERVICE.Services
 {
@@ -12,9 +13,12 @@ namespace COMMUNICATIONS_SERVICE.Services
     {
         public HttpClient _httpClient;
 
-        public EmailService(HttpClient client)
+        public TXSTBXD_LIBS.Email.EmailService email;
+
+        public EmailService(HttpClient client, TXSTBXD_LIBS.Email.EmailService mail)
         {
             _httpClient = client;
+            email = mail;
         }
         public async Task<bool> ResetUserPassword(PasswordRecovery dateReset)
         {
@@ -23,7 +27,8 @@ namespace COMMUNICATIONS_SERVICE.Services
             if (details?.Email is null)
                 return false;
 
-            SendMessage(details.Email);
+            //SendMessage(details.Email);
+            email.SendMessageNoReply(details.Email, "Тест", "<i><b>Тест</b><i>");
             return true;
         }
 
@@ -39,7 +44,7 @@ namespace COMMUNICATIONS_SERVICE.Services
             return await JsonSerializer.DeserializeAsync<UserDetails>(responseContent);
         }
 
-        public void SendMessage(string userMail)
+        public void SendMessage1(string userMail)
         {
             var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             MailMessage mail = new MailMessage();
