@@ -18,8 +18,17 @@ builder.Services.AddHttpClient<IdentityService>("IdentityAPI", (sharepoint, clie
         client.EnableIntercept(sharepoint);
     });
 
- builder.Services.AddScoped(
-        sharepoint => sharepoint!.GetService<IHttpClientFactory>()!.CreateClient("IdentityAPI"));
+builder.Services.AddHttpClient<PersonalityService>("PersonalityAPI", (sharepoint, client) =>
+    {
+        client.BaseAddress = new Uri("https://localhost:7159/Personality/");
+        client.EnableIntercept(sharepoint);
+    });
+
+builder.Services.AddScoped(
+       sharepoint => sharepoint!.GetService<IHttpClientFactory>()!.CreateClient("IdentityAPI"));
+
+builder.Services.AddScoped(
+    sharepoint => sharepoint!.GetService<IHttpClientFactory>()!.CreateClient("PersonalityAPI"));
 
 builder.Services.AddHttpClientInterceptor();
 

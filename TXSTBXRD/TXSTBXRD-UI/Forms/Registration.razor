@@ -1,9 +1,7 @@
 ﻿@page "/registration"
 @layout EmptyLayout
 
-@inject Services.IdentityService identity
-
-@using TXSTBXRD_MIDDLEWARE.IDENTITY
+@inject Services.PersonalityService personality
 
 <link href="css/login-validation.css" rel="stylesheet" />
 
@@ -49,7 +47,7 @@
 </EditForm>
 
 @code {
-    private Create create = new();
+    private TXSTBXRD_MIDDLEWARE.PERSONALITY.Registration create = new();
     EditContext? editContext;
     private bool visible = false;
 
@@ -72,6 +70,6 @@
         if (!editContext!.Validate())
             return;
 
-        bool response = await identity.AddUser(create);
+        bool response = await personality.UserRegistration(create);
     }
 }
