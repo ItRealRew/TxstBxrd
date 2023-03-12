@@ -24,7 +24,7 @@ namespace PERSONALITY_SERVICE.Services
 
             if (database.Users!.Where(c => c.Login == newUser.Username).Any())
                 return false;
-                
+
             using (var transaction = database.Database.BeginTransaction())
             {
                 try
@@ -33,7 +33,7 @@ namespace PERSONALITY_SERVICE.Services
                     newUser.Password = security.GetSecurePassword(newUser.Password, _salt, (int)IterationSalt.Standart);
 
 
-                    User user = new User { Login = newUser.Username, Password = newUser.Password };
+                    User user = new User { Login = newUser.Username, Password = newUser.Password, Enabled = false };
                     database.Users!.Add(user);
                     database.SaveChanges();
 

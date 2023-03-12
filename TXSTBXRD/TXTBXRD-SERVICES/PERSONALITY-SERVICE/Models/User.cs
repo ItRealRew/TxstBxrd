@@ -14,6 +14,8 @@ public partial class User
 
     public string Password { get; set; } = null!;
 
+    public bool Enabled { get; set; }
+
     public virtual ICollection<Detail> Details { get; } = new List<Detail>();
 
     public virtual ICollection<Salt> Salts { get; } = new List<Salt>();

@@ -90,6 +90,7 @@ public partial class UserstxstbxrdContext : DbContext
 
             entity.Property(e => e.Login).HasMaxLength(255);
             entity.Property(e => e.Password).HasMaxLength(255);
+            entity.Property(e => e.Enabled);
 
             entity.HasMany(d => d.Permissions).WithMany(p => p.Users)
                 .UsingEntity<Dictionary<string, object>>(
