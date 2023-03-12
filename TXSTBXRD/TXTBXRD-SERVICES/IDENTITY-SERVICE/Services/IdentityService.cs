@@ -23,7 +23,7 @@ namespace IDENTITY_SERVICE.Services
         }
         internal async Task<Guid> Identification(LogIn unknownUser)
         {
-            var salt = await dao.getSalt(unknownUser.Password);
+            var salt = await dao.getSalt(unknownUser.Login);
             unknownUser.Password = security.GetSecurePassword(unknownUser.Password, salt, (int)IterationSalt.Standart);
 
             string userId = await dao.authentication(unknownUser);
