@@ -32,8 +32,9 @@ namespace PERSONALITY_SERVICE.Services
                     string _salt = security.GetUniqueKey(((int)GenerationLength.Standart), Alphabet.Hard.Value);
                     newUser.Password = security.GetSecurePassword(newUser.Password, _salt, (int)IterationSalt.Standart);
 
-
-                    User user = new User { Login = newUser.Username, Password = newUser.Password, Enabled = false };
+                    var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                    
+                    User user = new User { Login = newUser.Username, Password = newUser.Password, Enabled = !MyConfig.GetValue<bool>("EmailConfirmation") };
                     database.Users!.Add(user);
                     database.SaveChanges();
 
