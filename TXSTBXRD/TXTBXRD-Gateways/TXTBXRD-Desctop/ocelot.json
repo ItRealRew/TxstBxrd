@@ -1,0 +1,27 @@
+{
+    "GlobalConfiguration": {
+        "BaseUrl": "https://localhost:7196"
+    },
+    "Routes": [{
+            "UpstreamPathTemplate": "/txtbxrd/addeduser",
+            "UpstreamHttpMethod": ["Post"],
+            "DownstreamPathTemplate": "/Personality/registration",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [{
+                "Host": "localhost",
+                "Port": 7159
+            }]
+        },
+        {
+            "UpstreamPathTemplate": "/txtbxrd/login",
+            "UpstreamHttpMethod": ["Post"],
+            "DownstreamPathTemplate": "/identity/identification",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [{
+                "Host": "localhost",
+                "Port": 5001
+            }],
+            "DangerousAcceptAnyServerCertificateValidator": true
+        }
+    ]
+}
