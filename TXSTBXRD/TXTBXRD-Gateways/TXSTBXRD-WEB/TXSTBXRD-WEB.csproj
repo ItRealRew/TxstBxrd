@@ -4,12 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TXTBXRD_Desctop</RootNamespace>
+    <RootNamespace>TXSTBXRD_WEB</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Ocelot" Version="18.0.0" />
+    <PackageReference Include="MMLib.SwaggerForOcelot" Version="6.2.0" />
   </ItemGroup>
 
 </Project>
