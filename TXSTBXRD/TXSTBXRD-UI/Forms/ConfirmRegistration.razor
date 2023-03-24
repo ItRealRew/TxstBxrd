@@ -1,0 +1,128 @@
+﻿@page "/accountconfirm"
+@layout EmptyLayout
+
+@inject NavigationManager NavigationManager
+@inject Services.IdentityService identity
+@inject Utils.ILocalStorage LocalStorage
+@inject NotificationService notification
+
+@using TXSTBXRD_MIDDLEWARE.PERSONALITY
+
+<link href="css/login-validation.css" rel="stylesheet" />
+
+<TXSTBXRD_UI.Components.Loader.Loader visible="@InProcess" />
+
+<PageTitle>Confirm your email</PageTitle>
+<EditForm EditContext="editContext">
+    <DataAnnotationsValidator />
+    <div class="center-form">
+        <a class="navbar-brand noselect" href="/">TXSTBXRD</a>
+        <p class="login-form-description">Confirm your email</p>
+        <div class="login-form">
+            <div class="create-password-container noselect">
+         @for (int i = 0; i < 4; i++)             
+        {
+            <input class="pin-input login-input" type="text" @bind="@PinCode[i]" @oninput="(() => PinCodeChanged(i))" maxlength="1" />
+        }
+            </div>
+            <button @onclick="Confirm" class="btn-login" disabled="@InProcess">Confirm</button>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    public class PinClass
+    {
+        public string pin1 { get; set; }
+        public string pin2 { get; set; }
+        public string pin3 { get; set; }
+        public string pin4 { get; set; }
+    }
+
+    private NewAccountConfirm accountConfirm = new();
+    private InputText Input1;
+    private InputText Input2;
+    private InputText Input3;
+    private InputText Input4;
+
+    private PinClass pinClass = new();
+    EditContext? editContext;
+    protected bool InProcess { get; set; }
+
+    protected override async void OnInitialized()
+    {
+        editContext = new(pinClass);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            if (Input1.Element != null)
+                await Input1.Element.Value.FocusAsync();
+    }
+
+    public void Next()
+    {
+        if (string.IsNullOrEmpty(Input1.Value))
+        {
+            Input1.Element.Value.FocusAsync(); 
+                    Console.WriteLine("Херо1");
+                    return;
+        }
+        if (string.IsNullOrEmpty(pinClass.pin2))
+        {
+            Input2.Element.Value.FocusAsync();
+                    Console.WriteLine("Херо2");
+                    return;
+            
+        }
+        if (string.IsNullOrEmpty(pinClass.pin3))
+        {
+            Input3.Element.Value.FocusAsync();
+                    Console.WriteLine("Херо3");
+                    return;
+        }
+        if (string.IsNullOrEmpty(pinClass.pin4))
+        {
+                    Console.WriteLine("Херо4");
+            Input4.Element.Value.FocusAsync();
+            return;
+        }
+    }
+    
+     private async void UpdForms()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+
+    public void Confirm()
+    {
+
+    }
+
+    public string[] PinCode { get; set; } = new string[4];
+
+    public string ErrorMessage { get; set; }
+
+    private void PinCodeChanged(int index)
+    {
+        PinCode[index] = PinCode[index].Trim().ToUpper();
+
+        if (PinCode.Any(x => string.IsNullOrEmpty(x)))
+        {
+            ErrorMessage = string.Empty;
+            return;
+        }
+
+        if (PinCode.All(x => x.Equals(PinCode[0])))
+        {
+            ErrorMessage = string.Empty;
+            return;
+        }
+
+        ErrorMessage = "PIN codes do not match.";
+    }
+}

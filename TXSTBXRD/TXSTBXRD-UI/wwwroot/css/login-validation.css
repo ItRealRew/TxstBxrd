@@ -117,6 +117,15 @@ input {
     font-weight: 400
 }
 
+.pin-input {
+    height: 30px;
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
 .btn-login {
     cursor: pointer;
     width: 100%;
