@@ -18,7 +18,8 @@
 
 ## API Gateway
 
-<a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-Gateways/TXSTBXRD-WEB"><strong>Web Gateway         »</strong></a>
+Started Implementation
+* <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-Gateways/TXSTBXRD-WEB"><strong>Web Gateway         »</strong></a>
 
 ## List Services
 
