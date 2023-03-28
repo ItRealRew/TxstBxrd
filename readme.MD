@@ -19,7 +19,7 @@
 ## List Services
 
 * <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/IDENTITY-SERVICE"><strong>TXSTBXRD.Identity         »</strong></a>
-* <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/EVENT-SERVICE"><strong>TXSTBXRD.Event            »</strong></a>
+* <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/EVENT-SERVICE"><strong>TXSTBXRD.Personality            »</strong></a>
 
 ## Postman Collection 
 
