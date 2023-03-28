@@ -16,10 +16,14 @@
   </p>
 </p>
 
+## API Gateway
+
+<a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-Gateways/TXSTBXRD-WEB"><strong>Web Gateway         »</strong></a>
+
 ## List Services
 
 * <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/IDENTITY-SERVICE"><strong>TXSTBXRD.Identity         »</strong></a>
-* <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/EVENT-SERVICE"><strong>TXSTBXRD.Personality            »</strong></a>
+* <a href="https://github.com/ItRealRew/TxstBxrd/tree/master/TXSTBXRD/TXTBXRD-SERVICES/PERSONALITY-SERVICE"><strong>TXSTBXRD.Personality            »</strong></a>
 
 ## Postman Collection 
 
